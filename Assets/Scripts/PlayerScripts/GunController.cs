@@ -35,8 +35,7 @@ public class GunController : MonoBehaviour {
                 PlayerController hitPlayer = hit.transform.gameObject.GetComponent<PlayerController>();
                 if (hitPlayer != null)
                 {
-                    hitPlayer.currentHealth -= damage;
-                    print(hitPlayer.currentHealth);
+                    hitPlayer.TakeDamage(damage);
                 }
             }
             bulletsInChamber--;

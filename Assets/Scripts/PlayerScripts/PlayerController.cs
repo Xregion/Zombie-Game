@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System;
 
 [RequireComponent(typeof(GunController))]
 public class PlayerController : MonoBehaviour {
+
+    public event Action<float> DamageEvent;
 
     public float movSpeed;
     public float currentHealth;
@@ -10,7 +13,6 @@ public class PlayerController : MonoBehaviour {
     float horizontalDirection;
     float verticalDirection;
     float mouseToPlayerAngle;
-    Rigidbody2D rb;
     Vector3 mousePosition;
     Vector3 playerRotation;
     bool controlsOn;
@@ -21,7 +23,6 @@ public class PlayerController : MonoBehaviour {
         playerRotation = new Vector3(0, 0, 0);
         gunController = GetComponent<GunController>();
         controlsOn = true;
-        rb = GetComponent<Rigidbody2D>();
     }
 	
 	void Update()
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown("Fire1"))
             {
                 gunController.Fire();
+                TakeDamage(2);
             }
             if (Input.GetAxis("Reload") != 0 && !gunController.reloading)
             {
@@ -77,6 +79,16 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void TakeDamage (float damage)
+    {
+        currentHealth -= damage;
+        if (DamageEvent != null)
+        {
+            DamageEvent(damage);
+        }
+
+    }
+
     void MoveCharacter()
     {
         transform.Translate(new Vector3(verticalDirection * movSpeed * Time.deltaTime, 0, 0));
@@ -91,21 +103,4 @@ public class PlayerController : MonoBehaviour {
     {
         controlsOn = false;
     }
-
-    //void RotatePlayer()
-    //{
-    //    mousePosition = Input.mousePosition;
-    //    mousePosition.z = transform.position.z;
-    //    Vector3 worldPointMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-    //    if (worldPointMousePosition.y > transform.position.y)
-    //    {
-    //        mouseToPlayerAngle = Mathf.Rad2Deg * Mathf.Acos((worldPointMousePosition.x - transform.position.x) / Mathf.Sqrt((Mathf.Pow(worldPointMousePosition.x - transform.position.x, 2) + Mathf.Pow(worldPointMousePosition.y - transform.position.y, 2))));
-    //    }
-    //    else
-    //    {
-    //        mouseToPlayerAngle = -Mathf.Rad2Deg * Mathf.Acos((worldPointMousePosition.x - transform.position.x) / Mathf.Sqrt((Mathf.Pow(worldPointMousePosition.x - transform.position.x, 2) + Mathf.Pow(worldPointMousePosition.y - transform.position.y, 2))));
-    //    }
-    //    playerRotation.z = mouseToPlayerAngle;
-    //    transform.eulerAngles = (playerRotation);
-    //}
 }
