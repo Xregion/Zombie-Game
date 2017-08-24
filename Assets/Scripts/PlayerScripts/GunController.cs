@@ -1,44 +1,77 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour {
 
+    public Text bulletsText;
+
     public LayerMask shootable;
     public Transform firePoint;
-    public float totalBulletsRemaining;
-    public float maxBulletsInChamber;
+    public LineRenderer redDot;
+    public int totalBulletsRemaining;
+    public int maxBulletsInChamber;
     public float fireRate;
+    public float reloadSpeed;
     public float range;
     public float damage;
+    public float critChance;
     [HideInInspector]
-    public bool reloading;
+    public bool isReloading;
+    [HideInInspector]
+    public bool isFiring;
+    [HideInInspector]
+    public bool chamberIsEmpty;
+    [HideInInspector]
+    public bool fullChamber;
+    [HideInInspector]
+    public bool outOfBullets;
 
-    float bulletsRemainingInChamber;
-    float bulletsInChamber;
+    int bulletsFired;
+    int bulletsInChamber;
 
     void Start()
     {
+        redDot.SetPosition(1, new Vector3(range, 0, 0));
         bulletsInChamber = maxBulletsInChamber;
-        bulletsRemainingInChamber = bulletsInChamber;
+        bulletsFired = bulletsInChamber;
+        SetBulletsText();
+    }
+
+    void Update()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, range, shootable);
+        if (hit.collider != null)
+            redDot.SetPosition(1, new Vector3(Vector3.Distance(hit.transform.position, transform.position), 0, 0));
+        else
+            redDot.SetPosition(1, new Vector3(range, 0, 0));
+
     }
 
     public void Fire ()
     {
         if (bulletsInChamber <= 0)
         {
-            Reload();
+            //Reload();
+            chamberIsEmpty = true;
         }
-        else if (!reloading)
+        else if (!isReloading)
         {
+            isFiring = true;
             RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, range, shootable);
             if (hit.collider != null)
             {
-                PlayerController hitPlayer = hit.transform.gameObject.GetComponent<PlayerController>();
-                if (hitPlayer != null)
+                AIController zombieHit = hit.transform.gameObject.GetComponent<AIController>();
+                if (zombieHit != null)
                 {
-                    hitPlayer.TakeDamage(damage);
+                    float crit = Random.Range(0f, 1f);
+                    if (crit <= critChance)
+                        zombieHit.TakeDamage(damage * 2f);
+                    else
+                        zombieHit.TakeDamage(damage);
                 }
             }
             bulletsInChamber--;
+            SetBulletsText();
         }
     }
 
@@ -46,32 +79,35 @@ public class GunController : MonoBehaviour {
     {
         if (bulletsInChamber == maxBulletsInChamber)
         {
+            fullChamber = true;
             return;
         }
-        reloading = true;
-        // start reloading animation
+
         if (totalBulletsRemaining > 0)
         {
-            bulletsRemainingInChamber = maxBulletsInChamber - bulletsInChamber;
-            if (totalBulletsRemaining > maxBulletsInChamber)
-            {
+            fullChamber = false;
+            isReloading = true;
+            chamberIsEmpty = false;
+            bulletsFired = maxBulletsInChamber - bulletsInChamber;
+            if (totalBulletsRemaining >= maxBulletsInChamber || (bulletsInChamber > 0 && totalBulletsRemaining < maxBulletsInChamber))
                 bulletsInChamber = maxBulletsInChamber;
-            }
             else
-            {
                 bulletsInChamber = totalBulletsRemaining;
-            }
-            totalBulletsRemaining -= bulletsRemainingInChamber;
+
+            totalBulletsRemaining -= bulletsFired;
             if (totalBulletsRemaining < 0)
-            {
                 totalBulletsRemaining = 0;
-            }
         }
         else
         {
             // Play out of ammo audio clip
+            outOfBullets = true;
         }
+        SetBulletsText();
+    }
 
-        reloading = false;
+    public void SetBulletsText ()
+    {
+        bulletsText.text = bulletsInChamber + "/" + totalBulletsRemaining;
     }
 }

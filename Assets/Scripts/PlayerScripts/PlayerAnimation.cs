@@ -4,6 +4,9 @@ public class PlayerAnimation : MonoBehaviour {
 
     Animator animator;
     bool isMoving;
+    bool isFiring;
+    bool isReloading;
+    bool isDead;
 
     void Start()
     {
@@ -12,20 +15,29 @@ public class PlayerAnimation : MonoBehaviour {
 
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        bool fire = Input.GetButtonDown("Fire1");
-
-        if (h != 0 || v != 0)
-        {
-            isMoving = true;
-        }
-        else
-        {
-            isMoving = false;
-        }
-
         animator.SetBool("Moving", isMoving);
-        animator.SetBool("Fire", fire);
+        animator.SetBool("Fire", isFiring);
+        animator.SetBool("Reload", isReloading);
+        animator.SetBool("Dead", isDead);
+    }
+
+    public void SetIsMoving(bool _isMoving)
+    {
+        isMoving = _isMoving;
+    }
+
+    public void SetIsFiring(bool _isFiring)
+    {
+        isFiring = _isFiring;
+    }
+
+    public void SetIsReloading(bool _isReloading)
+    {
+        isReloading = _isReloading;
+    }
+
+    public void SetIsDead(bool _isDead)
+    {
+        isDead = _isDead;
     }
 }

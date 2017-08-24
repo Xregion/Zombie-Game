@@ -78,6 +78,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AIScripts\AIController.cs" />
+    <Compile Include="Assets\Scripts\AIScripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Items\AmmoPack.cs" />
+    <Compile Include="Assets\Scripts\Items\HealthPack.cs" />
+    <Compile Include="Assets\Scripts\Items\IDroppable.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemDrop.cs" />
+    <Compile Include="Assets\Scripts\Misc\CameraController.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\GunController.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerController.cs" />
