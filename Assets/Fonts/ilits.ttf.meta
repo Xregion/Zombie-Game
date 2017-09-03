@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b4bd7dc05f73d3c499f6e096c9661a89
+timeCreated: 1503959436
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: It Lives In The Swamp BRK
+  fontNames:
+  - It Lives In The Swamp BRK
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

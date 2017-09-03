@@ -18,7 +18,7 @@ public class HealthBars : MonoBehaviour {
         actor.HealthChangeEvent += HealthChange;
         actor.DeathEvent += PlayerDied;
         currentHealth = actor.currentHealth;
-        healthBar.value = currentHealth;
+        healthBar.value = actor.totalHealth;
     }
 	
 	void HealthChange (float change)

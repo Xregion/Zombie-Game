@@ -7,6 +7,7 @@ TagManager:
   - Ammo
   - Health
   - Enemy
+  - Environment
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - 
   - Shootable
-  - 
+  - Environment
   - 
   - 
   - 
