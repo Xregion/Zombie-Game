@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 
-[RequireComponent(typeof(GunController))]
 [RequireComponent(typeof(ActorMotor))]
 public class PlayerController : MonoBehaviour, IDamageable {
 
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
         Vector3 worldPointMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         currentHealth = totalHealth;
         movSpeed = normalMovSpeed;
-        gunController = GetComponent<GunController>();
+        gunController = GetComponentInChildren<GunController>();
         animations = GetComponentInChildren<PlayerAnimation>();
         motor = GetComponent<ActorMotor>();
         motor.SetTarget(worldPointMousePosition);
@@ -49,11 +48,11 @@ public class PlayerController : MonoBehaviour, IDamageable {
 	
 	void Update()
     {
-        if (isAlive)
+        if (isAlive) // Turn on controls if the player is alive
         {
-            if (Input.GetButtonDown("Fire1") && !IsPerformingAction())
+            if (Input.GetButtonDown("Fire1") && !IsPerformingAction()) // check if the player hit the fire button and is not currently performing another action
             {
-                gunController.Fire();
+                gunController.Fire(); // calls the Fire method from the gun controller
                 if (!gunController.chamberIsEmpty)
                 {
                     muzzleFlash.gameObject.SetActive(true);
@@ -119,7 +118,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
         }
     }
 
-    public void TakeDamage (int damage)
+    public bool TakeDamage (int damage)
     {
         currentHealth -= damage;
         if (HealthChangeEvent != null)
@@ -129,7 +128,9 @@ public class PlayerController : MonoBehaviour, IDamageable {
         {
             currentHealth = 0;
             Die();
+            return true;
         }
+        return false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

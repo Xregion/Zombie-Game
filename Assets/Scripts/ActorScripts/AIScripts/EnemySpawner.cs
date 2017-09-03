@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject prefab;
     public int numberToSpawn;
     public float timer;
-    public int maxEnemiesAllowedInPlay;
+    public Transform [] spawnPoints;
 
     static int numberOfEnemiesLeft;
     static int numberOfEnemiesInPlay;
@@ -43,22 +43,20 @@ public class EnemySpawner : MonoBehaviour {
             return;
         }
 
-        if (activeObjects.Count < maxEnemiesAllowedInPlay)
+        int spawnPosition = UnityEngine.Random.Range(0, spawnPoints.Length);
+        for (int i = 0; i < objects.Count; i++)
         {
-            for (int i = 0; i < objects.Count; i++)
+            if (!objects[i].activeInHierarchy)
             {
-                if (!objects[i].activeInHierarchy)
-                {
-                    AIController ai = objects[i].GetComponent<AIController>();
-                    if (!ai.isAlive)
-                        ai.ReviveZombie();
-                    objects[i].transform.position = transform.position;
-                    objects[i].transform.rotation = transform.rotation;
-                    objects[i].SetActive(true);
-                    activeObjects.Add(objects[i]);
-                    numberOfEnemiesInPlay++;
-                    break;
-                }
+                AIController ai = objects[i].GetComponent<AIController>();
+                if (!ai.isAlive)
+                    ai.ReviveZombie();
+                objects[i].transform.position = spawnPoints[spawnPosition].position;
+                objects[i].transform.rotation = spawnPoints[spawnPosition].rotation;
+                objects[i].SetActive(true);
+                activeObjects.Add(objects[i]);
+                numberOfEnemiesInPlay++;
+                break;
             }
         }
     }
@@ -81,6 +79,7 @@ public class EnemySpawner : MonoBehaviour {
     void RemoveFromList (GameObject go)
     {
         activeObjects.Remove(go);
+        numberOfEnemiesInPlay--;
         numberOfEnemiesLeft--;
         if (numberOfEnemiesLeft <= 0)
         {

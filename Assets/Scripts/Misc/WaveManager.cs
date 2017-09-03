@@ -19,15 +19,16 @@ public class WaveManager : MonoBehaviour {
 	void NextWave()
     {
         waveNumber++;
-        numberOfEnemies += 5;
+        numberOfEnemies += 10;
         EnemySpawner.SetMaxEnemiesThisWave(numberOfEnemies);
         waveText.text = "Wave " + waveNumber;
+        StartCoroutine(CountdownUntilNextWave());
     }
 
     IEnumerator CountdownUntilNextWave ()
     {
         yield return new WaitForSeconds(preparationTime);
 
-        //EnemySpawner.StartNextWave();
+        EnemySpawner.StartNextWave();
     }
 }
