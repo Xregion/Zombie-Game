@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletsText: {fileID: 0}
-  shootable:
+  damageable:
     serializedVersion: 2
     m_Bits: 768
   firePoint: {fileID: 4128981471122110}
@@ -407,12 +407,16 @@ MonoBehaviour:
   totalBulletsRemaining: 25
   maxBulletsInChamber: 5
   fireRate: 0.5
+  meleeSpeed: 1
   reloadSpeed: 1.24
-  range: 25
-  damage: 5
+  bulletRange: 40
+  meleeRange: 1
+  bulletDamage: 5
+  meleeDamage: 5
   critChance: 0.2
   isReloading: 0
   isFiring: 0
+  isMeleeing: 0
   chamberIsEmpty: 0
   fullChamber: 0
   outOfBullets: 0

@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
     Vector3 worldPointMousePosition;
     bool isAlive;
     bool isRunning;
+    bool isMoving;
     GunController gunController;
     PlayerAnimation animations;
     ActorMotor motor;
@@ -52,12 +53,22 @@ public class PlayerController : MonoBehaviour, IDamageable {
         {
             if (Input.GetButtonDown("Fire1") && !IsPerformingAction()) // check if the player hit the fire button and is not currently performing another action
             {
-                gunController.Fire(); // calls the Fire method from the gun controller
                 if (!gunController.chamberIsEmpty)
                 {
+                    gunController.Fire(); // calls the Fire method from the gun controller
                     muzzleFlash.gameObject.SetActive(true);
                     animations.SetIsFiring(true);
                     StartCoroutine(AnimationTimer(gunController.fireRate));
+                }
+                else
+                {
+                    gunController.Reload();
+                    if (!gunController.outOfBullets)
+                    {
+                        movSpeed = movSpeedWhileReloading;
+                        animations.SetIsReloading(true);
+                        StartCoroutine(AnimationTimer(gunController.reloadSpeed));
+                    }
                 }
             }
             else if (Input.GetButtonDown("Reload") && !IsPerformingAction())
@@ -67,8 +78,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 {
                     movSpeed = movSpeedWhileReloading;
                     animations.SetIsReloading(true);
+                    gunController.SetRedDot(false);
                     StartCoroutine(AnimationTimer(gunController.reloadSpeed));
                 }
+            }
+            else if (Input.GetButtonDown("Melee") && !IsPerformingAction() && !isMoving) {
+                gunController.MeleeAttack();
+                animations.SetIsMeleeing(true);
+                movSpeed = 0;
+                gunController.SetRedDot(false);
+                StartCoroutine(AnimationTimer(gunController.meleeSpeed));
             }
             else if (Input.GetButton("Run") && !IsPerformingAction())
             {
@@ -76,8 +95,11 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 movSpeed = runMovSpeed;
             }
 
-            if (Input.GetButtonUp("Run"))
+            if (Input.GetButtonUp("Run") && !gunController.isReloading)
+            {
                 isRunning = false;
+                movSpeed = normalMovSpeed;
+            }
         }
         else
         {
@@ -103,17 +125,17 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
             if (verticalDirection < 0)
                 movSpeed = backpeddleMovSpeed;
-            else if (!Input.GetButton("Run"))
-                movSpeed = normalMovSpeed;
 
             motor.MoveActor(verticalDirection, movSpeed);
             motor.Strafe(-horizontalDirection, movSpeed);
 
-            SetMovementAnimation(true);
+            SetMovementAnimation(false);
+            isMoving = false;
 
-            if (horizontalDirection == 0 && verticalDirection == 0)
+            if (horizontalDirection != 0 && verticalDirection != 0)
             {
-                SetMovementAnimation(false);
+                SetMovementAnimation(true);
+                isMoving = true;
             }
         }
     }
@@ -159,7 +181,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
     // Checks if the player is shooting, reloading, or running. Used to block certain actions while doing any of these things
     bool IsPerformingAction ()
     {
-        return gunController.isFiring || gunController.isReloading || isRunning;
+        return gunController.isFiring || gunController.isReloading || isRunning || gunController.isMeleeing;
     }
 
     void SetMovementAnimation(bool isMoving)
@@ -181,8 +203,11 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
         muzzleFlash.gameObject.SetActive(false);
         gunController.isFiring = false;
+        gunController.SetRedDot(true);
+        gunController.isMeleeing = false;
         gunController.isReloading = false;
         animations.SetIsFiring(false);
+        animations.SetIsMeleeing(false);
         animations.SetIsReloading(false);
         movSpeed = normalMovSpeed;
     }

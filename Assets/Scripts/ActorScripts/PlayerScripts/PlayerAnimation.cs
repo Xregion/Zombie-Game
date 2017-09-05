@@ -5,6 +5,7 @@ public class PlayerAnimation : MonoBehaviour {
     Animator animator;
     bool isMoving;
     bool isFiring;
+    bool isMeleeing;
     bool isReloading;
     bool isDead;
 
@@ -17,6 +18,7 @@ public class PlayerAnimation : MonoBehaviour {
     {
         animator.SetBool("Moving", isMoving);
         animator.SetBool("Fire", isFiring);
+        animator.SetBool("Melee", isMeleeing);
         animator.SetBool("Reload", isReloading);
         animator.SetBool("Dead", isDead);
     }
@@ -29,6 +31,10 @@ public class PlayerAnimation : MonoBehaviour {
     public void SetIsFiring(bool _isFiring)
     {
         isFiring = _isFiring;
+    }
+    public void SetIsMeleeing(bool _isMeleeing)
+    {
+        isMeleeing = _isMeleeing;
     }
 
     public void SetIsReloading(bool _isReloading)

@@ -8,7 +8,6 @@ public class AIController : MonoBehaviour, IDamageable {
 
     public event Action<GameObject> DeathEvent; // Called when zombie dies
 
-    public GameObject[] items; //items that the AI can drop upon death
     public LayerMask colliderMask;
     public float maxHealth;
     public float movSpeed;
@@ -16,7 +15,6 @@ public class AIController : MonoBehaviour, IDamageable {
     public float attackSpeed;
     public float staggerTime; // the amount of time after being shot that the AI can't move
     public float knockbackAmount; // the amount at x the AI will be knocked back when shot
-    public float dropChance;
 
     [HideInInspector]
     public bool isAlive;
@@ -162,9 +160,8 @@ public class AIController : MonoBehaviour, IDamageable {
             {
                 isAlive = false;
                 col.enabled = false;
-                float drop = UnityEngine.Random.Range(0f, 1f);
-                if (drop <= dropChance)
-                    dropper.DropItem(items, transform.position); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
+                if (dropper != null)
+                    dropper.DropItem(); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
 
                 Vector3 deathPosition = transform.position;
                 deathPosition.z = 1;

@@ -131,9 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb8776ea7389514796dc3d7bf1145b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 1930138191238458, guid: 99190c739eb31634e85655b6a7b89dad, type: 2}
-  - {fileID: 1968237028727736, guid: 43de3ba77ac1aa747b787805aa8071c2, type: 2}
   colliderMask:
     serializedVersion: 2
     m_Bits: 1536
@@ -143,7 +140,6 @@ MonoBehaviour:
   attackSpeed: 0.5
   staggerTime: 0.2
   knockbackAmount: 0.5
-  dropChance: 0.5
   isAlive: 0
 --- !u!114 &114329766234713958
 MonoBehaviour:
@@ -167,6 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd9dfa958fa63e40aaa4f95c59b74b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items:
+  - {fileID: 1930138191238458, guid: 99190c739eb31634e85655b6a7b89dad, type: 2}
+  - {fileID: 1968237028727736, guid: 43de3ba77ac1aa747b787805aa8071c2, type: 2}
+  dropChance: 0.5
 --- !u!212 &212410229275460270
 SpriteRenderer:
   m_ObjectHideFlags: 1
