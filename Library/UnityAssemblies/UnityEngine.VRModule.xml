@@ -895,6 +895,20 @@
         <para>Pose data of the interaction source at the time of either the gesture or interaction.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.XR.WSA.Input.InteractionSourcePose.positionAccuracy">
+      <summary>
+        <para>Returns the accuracy of tracking on the interaction source.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.XR.WSA.Input.InteractionSourcePose.TryGetAngularVelocity(UnityEngine.Vector3&amp;)">
+      <summary>
+        <para>Attempts to retrieve a Vector3 representing the current angular velocity of the tracked node.</para>
+      </summary>
+      <param name="angularVelocity"></param>
+      <returns>
+        <para>True if the angular velocity was set in the output parameter. False if the angular velocity is not available due to limitations of the underlying platform or if the node is not presently tracked.</para>
+      </returns>
+    </member>
     <member name="M:UnityEngine.XR.WSA.Input.InteractionSourcePose.TryGetForward(UnityEngine.Vector3&amp;,UnityEngine.XR.WSA.Input.InteractionSourceNode)">
       <summary>
         <para>Gets the forward vector of the interaction source, assuming rotation is valid.</para>
@@ -953,6 +967,11 @@
       <returns>
         <para>Returns true if the Vector3 passed in was filled out correctly, and false if otherwise.</para>
       </returns>
+    </member>
+    <member name="T:UnityEngine.XR.WSA.Input.InteractionSourcePositionAccuracy">
+      <summary>
+        <para>Denotes the accuracy of tracking on the interaction source.</para>
+      </summary>
     </member>
     <member name="T:UnityEngine.XR.WSA.Input.InteractionSourcePressedEventArgs">
       <summary>
@@ -2512,6 +2531,11 @@ and false if the node is not presently being tracked by the underlying XR system
         <para>Globally enables or disables XR for the application.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.XR.XRSettings.eyeTextureDesc">
+      <summary>
+        <para>Fetch the eye texture RenderTextureDescriptor from the active stereo device.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.XR.XRSettings.eyeTextureHeight">
       <summary>
         <para>The current height of an eye texture for the loaded device.</para>
@@ -2519,7 +2543,7 @@ and false if the node is not presently being tracked by the underlying XR system
     </member>
     <member name="P:UnityEngine.XR.XRSettings.eyeTextureResolutionScale">
       <summary>
-        <para>Controls the texel:pixel ratio before lens correction, trading performance for sharpness.</para>
+        <para>Controls the actual size of eye textures as a multiplier of the device's default resolution.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.XR.XRSettings.eyeTextureWidth">
@@ -2549,7 +2573,7 @@ and false if the node is not presently being tracked by the underlying XR system
     </member>
     <member name="P:UnityEngine.XR.XRSettings.renderViewportScale">
       <summary>
-        <para>Controls the texel:pixel ratio before lens correction, trading performance for sharpness.</para>
+        <para>Controls how much of the allocated eye texture should be used for rendering.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.XR.XRSettings.showDeviceView">

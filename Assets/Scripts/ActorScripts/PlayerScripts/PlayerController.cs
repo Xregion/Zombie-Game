@@ -126,8 +126,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
             if (verticalDirection < 0)
                 movSpeed = backpeddleMovSpeed;
 
-            motor.MoveActor(verticalDirection, movSpeed);
-            motor.Strafe(-horizontalDirection, movSpeed);
+            motor.MoveActor(new Vector3 (verticalDirection, -horizontalDirection, 0), movSpeed);
 
             SetMovementAnimation(false);
             isMoving = false;
@@ -164,10 +163,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
             if (currentHealth > totalHealth)
                 currentHealth = totalHealth;
 
-            healthPack.Destroy();
-
             if (HealthChangeEvent != null)
                 HealthChangeEvent(healthPack.GetAmountToDrop());
+
+            healthPack.Destroy();
         }
         else if (collision.CompareTag("Ammo"))
         {

@@ -16,16 +16,10 @@ public class ActorMotor: MonoBehaviour {
         RotateActor();
     }
 
-    // Move the Actor either backwards or forwards based on directon and at the speed set in the Inspector
-    public void MoveActor(float direction, float speed)
-    {  
-        transform.Translate(new Vector3(direction * speed * Time.deltaTime, 0, 0));
-    }
-
-    // Move the Actor either left or right based on directon and at the speed set in the Inspector
-    public void Strafe(float direction, float speed)
+    // Move the Actor in the given direction and at the speed set in the Inspector
+    public void MoveActor(Vector3 direction, float speed)
     {
-        transform.Translate(new Vector3(0, direction * speed * Time.deltaTime, 0));
+        transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
     // Used to set the target to look at

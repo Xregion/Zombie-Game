@@ -72,14 +72,17 @@ public class AIController : MonoBehaviour, IDamageable {
             // check if the Actor is allowed to move and if so use the motor to move him towards his target at specified speed
             // otherwise attack the current target if it is in range
             if (IsAbleToMove())
-                motor.MoveActor(1, movSpeed);
+                motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
             else if (isInRange)
                 Attack();
 
             if (playerIsDead && (isInRange || isBlocked))
             {
-                motor.MoveActor(0, 0);
-                // Start player eating animation
+                movSpeed = 0;
+                if (!isBlocked)
+                {
+                    // Start player eating animation
+                }
             }
         }
     }
@@ -99,7 +102,7 @@ public class AIController : MonoBehaviour, IDamageable {
             {
                 if (!target.CompareTag("Environment"))
                 {
-                    target = collision.gameObject; // if it is able to be damage then set it as the target and set in range to be true
+                    target = collision.gameObject; // if it is able to be damaged then set it as the target and set in range to be true
                     isInRange = true;
                 }
             }
@@ -108,9 +111,7 @@ public class AIController : MonoBehaviour, IDamageable {
             isInRange = true;
 
         if (collision.gameObject.CompareTag("Enemy"))
-        {
             isBlocked = true;
-        }
     }
 
     void OnCollisionExit2D(Collision2D collision)

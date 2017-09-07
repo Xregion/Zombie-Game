@@ -19996,6 +19996,11 @@ The Player ID is always 1, because only one Editor can be connected.</param>
         <para>Representation of a Position, and a Rotation in 3D Space</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Pose.forward">
+      <summary>
+        <para>Returns the forward vector of the pose</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Pose.identity">
       <summary>
         <para>shorthand for pose which represents zero position, and an identity rotation</para>
@@ -20006,14 +20011,24 @@ The Player ID is always 1, because only one Editor can be connected.</param>
         <para>the position component of the pose</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Pose.right">
+      <summary>
+        <para>Returns the right vector of the pose</para>
+      </summary>
+    </member>
     <member name="F:UnityEngine.Pose.rotation">
       <summary>
         <para>the rotation component of the pose</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Pose.up">
+      <summary>
+        <para>Returns the up vector of the pose</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.Pose.#ctor">
       <summary>
-        <para>Creates a new pose with given the given vector, and quaternion values.</para>
+        <para>Creates a new pose with the given vector, and quaternion values.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.Pose.GetTransformedBy(UnityEngine.Pose)">
