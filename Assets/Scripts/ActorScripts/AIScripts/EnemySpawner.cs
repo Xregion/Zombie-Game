@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour {
             {
                 AIController ai = objects[i].GetComponent<AIController>();
                 if (!ai.isAlive)
-                    ai.ReviveZombie();
+                    ai.Revive();
                 objects[i].transform.position = spawnPoints[spawnPosition].position;
                 objects[i].transform.rotation = spawnPoints[spawnPosition].rotation;
                 objects[i].SetActive(true);

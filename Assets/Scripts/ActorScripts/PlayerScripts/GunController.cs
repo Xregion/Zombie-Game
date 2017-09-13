@@ -8,13 +8,10 @@ public class GunController : MonoBehaviour {
     public LayerMask damageable;
     public Transform firePoint;
     public LineRenderer redDot;
+    public SpriteRenderer muzzleFlash;
     public int totalBulletsRemaining;
     public int maxBulletsInChamber;
-    public float fireRate;
-    public float meleeSpeed;
-    public float reloadSpeed;
     public float bulletRange;
-    public float meleeRange;
     public int bulletDamage;
     public int meleeDamage;
     public float critChance;
@@ -30,12 +27,19 @@ public class GunController : MonoBehaviour {
     public bool fullChamber;
     [HideInInspector]
     public bool outOfBullets;
+    [HideInInspector]
+    public bool meleeHit;
 
+    BoxCollider2D gunCollider;
+    RaycastHit2D hit;
     int bulletsFired;
     int bulletsInChamber;
 
     void Start()
     {
+        gunCollider = GetComponent<BoxCollider2D>();
+        gunCollider.enabled = false;
+        muzzleFlash.gameObject.SetActive(false);
         redDot.SetPosition(1, new Vector3(bulletRange, 0, 0));
         bulletsInChamber = maxBulletsInChamber;
         bulletsFired = bulletsInChamber;
@@ -44,9 +48,9 @@ public class GunController : MonoBehaviour {
 
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, bulletRange, damageable);
-        if (hit.collider != null)
-            redDot.SetPosition(1, new Vector3(Vector3.Distance(hit.transform.position, firePoint.position), 0, 0));
+        hit = Physics2D.Raycast(firePoint.position, firePoint.right, bulletRange, damageable);
+        if (hit.collider != null && !hit.collider.isTrigger)
+            redDot.SetPosition(1, new Vector3(Vector3.Distance(hit.point, firePoint.position), 0, 0));
         else
             redDot.SetPosition(1, new Vector3(bulletRange, 0, 0));
 
@@ -54,8 +58,8 @@ public class GunController : MonoBehaviour {
 
     public void Fire ()
     {
+        muzzleFlash.gameObject.SetActive(true);
         isFiring = true;
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, firePoint.right, bulletRange, damageable);
         if (hit.collider != null)
         {
             IDamageable hitObject = hit.transform.gameObject.GetComponent<IDamageable>();
@@ -78,13 +82,7 @@ public class GunController : MonoBehaviour {
     public void MeleeAttack ()
     {
         isMeleeing = true;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, meleeRange, damageable);
-        if (hit.collider != null)
-        {
-            IDamageable hitObject = hit.transform.gameObject.GetComponent<IDamageable>();
-            if (hitObject != null)
-                hitObject.TakeDamage(meleeDamage);
-        }
+        gunCollider.enabled = true;
     }
 
     public void Reload ()
@@ -118,6 +116,16 @@ public class GunController : MonoBehaviour {
         SetBulletsText();
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        IDamageable hitObject = collision.GetComponent<IDamageable>();
+        if (hitObject != null && !meleeHit)
+        {
+            hitObject.TakeDamage(meleeDamage);
+            meleeHit = true;
+        }
+    }
+
     public void SetRedDot (bool on)
     {
         redDot.enabled = on;
@@ -126,5 +134,10 @@ public class GunController : MonoBehaviour {
     public void SetBulletsText ()
     {
         bulletsText.text = bulletsInChamber + "/" + totalBulletsRemaining;
+    }
+
+    public void DisableGunCollider ()
+    {
+        gunCollider.enabled = false;
     }
 }

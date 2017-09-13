@@ -224,11 +224,19 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\ActorScripts\ActorMotor.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\AIScripts\AIController.cs" />
+    <Compile Include="Assets\Scripts\ActorScripts\AIScripts\BasicZombieMain.cs" />
+    <Compile Include="Assets\Scripts\ActorScripts\AIScripts\BasicZombieWaves.cs" />
+    <Compile Include="Assets\Scripts\ActorScripts\AIScripts\EnemyAnimations.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\AIScripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\ActorScripts\Animations.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\PlayerScripts\GunController.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\PlayerScripts\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\PlayerScripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Environment\DestructableObject.cs" />
+    <Compile Include="Assets\Scripts\Environment\Doorway.cs" />
+    <Compile Include="Assets\Scripts\Environment\FanSpin.cs" />
+    <Compile Include="Assets\Scripts\Environment\InspectableObject.cs" />
+    <Compile Include="Assets\Scripts\Environment\Interactable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Items\AmmoPack.cs" />
     <Compile Include="Assets\Scripts\Items\HealthPack.cs" />
@@ -238,6 +246,7 @@
     <Compile Include="Assets\Scripts\Misc\CameraController.cs" />
     <Compile Include="Assets\Scripts\Misc\WaveManager.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\RemainingEnemies.cs" />
     <Compile Include="Assets\Scripts\UIScripts\TitleScreen\TitleScreen.cs" />
   </ItemGroup>

@@ -13,7 +13,8 @@ public class ActorMotor: MonoBehaviour {
 
     void Update()
     {
-        RotateActor();
+        if (target != new Vector3(0, 0, 0))
+            RotateActor();
     }
 
     // Move the Actor in the given direction and at the speed set in the Inspector
@@ -31,12 +32,12 @@ public class ActorMotor: MonoBehaviour {
     // Rotates the Actor to look at the set target
     void RotateActor()
     {
-        if (target.y > transform.position.y)
-            rotationAngle = Mathf.Rad2Deg * Mathf.Acos((target.x - transform.position.x) / Mathf.Sqrt((Mathf.Pow(target.x - transform.position.x, 2) +
+        rotationAngle = Mathf.Rad2Deg * Mathf.Acos((target.x - transform.position.x) / Mathf.Sqrt((Mathf.Pow(target.x - transform.position.x, 2) +
                 Mathf.Pow(target.y - transform.position.y, 2))));
-        else
-            rotationAngle = -Mathf.Rad2Deg * Mathf.Acos((target.x - transform.position.x) / Mathf.Sqrt((Mathf.Pow(target.x - transform.position.x, 2) +
-                Mathf.Pow(target.y - transform.position.y, 2))));
+
+        if (target.y < transform.position.y)
+            rotationAngle *= -1;
+
         actorRotation.z = rotationAngle;
         transform.eulerAngles = (actorRotation);
     }

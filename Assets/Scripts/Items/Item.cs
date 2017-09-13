@@ -13,16 +13,16 @@ public class Item : MonoBehaviour {
     SpriteRenderer ren;
     Color color;
 
-    void OnEnable()
-    {
-        StartCoroutine(Despawn(secondsUntilDespawnBegins));
-    }
-
     void Start()
     {
         ren = GetComponent<SpriteRenderer>();
         color = ren.color;
         oldBlinkSpeed = blinkSpeed;
+    }
+
+    public void StartDespawn()
+    {
+        StartCoroutine(Despawn(secondsUntilDespawnBegins));
     }
 
     public void Destroy()

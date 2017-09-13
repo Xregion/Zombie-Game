@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections;
 
 [RequireComponent(typeof(ActorMotor))]
 public class PlayerController : MonoBehaviour, IDamageable {
@@ -9,11 +8,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
     public event Action DeathEvent; // called when the player dies
 
 
-    public SpriteRenderer muzzleFlash;
-    public float normalMovSpeed; // the normal movement speed set in the inspector
-    public float runMovSpeed; // the movement speed when the player is running
-    public float movSpeedWhileReloading; // the movement speed when the player is reloading
-    public float backpeddleMovSpeed; // the movement speed when the player is walking backwards
+    public float normalMoveSpeed; // the normal movement speed set in the inspector
+    public float runMoveSpeed; // the movement speed when the player is running
+    public float moveSpeedWhileReloading; // the movement speed when the player is reloading
+    public float backpeddleMoveSpeed; // the movement speed when the player is walking backwards
 
     [HideInInspector]
     public int currentHealth;
@@ -38,13 +36,12 @@ public class PlayerController : MonoBehaviour, IDamageable {
         mousePosition.z = transform.position.z;
         Vector3 worldPointMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         currentHealth = totalHealth;
-        movSpeed = normalMovSpeed;
+        movSpeed = normalMoveSpeed;
         gunController = GetComponentInChildren<GunController>();
         animations = GetComponentInChildren<PlayerAnimation>();
         motor = GetComponent<ActorMotor>();
         motor.SetTarget(worldPointMousePosition);
         isAlive = true;
-        muzzleFlash.gameObject.SetActive(false);
     }
 	
 	void Update()
@@ -56,18 +53,15 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 if (!gunController.chamberIsEmpty)
                 {
                     gunController.Fire(); // calls the Fire method from the gun controller
-                    muzzleFlash.gameObject.SetActive(true);
                     animations.SetIsFiring(true);
-                    StartCoroutine(AnimationTimer(gunController.fireRate));
                 }
                 else
                 {
                     gunController.Reload();
                     if (!gunController.outOfBullets)
                     {
-                        movSpeed = movSpeedWhileReloading;
+                        movSpeed = moveSpeedWhileReloading;
                         animations.SetIsReloading(true);
-                        StartCoroutine(AnimationTimer(gunController.reloadSpeed));
                     }
                 }
             }
@@ -76,10 +70,9 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 gunController.Reload();
                 if (!gunController.fullChamber && !gunController.outOfBullets)
                 {
-                    movSpeed = movSpeedWhileReloading;
+                    movSpeed = moveSpeedWhileReloading;
                     animations.SetIsReloading(true);
                     gunController.SetRedDot(false);
-                    StartCoroutine(AnimationTimer(gunController.reloadSpeed));
                 }
             }
             else if (Input.GetButtonDown("Melee") && !IsPerformingAction() && !isMoving) {
@@ -87,25 +80,17 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 animations.SetIsMeleeing(true);
                 movSpeed = 0;
                 gunController.SetRedDot(false);
-                StartCoroutine(AnimationTimer(gunController.meleeSpeed));
             }
             else if (Input.GetButton("Run") && !IsPerformingAction())
             {
                 isRunning = true;
-                movSpeed = runMovSpeed;
+                movSpeed = runMoveSpeed;
             }
 
             if (Input.GetButtonUp("Run") && !gunController.isReloading)
             {
                 isRunning = false;
-                movSpeed = normalMovSpeed;
-            }
-        }
-        else
-        {
-            if (DeathEvent != null)
-            {
-                DeathEvent();
+                movSpeed = normalMoveSpeed;
             }
         }
     }
@@ -120,21 +105,23 @@ public class PlayerController : MonoBehaviour, IDamageable {
             Vector3 worldPointMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             motor.SetTarget(worldPointMousePosition);
 
-            horizontalDirection = Input.GetAxis("Horizontal");
-            verticalDirection = Input.GetAxis("Vertical");
+            horizontalDirection = Input.GetAxisRaw("Horizontal");
+            verticalDirection = Input.GetAxisRaw("Vertical");
 
             if (verticalDirection < 0)
-                movSpeed = backpeddleMovSpeed;
+                movSpeed = backpeddleMoveSpeed;
+            else if (!gunController.isReloading && !isRunning)
+                movSpeed = normalMoveSpeed;
 
             motor.MoveActor(new Vector3 (verticalDirection, -horizontalDirection, 0), movSpeed);
 
-            SetMovementAnimation(false);
-            isMoving = false;
+            SetMovementAnimation(true);
+            isMoving = true;
 
-            if (horizontalDirection != 0 && verticalDirection != 0)
+            if (horizontalDirection == 0 && verticalDirection == 0)
             {
-                SetMovementAnimation(true);
-                isMoving = true;
+                SetMovementAnimation(false);
+                isMoving = false;
             }
         }
     }
@@ -152,6 +139,11 @@ public class PlayerController : MonoBehaviour, IDamageable {
             return true;
         }
         return false;
+    }
+
+    public void ResetMoveSpeed ()
+    {
+        movSpeed = normalMoveSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -190,24 +182,11 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
     void Die()
     {
+        if (DeathEvent != null)
+            DeathEvent();
+
         isAlive = false;
         SetMovementAnimation(false);
         animations.SetIsDead(true);
-    }
-
-    // used to time the animations of shooting or reloading, turns off animations when finished and allows the player is move at normal speeds again
-    IEnumerator AnimationTimer (float timer)
-    {
-        yield return new WaitForSeconds(timer);
-
-        muzzleFlash.gameObject.SetActive(false);
-        gunController.isFiring = false;
-        gunController.SetRedDot(true);
-        gunController.isMeleeing = false;
-        gunController.isReloading = false;
-        animations.SetIsFiring(false);
-        animations.SetIsMeleeing(false);
-        animations.SetIsReloading(false);
-        movSpeed = normalMovSpeed;
     }
 }

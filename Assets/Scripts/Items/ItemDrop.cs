@@ -14,7 +14,9 @@ public class ItemDrop : MonoBehaviour {
             int amountToDrop = Random.Range(5, 11);
 
             GameObject item = Instantiate(items[itemToDrop], transform.position, Quaternion.identity);
-            item.GetComponent<Item>().SetDropAmount(amountToDrop);
+            Item i = item.GetComponent<Item>();
+            i.SetDropAmount(amountToDrop);
+            i.StartDespawn();
         }
     }
 }

@@ -9,5 +9,11 @@ EditorBuildSettings:
     path: Assets/scenes/title screen.unity
     guid: 9de1f30b63c7fe143989942e082df9f3
   - enabled: 1
+    path: Assets/scenes/Roof.unity
+    guid: f793d5de61a0e3a43b8c9b854a0dd4e0
+  - enabled: 1
+    path: Assets/scenes/Third Floor.unity
+    guid: a6b1fd0898d166e4d9f97c6fd949ba73
+  - enabled: 1
     path: Assets/scenes/main.unity
     guid: a313c6d54b10ac344bf06b913726e2d1
