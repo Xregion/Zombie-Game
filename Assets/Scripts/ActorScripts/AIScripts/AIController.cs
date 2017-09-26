@@ -162,7 +162,7 @@ public class AIController : MonoBehaviour, IDamageable {
                     dropper.DropItem(); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
 
                 Vector3 deathPosition = transform.position;
-                deathPosition.z = 10;
+                deathPosition.z = 14.5f;
                 transform.position = deathPosition;
                 if (DeathEvent != null)
                     DeathEvent(gameObject);

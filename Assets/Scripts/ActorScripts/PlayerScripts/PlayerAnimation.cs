@@ -25,7 +25,7 @@ public class PlayerAnimation : Animations {
 
     public void ShootingAnimationEnded()
     {
-        gunController.isFiring = false;
+        gunController.SetIsFiring(false);
         SetIsFiring(false);
         gunController.muzzleFlash.gameObject.SetActive(false);
     }
@@ -33,17 +33,17 @@ public class PlayerAnimation : Animations {
     public override void MeleeingAnimationEnded ()
     {
         base.MeleeingAnimationEnded();
-        gunController.isMeleeing = false;
+        gunController.SetIsMeleeing(false);
         SetIsMeleeing(false);
         gunController.DisableGunCollider();
         gunController.SetRedDot(true);
-        gunController.meleeHit = false;
+        gunController.SetMeleeHit(false);
         ResetMoveSpeed();
     }
 
     public void ReloadingAnimationEnded ()
     {
-        gunController.isReloading = false;
+        gunController.SetIsReloading(false);
         SetIsReloading(false);
         gunController.SetRedDot(true);
         ResetMoveSpeed();

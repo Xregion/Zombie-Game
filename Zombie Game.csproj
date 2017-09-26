@@ -16,7 +16,7 @@
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
-    <UnityVersion>2017.2.0b10</UnityVersion>
+    <UnityVersion>2017.2.0b11</UnityVersion>
     <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
@@ -235,6 +235,7 @@
     <Compile Include="Assets\Scripts\Environment\DestructableObject.cs" />
     <Compile Include="Assets\Scripts\Environment\Doorway.cs" />
     <Compile Include="Assets\Scripts\Environment\FanSpin.cs" />
+    <Compile Include="Assets\Scripts\Environment\FlameFlicker.cs" />
     <Compile Include="Assets\Scripts\Environment\InspectableObject.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactable.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IDamageable.cs" />

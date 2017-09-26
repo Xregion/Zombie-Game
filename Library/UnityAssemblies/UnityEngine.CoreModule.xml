@@ -3819,6 +3819,16 @@ See Also: WWW.assetBundle, WWW.LoadFromCacheOrDownload.</param>
       <summary>
         <para>Removes all cached content in the cache that has been cached by the current application.</para>
       </summary>
+      <param name="expiration">The number of seconds that AssetBundles may remain unused in the cache.</param>
+      <returns>
+        <para>Returns True when cache clearing succeeded.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Cache.ClearCache(System.Int32)">
+      <summary>
+        <para>Removes all cached content in the cache that has been cached by the current application.</para>
+      </summary>
+      <param name="expiration">The number of seconds that AssetBundles may remain unused in the cache.</param>
       <returns>
         <para>Returns True when cache clearing succeeded.</para>
       </returns>
@@ -3887,6 +3897,16 @@ See Also: WWW.assetBundle, WWW.LoadFromCacheOrDownload.</param>
       <summary>
         <para>Removes all AssetBundle and Procedural Material content that has been cached by the current application.</para>
       </summary>
+      <param name="expiration">The number of seconds that AssetBundles may remain unused in the cache.</param>
+      <returns>
+        <para>True when cache clearing succeeded, false if cache was in use.</para>
+      </returns>
+    </member>
+    <member name="M:UnityEngine.Caching.ClearCache(System.Int32)">
+      <summary>
+        <para>Removes all AssetBundle and Procedural Material content that has been cached by the current application.</para>
+      </summary>
+      <param name="expiration">The number of seconds that AssetBundles may remain unused in the cache.</param>
       <returns>
         <para>True when cache clearing succeeded, false if cache was in use.</para>
       </returns>

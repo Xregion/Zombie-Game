@@ -6,7 +6,7 @@ public class FanSpin : MonoBehaviour {
     float rotationAngle = 0;
 
 	void Update () {
-        rotationAngle -= 20f;
+        rotationAngle -= 10f;
         if (rotationAngle <= -1000)
             rotationAngle = 0;
         rotation.z = rotationAngle;

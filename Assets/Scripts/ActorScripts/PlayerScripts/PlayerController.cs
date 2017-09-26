@@ -17,13 +17,13 @@ public class PlayerController : MonoBehaviour, IDamageable {
     public int currentHealth;
     public int totalHealth;
 
-    float horizontalDirection;
+    //float horizontalDirection;
     float verticalDirection;
     float mouseToPlayerAngle;
     float movSpeed;
     Vector3 mousePosition;
     Vector3 worldPointMousePosition;
-    bool isAlive;
+    bool controlsOn;
     bool isRunning;
     bool isMoving;
     GunController gunController;
@@ -41,16 +41,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
         animations = GetComponentInChildren<PlayerAnimation>();
         motor = GetComponent<ActorMotor>();
         motor.SetTarget(worldPointMousePosition);
-        isAlive = true;
+        controlsOn = true;
     }
 	
 	void Update()
     {
-        if (isAlive) // Turn on controls if the player is alive
+        if (controlsOn)
         {
             if (Input.GetButtonDown("Fire1") && !IsPerformingAction()) // check if the player hit the fire button and is not currently performing another action
             {
-                if (!gunController.chamberIsEmpty)
+                if (!gunController.getChamberIsEmpty())
                 {
                     gunController.Fire(); // calls the Fire method from the gun controller
                     animations.SetIsFiring(true);
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 else
                 {
                     gunController.Reload();
-                    if (!gunController.outOfBullets)
+                    if (!gunController.getOutOfBullets())
                     {
                         movSpeed = moveSpeedWhileReloading;
                         animations.SetIsReloading(true);
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
             else if (Input.GetButtonDown("Reload") && !IsPerformingAction())
             {
                 gunController.Reload();
-                if (!gunController.fullChamber && !gunController.outOfBullets)
+                if (!gunController.getFullChamber() && !gunController.getOutOfBullets())
                 {
                     movSpeed = moveSpeedWhileReloading;
                     animations.SetIsReloading(true);
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 movSpeed = runMoveSpeed;
             }
 
-            if (Input.GetButtonUp("Run") && !gunController.isReloading)
+            if (Input.GetButtonUp("Run") && !gunController.getIsReloading())
             {
                 isRunning = false;
                 movSpeed = normalMoveSpeed;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
     void FixedUpdate()
     {
-        if (isAlive)
+        if (controlsOn)
         {
             // Have player look at cursor at all times
             mousePosition = Input.mousePosition;
@@ -105,20 +105,20 @@ public class PlayerController : MonoBehaviour, IDamageable {
             Vector3 worldPointMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
             motor.SetTarget(worldPointMousePosition);
 
-            horizontalDirection = Input.GetAxisRaw("Horizontal");
+            //horizontalDirection = Input.GetAxisRaw("Horizontal");
             verticalDirection = Input.GetAxisRaw("Vertical");
 
             if (verticalDirection < 0)
                 movSpeed = backpeddleMoveSpeed;
-            else if (!gunController.isReloading && !isRunning)
+            else if (!gunController.getIsReloading() && !isRunning)
                 movSpeed = normalMoveSpeed;
 
-            motor.MoveActor(new Vector3 (verticalDirection, -horizontalDirection, 0), movSpeed);
+            motor.MoveActor(new Vector3 (verticalDirection, 0, 0), movSpeed);
 
             SetMovementAnimation(true);
             isMoving = true;
 
-            if (horizontalDirection == 0 && verticalDirection == 0)
+            if (verticalDirection == 0)
             {
                 SetMovementAnimation(false);
                 isMoving = false;
@@ -139,6 +139,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
             return true;
         }
         return false;
+    }
+
+    public bool GetControls ()
+    {
+        return controlsOn;
+    }
+
+    public void SetControls (bool on)
+    {
+        controlsOn = on;
     }
 
     public void ResetMoveSpeed ()
@@ -172,7 +182,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
     // Checks if the player is shooting, reloading, or running. Used to block certain actions while doing any of these things
     bool IsPerformingAction ()
     {
-        return gunController.isFiring || gunController.isReloading || isRunning || gunController.isMeleeing;
+        return gunController.getIsFiring() || gunController.getIsReloading() || isRunning || gunController.getIsMeleeing();
     }
 
     void SetMovementAnimation(bool isMoving)
@@ -185,7 +195,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
         if (DeathEvent != null)
             DeathEvent();
 
-        isAlive = false;
+        controlsOn = false;
         SetMovementAnimation(false);
         animations.SetIsDead(true);
     }

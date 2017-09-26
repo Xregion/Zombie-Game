@@ -15,21 +15,14 @@ public class GunController : MonoBehaviour {
     public int bulletDamage;
     public int meleeDamage;
     public float critChance;
-    [HideInInspector]
-    public bool isReloading;
-    [HideInInspector]
-    public bool isFiring;
-    [HideInInspector]
-    public bool isMeleeing;
-    [HideInInspector]
-    public bool chamberIsEmpty;
-    [HideInInspector]
-    public bool fullChamber;
-    [HideInInspector]
-    public bool outOfBullets;
-    [HideInInspector]
-    public bool meleeHit;
 
+    bool isReloading;
+    bool isFiring;
+    bool isMeleeing;
+    bool chamberIsEmpty;
+    bool fullChamber;
+    bool outOfBullets;
+    bool meleeHit;
     BoxCollider2D gunCollider;
     RaycastHit2D hit;
     int bulletsFired;
@@ -124,6 +117,56 @@ public class GunController : MonoBehaviour {
             hitObject.TakeDamage(meleeDamage);
             meleeHit = true;
         }
+    }
+
+    public bool getIsReloading()
+    {
+        return isReloading;
+    }
+
+    public void SetIsReloading(bool _isReloading)
+    {
+        isReloading = _isReloading;
+    }
+
+    public bool getIsFiring()
+    {
+        return isFiring;
+    }
+
+    public void SetIsFiring(bool _isFiring)
+    {
+        isFiring = _isFiring;
+    }
+
+    public bool getIsMeleeing()
+    {
+        return isMeleeing;
+    }
+
+    public void SetIsMeleeing(bool _isMeleeing)
+    {
+        isMeleeing = _isMeleeing;
+    }
+
+    public bool getChamberIsEmpty()
+    {
+        return chamberIsEmpty;
+    }
+
+    public bool getFullChamber()
+    {
+        return fullChamber;
+    }
+
+    public bool getOutOfBullets()
+    {
+        return outOfBullets;
+    }
+
+    public void SetMeleeHit(bool _meleeHit)
+    {
+        meleeHit = _meleeHit;
     }
 
     public void SetRedDot (bool on)

@@ -6,6 +6,6 @@ public class TitleScreen : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("Roof");
     }
 }

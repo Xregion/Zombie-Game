@@ -18726,6 +18726,20 @@ GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
         <para>Called when the Editor is woken up.</para>
       </summary>
     </member>
+    <member name="M:UnityEditor.MaterialEditor.BeginAnimatedCheck(UnityEngine.Rect,UnityEditor.MaterialProperty)">
+      <summary>
+        <para>Create a Property wrapper, useful for making regular GUI controls work with MaterialProperty.</para>
+      </summary>
+      <param name="totalPosition">Rectangle on the screen to use for the control, including label if applicable.</param>
+      <param name="prop">The MaterialProperty to use for the control.</param>
+    </member>
+    <member name="M:UnityEditor.MaterialEditor.BeginAnimatedCheck(UnityEditor.MaterialProperty)">
+      <summary>
+        <para>Create a Property wrapper, useful for making regular GUI controls work with MaterialProperty.</para>
+      </summary>
+      <param name="totalPosition">Rectangle on the screen to use for the control, including label if applicable.</param>
+      <param name="prop">The MaterialProperty to use for the control.</param>
+    </member>
     <member name="M:UnityEditor.MaterialEditor.ColorProperty(UnityEngine.Rect,UnityEditor.MaterialProperty,System.String)">
       <summary>
         <para>Draw a property field for a color shader property.</para>
@@ -18798,6 +18812,11 @@ Returns true if the UI is indeed displayed i.e. the material supports the Double
         <para>Display UI for editing material's render queue setting within the specified rect.</para>
       </summary>
       <param name="r"></param>
+    </member>
+    <member name="M:UnityEditor.MaterialEditor.EndAnimatedCheck">
+      <summary>
+        <para>Ends a Property wrapper started with BeginAnimatedCheck.</para>
+      </summary>
     </member>
     <member name="M:UnityEditor.MaterialEditor.FixupEmissiveFlag(UnityEngine.Color,UnityEngine.MaterialGlobalIlluminationFlags)">
       <summary>
