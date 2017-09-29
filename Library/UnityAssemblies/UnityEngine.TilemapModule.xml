@@ -585,7 +585,7 @@ Only one class at any one time should set defaultBrush to true.</para>
       <param name="position">Position of the Tile on the Tilemap.</param>
       <param name="flags">TileFlags to add (with bitwise or) onto the flags provided by Tile.TileBase.</param>
     </member>
-    <member name="M:UnityEngine.Tilemaps.Tilemap.BoxFill">
+    <member name="M:UnityEngine.Tilemaps.Tilemap.BoxFill(UnityEngine.Vector3Int,UnityEngine.Tilemaps.TileBase,System.Int32,System.Int32,System.Int32,System.Int32)">
       <summary>
         <para>Does a box fill with the given. Starts from given coordinates and fills the limits from start to end (inclusive).</para>
       </summary>
@@ -620,6 +620,17 @@ Only one class at any one time should set defaultBrush to true.</para>
         <para>Whether the Tilemap contains the tile.</para>
       </returns>
     </member>
+    <member name="M:UnityEngine.Tilemaps.Tilemap.EditorPreviewBoxFill(UnityEngine.Vector3Int,UnityEngine.Object,System.Int32,System.Int32,System.Int32,System.Int32)">
+      <summary>
+        <para>Does an editor preview of a box fill with the given. Starts from given coordinates and fills the limits from start to end (inclusive).</para>
+      </summary>
+      <param name="position">Position of the Tile on the Tilemap.</param>
+      <param name="tile"> to place.</param>
+      <param name="startX">The start X coordinate limit to fill to.</param>
+      <param name="startY">The start Y coordinate limit to fill to.</param>
+      <param name="endX">The ending X coordinate limit to fill to.</param>
+      <param name="endY">The ending Y coordinate limit to fill to.</param>
+    </member>
     <member name="M:UnityEngine.Tilemaps.Tilemap.EditorPreviewFloodFill(UnityEngine.Vector3Int,UnityEngine.Tilemaps.TileBase)">
       <summary>
         <para>Does an editor preview of a flood fill with the given starting from the given coordinates.</para>
@@ -627,7 +638,7 @@ Only one class at any one time should set defaultBrush to true.</para>
       <param name="position">Start position of the flood fill on the Tilemap.</param>
       <param name="tile"> to place.</param>
     </member>
-    <member name="M:UnityEngine.Tilemaps.Tilemap.FloodFill">
+    <member name="M:UnityEngine.Tilemaps.Tilemap.FloodFill(UnityEngine.Vector3Int,UnityEngine.Tilemaps.TileBase)">
       <summary>
         <para>Does a flood fill with the given starting from the given coordinates.</para>
       </summary>

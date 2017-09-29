@@ -995,7 +995,7 @@
       <summary>
         <para>Get the particles of this particle system.</para>
       </summary>
-      <param name="particles">Particle buffer that is used for writing particle state to. The return value is the number of particles written to this array.</param>
+      <param name="particles">Output particle buffer, containing the current particle state.</param>
       <returns>
         <para>The number of particles written to the input particle array (the number of particles currently alive).</para>
       </returns>
@@ -1946,10 +1946,10 @@ The Noise Module allows you to apply turbulence to the movement of your particle
     </member>
     <member name="M:UnityEngine.ParticleSystem.SetParticles(UnityEngine.ParticleSystem/Particle[],System.Int32)">
       <summary>
-        <para>Set the particles of this particle system. size is the number of particles that is set.</para>
+        <para>Set the particles of this particle system. size is the number of particles that will be set.</para>
       </summary>
-      <param name="particles"></param>
-      <param name="size"></param>
+      <param name="particles">Input particle buffer, containing the desired particle state.</param>
+      <param name="size">The number of elements in the particles array that will be written to the Particle System.</param>
     </member>
     <member name="T:UnityEngine.ParticleSystem.ShapeModule">
       <summary>
@@ -2539,9 +2539,19 @@ The Noise Module allows you to apply turbulence to the movement of your particle
         <para>Set the minimum distance each trail can travel before a new vertex is added to it.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.ParticleSystem.TrailModule.mode">
+      <summary>
+        <para>Choose how particle trails are generated.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.ParticleSystem.TrailModule.ratio">
       <summary>
         <para>Choose what proportion of particles will receive a trail.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.ParticleSystem.TrailModule.ribbonCount">
+      <summary>
+        <para>Select how many lines to create through the Particle System.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.ParticleSystem.TrailModule.sizeAffectsLifetime">
@@ -2643,6 +2653,16 @@ The Noise Module allows you to apply turbulence to the movement of your particle
     <member name="P:UnityEngine.ParticleSystem.VelocityOverLifetimeModule.space">
       <summary>
         <para>Specifies if the velocities are in local space (rotated with the transform) or world space.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.ParticleSystem.VelocityOverLifetimeModule.speedModifier">
+      <summary>
+        <para>Curve to control particle speed based on lifetime, without affecting the direction of the particles.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.ParticleSystem.VelocityOverLifetimeModule.speedModifierMultiplier">
+      <summary>
+        <para>Speed multiplier.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.ParticleSystem.VelocityOverLifetimeModule.x">
@@ -3441,6 +3461,21 @@ The position stream is always enabled, and any attempts to remove it will be ign
     <member name="F:UnityEngine.ParticleSystemSubEmitterType.Death">
       <summary>
         <para>Spawn new particles when particles from the parent system die.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.ParticleSystemTrailMode">
+      <summary>
+        <para>Choose how Particle Trails are generated.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ParticleSystemTrailMode.PerParticle">
+      <summary>
+        <para>Leave a trail behind each particle as it moves.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.ParticleSystemTrailMode.Ribbon">
+      <summary>
+        <para>Draw a line between each particle, connecting the youngest particle to the oldest.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.ParticleSystemTrailTextureMode">

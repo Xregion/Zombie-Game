@@ -54,6 +54,11 @@
         <para>The PlayableGraph created by the PlayableDirector.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.Playables.PlayableDirector.playOnAwake">
+      <summary>
+        <para>Whether the playable asset will start playing back as soon as the component awakes.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.Playables.PlayableDirector.state">
       <summary>
         <para>The current playing state of the component. (Read Only)</para>

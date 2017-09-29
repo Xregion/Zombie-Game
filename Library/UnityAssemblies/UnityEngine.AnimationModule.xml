@@ -868,45 +868,49 @@
         <para>Apply the default Root Motion.</para>
       </summary>
     </member>
-    <member name="M:UnityEngine.Animator.CrossFade(System.String,System.Single,System.Int32,System.Single)">
+    <member name="M:UnityEngine.Animator.CrossFade(System.String,System.Single,System.Int32,System.Single,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.CrossFade.</para>
+        <para>Creates a crossfade from the current state to any other state using normalized times.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="transitionDuration"></param>
-      <param name="layer"></param>
-      <param name="normalizedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The name of the state.</param>
+      <param name="stateHashName">The hash name of the state.</param>
+      <param name="normalizedTransitionDuration">The duration of the transition (normalized).</param>
+      <param name="layer">The layer where the crossfade occurs.</param>
+      <param name="normalizedTimeOffset">The time of the state (normalized).</param>
+      <param name="normalizedTransitionTime">The time of the transition (normalized).</param>
     </member>
-    <member name="M:UnityEngine.Animator.CrossFade(System.Int32,System.Single,System.Int32,System.Single)">
+    <member name="M:UnityEngine.Animator.CrossFade(System.Int32,System.Single,System.Int32,System.Single,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.CrossFade.</para>
+        <para>Creates a crossfade from the current state to any other state using normalized times.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="transitionDuration"></param>
-      <param name="layer"></param>
-      <param name="normalizedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The name of the state.</param>
+      <param name="stateHashName">The hash name of the state.</param>
+      <param name="normalizedTransitionDuration">The duration of the transition (normalized).</param>
+      <param name="layer">The layer where the crossfade occurs.</param>
+      <param name="normalizedTimeOffset">The time of the state (normalized).</param>
+      <param name="normalizedTransitionTime">The time of the transition (normalized).</param>
     </member>
-    <member name="M:UnityEngine.Animator.CrossFadeInFixedTime(System.String,System.Single,System.Int32,System.Single)">
+    <member name="M:UnityEngine.Animator.CrossFadeInFixedTime(System.Int32,System.Single,System.Int32,System.Single,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.CrossFadeInFixedTime.</para>
+        <para>Creates a crossfade from the current state to any other state using times in seconds.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="transitionDuration"></param>
-      <param name="layer"></param>
-      <param name="fixedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The name of the state.</param>
+      <param name="stateHashName">The hash name of the state.</param>
+      <param name="fixedTransitionDuration">The duration of the transition (in seconds).</param>
+      <param name="layer">The layer where the crossfade occurs.</param>
+      <param name="fixedTimeOffset">The time of the state (in seconds).</param>
+      <param name="normalizedTransitionTime">The time of the transition (normalized).</param>
     </member>
-    <member name="M:UnityEngine.Animator.CrossFadeInFixedTime(System.Int32,System.Single,System.Int32,System.Single)">
+    <member name="M:UnityEngine.Animator.CrossFadeInFixedTime(System.String,System.Single,System.Int32,System.Single,System.Single)">
       <summary>
-        <para>See IAnimatorControllerPlayable.CrossFadeInFixedTime.</para>
+        <para>Creates a crossfade from the current state to any other state using times in seconds.</para>
       </summary>
-      <param name="stateName"></param>
-      <param name="transitionDuration"></param>
-      <param name="layer"></param>
-      <param name="fixedTime"></param>
-      <param name="stateNameHash"></param>
+      <param name="stateName">The name of the state.</param>
+      <param name="stateHashName">The hash name of the state.</param>
+      <param name="fixedTransitionDuration">The duration of the transition (in seconds).</param>
+      <param name="layer">The layer where the crossfade occurs.</param>
+      <param name="fixedTimeOffset">The time of the state (in seconds).</param>
+      <param name="normalizedTransitionTime">The time of the transition (normalized).</param>
     </member>
     <member name="M:UnityEngine.Animator.GetAnimatorTransitionInfo(System.Int32)">
       <summary>
@@ -1744,9 +1748,19 @@
         <para>Returns true if the transition is from an AnyState node, or from Animator.CrossFade().</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.AnimatorTransitionInfo.duration">
+      <summary>
+        <para>Duration of the transition.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.AnimatorTransitionInfo.durationUnit">
+      <summary>
+        <para>The unit of the transition duration.</para>
+      </summary>
+    </member>
     <member name="P:UnityEngine.AnimatorTransitionInfo.fullPathHash">
       <summary>
-        <para>The unique name of the Transition.</para>
+        <para>The hash name of the Transition.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AnimatorTransitionInfo.nameHash">
@@ -2077,6 +2091,21 @@
     <member name="F:UnityEngine.AvatarTarget.Root">
       <summary>
         <para>The root, the position of the game object.</para>
+      </summary>
+    </member>
+    <member name="T:UnityEngine.DurationUnit">
+      <summary>
+        <para>Describe the unit of a duration.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.DurationUnit.Fixed">
+      <summary>
+        <para>A fixed duration is a duration expressed in seconds.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.DurationUnit.Normalized">
+      <summary>
+        <para>A normalized duration is a duration expressed in percentage.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.HumanBodyBones">

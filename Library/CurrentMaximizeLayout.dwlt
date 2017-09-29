@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 9916
+  controlID: 331
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -50,16 +50,17 @@ MonoBehaviour:
     y: 573
     width: 1107
     height: 445
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_MaximizeOnPlay: 1
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 05000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
-    m_HBaseRangeMin: -380.44446
-    m_HBaseRangeMax: 380.44446
+    m_HBaseRangeMin: -553.5
+    m_HBaseRangeMax: 553.5
     m_VBaseRangeMin: -214
     m_VBaseRangeMax: 214
     m_HAllowExceedBaseRangeMin: 1
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_MinSize: {x: 434, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 1
-  controlID: 9917
+  controlID: 332
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 9883
+  controlID: 285
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -202,15 +203,16 @@ MonoBehaviour:
     y: 92
     width: 1111
     height: 460
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 4813.444255100185
-  m_2DMode: 0
+  lastFramingTime: 245.33504565310386
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 21.15, y: -5.5599995, z: 1}
+    m_Target: {x: 1.736507, y: -2.597463, z: -0.234375}
     speed: 2
-    m_Value: {x: 21.15, y: -5.5599995, z: 1}
+    m_Value: {x: 1.736507, y: -2.597463, z: -0.234375}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -219,31 +221,32 @@ MonoBehaviour:
     showSkybox: 1
     showFlares: 1
     showImageEffects: 1
+    showParticleSystems: 1
   grid:
     xGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 1
-      speed: 2
-      m_Value: 1
-    zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
+    zGrid:
+      m_Target: 1
+      speed: 2
+      m_Value: 1
   m_Rotation:
-    m_Target: {x: -0.19397937, y: 0.0300108, z: -0.0059370124, w: -0.9805286}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.19397934, y: 0.030010797, z: -0.0059370114, w: -0.9805285}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 12.654844
+    m_Target: 39.256115
     speed: 2
-    m_Value: 12.654844
+    m_Value: 39.256115
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_ShowGlobalGrid: 1
   m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
@@ -277,6 +280,7 @@ MonoBehaviour:
     y: 92
     width: 1111
     height: 461
+  m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -303,6 +307,7 @@ MonoBehaviour:
     y: 92
     width: 1111
     height: 460
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_AnimEditor: {fileID: 0}
   m_Locked: 0
 --- !u!114 &9
@@ -331,13 +336,10 @@ MonoBehaviour:
     y: 92
     width: 1111
     height: 460
-  m_ViewPositions:
-    m_KeySerializationHelper:
-    - {fileID: 1107019725357987416, guid: 1ade6fc3d2930124882f6039f67d3711, type: 2}
-    - {fileID: 1107456940954582330, guid: f4c3cb89eb12a3f429bc82334f7a2bf0, type: 2}
-    m_ValueSerializationHelper:
-    - {x: 762.6, y: 240}
-    - {x: 643.6, y: 308.6}
+  m_PersistentViewDataDictionary: {fileID: 0}
+  m_ViewTransforms:
+    m_KeySerializationHelper: []
+    m_ValueSerializationHelper: []
   m_PreviewAnimator: {fileID: 0}
   m_AnimatorController: {fileID: 0}
   m_BreadCrumbs: []
@@ -402,25 +404,26 @@ MonoBehaviour:
     y: 92
     width: 370
     height: 460
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fe40fdff
-    m_LastClickedID: -179970
-    m_ExpandedIDs: d240fdffd440fdffde40fdff0041fdff2041fdff2059fdfffee4ffff000000003e3900006c390000fa3900008e3a0000b4d10000e4d1000010e10000
+    m_SelectedIDs: d22b0000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 1ef4ffff84fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Firepoint
-      m_OriginalName: Firepoint
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -180002
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -452,7 +455,7 @@ MonoBehaviour:
   m_MinSize: {x: 434, y: 271}
   m_MaxSize: {x: 14004, y: 10021}
   vertical: 0
-  controlID: 9918
+  controlID: 333
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -530,6 +533,7 @@ MonoBehaviour:
     y: 573
     width: 374
     height: 445
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
     m_ClassNames: []
@@ -542,19 +546,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Materials
+    - Assets/scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets/scenes
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\Kyle\Documents\GitHub\Zombie Game
+  m_LastProjectPath: C:\Users\Kyle\Documents\GitHub\Zombie Game
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 88}
-    m_SelectedIDs: 66320000
-    m_LastClickedID: 12902
-    m_ExpandedIDs: 000000004a3100006a310000d83100001432000086320000c6330000123500005035000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 180}
+    m_SelectedIDs: 9a2b0000
+    m_LastClickedID: 11162
+    m_ExpandedIDs: 000000009c270000ca2700004a2800009628000050290000242b0000002d0000682d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -582,7 +586,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004a3100006a310000d83100001432000086320000c6330000123500005035000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000009c270000ca2700004a2800009628000050290000242b0000002d0000682d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -607,10 +611,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: fe40fdff
-    m_LastClickedInstanceID: -179970
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000402700004c2600005447fbff02310000c630000000000000
+    m_SelectedInstanceIDs: d22b0000
+    m_LastClickedInstanceID: 11218
+    m_HadKeyboardFocusLastEvent: 0
+    m_ExpandedInstanceIDs: c6230000402700004c2600005447fbff
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -663,6 +667,7 @@ MonoBehaviour:
     y: 573
     width: 374
     height: 445
+  m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -681,8 +686,8 @@ MonoBehaviour:
     y: 0
     width: 433
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -716,6 +721,7 @@ MonoBehaviour:
     y: 92
     width: 431
     height: 926
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
@@ -749,6 +755,7 @@ MonoBehaviour:
     y: 92
     width: 431
     height: 926
+  m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -774,6 +781,7 @@ MonoBehaviour:
     y: 92
     width: 431
     height: 926
+  m_PersistentViewDataDictionary: {fileID: 0}
   m_InitialOpenURL: https://public-cdn.cloud.unity3d.com/editor/production/cloud/analytics
   m_GlobalObjectTypeName: 
   m_RegisteredViewURLs:
