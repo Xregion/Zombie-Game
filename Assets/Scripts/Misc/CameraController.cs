@@ -2,11 +2,12 @@
 
 public class CameraController : MonoBehaviour {
 
-    public Transform player;
+    Transform player;
 
     Vector3 cameraPos;
 
 	void Start () {
+        player = LoadManager.instance.GetPlayer().transform;
         cameraPos = transform.position;
 	}
 	

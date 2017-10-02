@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(ActorMotor))]
 public class PlayerController : MonoBehaviour, IDamageable {
@@ -7,22 +8,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
     public event Action<float> HealthChangeEvent; // called when the health of the player either increases or decreases
     public event Action DeathEvent; // called when the player dies
 
-
     public float normalMoveSpeed; // the normal movement speed set in the inspector
     public float runMoveSpeed; // the movement speed when the player is running
     public float moveSpeedWhileReloading; // the movement speed when the player is reloading
     public float backpeddleMoveSpeed; // the movement speed when the player is walking backwards
-
-    [HideInInspector]
-    public int currentHealth;
     public int totalHealth;
 
-    //float horizontalDirection;
+    int currentHealth;
     float verticalDirection;
-    float mouseToPlayerAngle;
     float movSpeed;
     Vector3 mousePosition;
-    Vector3 worldPointMousePosition;
     bool controlsOn;
     bool isRunning;
     bool isMoving;
@@ -43,14 +38,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
         motor.SetTarget(worldPointMousePosition);
         controlsOn = true;
     }
-	
-	void Update()
+
+    void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B))
+            SaveManager.data.IsPowerOn = false;
         if (controlsOn)
         {
             if (Input.GetButtonDown("Fire1") && !IsPerformingAction()) // check if the player hit the fire button and is not currently performing another action
             {
-                if (!gunController.getChamberIsEmpty())
+                if (!gunController.GetChamberIsEmpty())
                 {
                     gunController.Fire(); // calls the Fire method from the gun controller
                     animations.SetIsFiring(true);
@@ -58,7 +55,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 else
                 {
                     gunController.Reload();
-                    if (!gunController.getOutOfBullets())
+                    if (!gunController.GetOutOfBullets())
                     {
                         movSpeed = moveSpeedWhileReloading;
                         animations.SetIsReloading(true);
@@ -68,7 +65,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
             else if (Input.GetButtonDown("Reload") && !IsPerformingAction())
             {
                 gunController.Reload();
-                if (!gunController.getFullChamber() && !gunController.getOutOfBullets())
+                if (!gunController.GetFullChamber() && !gunController.GetOutOfBullets())
                 {
                     movSpeed = moveSpeedWhileReloading;
                     animations.SetIsReloading(true);
@@ -87,7 +84,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 movSpeed = runMoveSpeed;
             }
 
-            if (Input.GetButtonUp("Run") && !gunController.getIsReloading())
+            if (Input.GetButtonUp("Run") && !gunController.GetIsReloading())
             {
                 isRunning = false;
                 movSpeed = normalMoveSpeed;
@@ -110,10 +107,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
             if (verticalDirection < 0)
                 movSpeed = backpeddleMoveSpeed;
-            else if (!gunController.getIsReloading() && !isRunning)
+            else if (!gunController.GetIsReloading() && !isRunning)
                 movSpeed = normalMoveSpeed;
 
-            motor.MoveActor(new Vector3 (verticalDirection, 0, 0), movSpeed);
+            motor.MoveActor(new Vector3(verticalDirection, 0, 0), movSpeed);
 
             SetMovementAnimation(true);
             isMoving = true;
@@ -126,7 +123,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
         }
     }
 
-    public bool TakeDamage (int damage)
+    public bool TakeDamage(int damage)
     {
         currentHealth -= damage;
         if (HealthChangeEvent != null)
@@ -141,17 +138,22 @@ public class PlayerController : MonoBehaviour, IDamageable {
         return false;
     }
 
-    public bool GetControls ()
+    public bool GetControls()
     {
         return controlsOn;
     }
 
-    public void SetControls (bool on)
+    public void SetControls(bool on)
     {
         controlsOn = on;
     }
 
-    public void ResetMoveSpeed ()
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public void ResetMoveSpeed()
     {
         movSpeed = normalMoveSpeed;
     }
@@ -174,15 +176,15 @@ public class PlayerController : MonoBehaviour, IDamageable {
         {
             Item ammoPack = collision.GetComponent<Item>();
             gunController.totalBulletsRemaining += ammoPack.GetAmountToDrop();
-            gunController.SetBulletsText();
+            //gunController.SetBulletsText();
             ammoPack.Destroy();
         }
     }
 
     // Checks if the player is shooting, reloading, or running. Used to block certain actions while doing any of these things
-    bool IsPerformingAction ()
+    bool IsPerformingAction()
     {
-        return gunController.getIsFiring() || gunController.getIsReloading() || isRunning || gunController.getIsMeleeing();
+        return gunController.GetIsFiring() || gunController.GetIsReloading() || isRunning || gunController.GetIsMeleeing();
     }
 
     void SetMovementAnimation(bool isMoving)

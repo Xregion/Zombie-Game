@@ -17,14 +17,14 @@ public class HealthBars : MonoBehaviour {
         actor = GetComponentInParent<Canvas>().gameObject.GetComponentInParent<PlayerController>();
         actor.HealthChangeEvent += HealthChange;
         actor.DeathEvent += PlayerDied;
-        currentHealth = actor.currentHealth;
+        currentHealth = actor.GetCurrentHealth();
         healthBar.value = actor.totalHealth;
     }
 	
 	void HealthChange (float change)
     {
         healthBar.value += (change / actor.totalHealth);
-        currentHealth = actor.currentHealth;
+        currentHealth = actor.GetCurrentHealth();
         fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currentHealth / actor.totalHealth);
     }
 

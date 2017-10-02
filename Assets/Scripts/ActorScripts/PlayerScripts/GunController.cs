@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class GunController : MonoBehaviour {
 
-    public Text bulletsText;
+    Text bulletsText;
 
     public LayerMask damageable;
     public Transform firePoint;
@@ -36,7 +36,7 @@ public class GunController : MonoBehaviour {
         redDot.SetPosition(1, new Vector3(bulletRange, 0, 0));
         bulletsInChamber = maxBulletsInChamber;
         bulletsFired = bulletsInChamber;
-        SetBulletsText();
+        //SetBulletsText();
     }
 
     void Update()
@@ -69,7 +69,7 @@ public class GunController : MonoBehaviour {
         if (bulletsInChamber <= 0)
             chamberIsEmpty = true;
 
-        SetBulletsText();
+        //SetBulletsText();
     }
 
     public void MeleeAttack ()
@@ -106,7 +106,7 @@ public class GunController : MonoBehaviour {
             // Play out of ammo audio clip
             outOfBullets = true;
         }
-        SetBulletsText();
+        //SetBulletsText();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -119,7 +119,7 @@ public class GunController : MonoBehaviour {
         }
     }
 
-    public bool getIsReloading()
+    public bool GetIsReloading()
     {
         return isReloading;
     }
@@ -129,7 +129,7 @@ public class GunController : MonoBehaviour {
         isReloading = _isReloading;
     }
 
-    public bool getIsFiring()
+    public bool GetIsFiring()
     {
         return isFiring;
     }
@@ -139,7 +139,7 @@ public class GunController : MonoBehaviour {
         isFiring = _isFiring;
     }
 
-    public bool getIsMeleeing()
+    public bool GetIsMeleeing()
     {
         return isMeleeing;
     }
@@ -149,17 +149,17 @@ public class GunController : MonoBehaviour {
         isMeleeing = _isMeleeing;
     }
 
-    public bool getChamberIsEmpty()
+    public bool GetChamberIsEmpty()
     {
         return chamberIsEmpty;
     }
 
-    public bool getFullChamber()
+    public bool GetFullChamber()
     {
         return fullChamber;
     }
 
-    public bool getOutOfBullets()
+    public bool GetOutOfBullets()
     {
         return outOfBullets;
     }
@@ -174,10 +174,15 @@ public class GunController : MonoBehaviour {
         redDot.enabled = on;
     }
 
-    public void SetBulletsText ()
+    public int GetBulletsInChamber ()
     {
-        bulletsText.text = bulletsInChamber + "/" + totalBulletsRemaining;
+        return bulletsInChamber;
     }
+
+    //public void SetBulletsText ()
+    //{
+    //    bulletsText.text = bulletsInChamber + "/" + totalBulletsRemaining;
+    //}
 
     public void DisableGunCollider ()
     {
