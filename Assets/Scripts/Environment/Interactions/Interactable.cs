@@ -3,14 +3,25 @@
 public abstract class Interactable : MonoBehaviour {
 
     protected static InteractionText interactions;
-    PlayerController player;
-    bool interacting;
+    protected PlayerController player;
+    protected bool interacting;
 
     void Awake()
     {
-        interactions = FindObjectOfType<InteractionText>();
+        interactions = GameObject.Find("Canvas").GetComponentInChildren<InteractionText>(true);
     }
-     void Start()
+
+    void OnEnable()
+    {
+        LoadManager.instance.LevelLoaded += LoadComplete;
+    }
+
+    void OnDisable()
+    {
+        LoadManager.instance.LevelLoaded -= LoadComplete;
+    }
+
+    void LoadComplete()
     {
         player = LoadManager.instance.GetPlayer().GetComponent<PlayerController>();
     }
@@ -26,11 +37,16 @@ public abstract class Interactable : MonoBehaviour {
             }
             else
             {
-                player.SetControls(true);
-                interactions.EnableDialogue(false);
-                interacting = false;
+                StopInteracting();
             }
         }
+    }
+
+    public virtual void StopInteracting()
+    {
+        player.SetControls(true);
+        interactions.EnableDialogue(false);
+        interacting = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

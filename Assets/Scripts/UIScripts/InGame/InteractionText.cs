@@ -7,8 +7,8 @@ public class InteractionText : MonoBehaviour {
 
     void Start()
     {
-        gameObject.SetActive(false);
         interactionText = GetComponentInChildren<Text>();
+        gameObject.SetActive(false);
     }
 
     public void SetText(string newText)

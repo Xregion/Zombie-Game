@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Roof
+  playerPos: {x: -23, y: 5, z: 1}
+  playerRot: 0
 --- !u!212 &212611400010505082
 SpriteRenderer:
   m_ObjectHideFlags: 1

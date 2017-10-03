@@ -9,6 +9,9 @@ public class SaveManager : MonoBehaviour {
     public static SaveManager data;
 
     string filePath;
+    string fileOne;
+    string fileTwo;
+    string fileThree;
 
     #region Data to Save/Load
     int scene;
@@ -86,36 +89,6 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
-    float xRotation;
-
-    public float XRotation
-    {
-        get
-        {
-            return xRotation;
-        }
-
-        set
-        {
-            xRotation = value;
-        }
-    }
-
-    float yRotation;
-
-    public float YRotation
-    {
-        get
-        {
-            return yRotation;
-        }
-
-        set
-        {
-            yRotation = value;
-        }
-    }
-
     float zRotation;
 
     public float ZRotation
@@ -174,28 +147,64 @@ public class SaveManager : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        filePath = Application.persistentDataPath + "/gameData.dat";
+        filePath = Application.persistentDataPath;
+        fileOne = filePath + "/GameDataOne.zomb";
+        fileTwo = filePath + "/GameDataTwo.zomb";
+        fileThree = filePath + "/GameDataThree.zomb";
 
         LoadData();
     }
 
-    public void SaveData()
+    public void SaveData(/*int fileNumber*/)
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(filePath);
+        FileStream file = File.Create(fileOne);
+        //switch (fileNumber)
+        //{
+        //    case 1:
+        //        file = File.Create(fileOne);
+        //        break;
+        //    case 2:
+        //        file = File.Create(fileTwo);
+        //        break;
+        //    case 3:
+        //        file = File.Create(fileThree);
+        //        break;
+        //    default:
+        //        Debug.LogError("File number outside of 1-3");
+        //        return;
+        //}
 
-        Data data = new Data(scene, bullets, xPosition, yPosition, zPosition, xRotation, yRotation, zRotation, items, isPowerOn);
+        Data data = new Data(scene, bullets, xPosition, yPosition, zPosition, zRotation, items, isPowerOn);
 
         bf.Serialize(file, data);
         file.Close();
     }
 
-    public void LoadData()
+    // Deserializes the save file from binary and sets the variables based on the data on file.
+    // Returns true if the file exists so that anyone accessing the function knows if the file exists or not.
+    public bool LoadData(/*int fileNumber*/)
     {
-        if (File.Exists(filePath))
+        //String filePath;
+        //switch (fileNumber)
+        //{
+        //    case 1:
+        //        filePath = fileOne;
+        //        break;
+        //    case 2:
+        //        filePath = fileTwo;
+        //        break;
+        //    case 3:
+        //        filePath = fileThree;
+        //        break;
+        //    default:
+        //        Debug.LogError("File number outside of 1-3");
+        //        return false;
+        //}
+        if (File.Exists(fileOne))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(filePath, FileMode.Open);
+            FileStream file = File.Open(fileOne, FileMode.Open);
             Data data = (Data)bf.Deserialize(file);
 
             scene = data.currentScene;
@@ -203,14 +212,15 @@ public class SaveManager : MonoBehaviour {
             xPosition = data.xPos;
             yPosition = data.yPos;
             zPosition = data.zPos;
-            xRotation = data.xRot;
-            yRotation = data.yRot;
             zRotation = data.zRot;
             items = data.currentItems;
             isPowerOn = data.isPowerOn;
 
             file.Close();
+            return true;
         }
+
+        return false;
     }
 
     [Serializable]
@@ -221,21 +231,17 @@ public class SaveManager : MonoBehaviour {
         public float xPos;
         public float yPos;
         public float zPos;
-        public float xRot;
-        public float yRot;
         public float zRot;
         public List<GameObject> currentItems;
         public bool isPowerOn;
 
-        public Data(int scene, int bullets, float xPosition, float yPosition, float zPosition, float xRotation, float yRotation, float zRotation, List<GameObject> items, bool _isPowerOn)
+        public Data(int scene, int bullets, float xPosition, float yPosition, float zPosition, float zRotation, List<GameObject> items, bool _isPowerOn)
         {
             currentScene = scene;
             bulletsLeft = bullets;
             xPos = xPosition;
             yPos = yPosition;
             zPos = zPosition;
-            xRot = xRotation;
-            yRot = yRotation;
             zRot = zRotation;
             currentItems = items;
             isPowerOn = _isPowerOn;

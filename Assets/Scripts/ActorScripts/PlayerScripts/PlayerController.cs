@@ -41,8 +41,6 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-            SaveManager.data.IsPowerOn = false;
         if (controlsOn)
         {
             if (Input.GetButtonDown("Fire1") && !IsPerformingAction()) // check if the player hit the fire button and is not currently performing another action

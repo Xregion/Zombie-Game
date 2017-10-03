@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scenes/Third Floor.unity
+- path: Assets/scenes/title screen.unity
   isLoaded: 1
   isActive: 1

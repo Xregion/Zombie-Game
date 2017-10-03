@@ -251,6 +251,7 @@
     <Compile Include="Assets\Scripts\Environment\Interactions\Doorway.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\InspectableObject.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Environment\Interactions\SaveConsole.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\ItemDrop.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\RemainingEnemies.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\InGame\SaveScreen.cs" />
     <Compile Include="Assets\Scripts\UIScripts\TitleScreen\TitleScreen.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

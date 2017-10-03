@@ -36,6 +36,7 @@ public class AIController : MonoBehaviour, IDamageable {
 
     void OnEnable()
     {
+        LoadManager.instance.LevelLoaded += LoadComplete;
         isAlive = true;
         col = GetComponent<BoxCollider2D>();
         animations = GetComponentInChildren<EnemyAnimations>();
@@ -46,9 +47,14 @@ public class AIController : MonoBehaviour, IDamageable {
         bloodSplatter[1].enabled = false;
     }
 
-    void Start()
+    void OnDisable()
     {
-        player = LoadManager.instance.GetPlayer(); // find the player in the world
+        LoadManager.instance.LevelLoaded -= LoadComplete;
+    }
+
+    void LoadComplete()
+    {
+        player = LoadManager.instance.GetPlayer();
     }
 
     void Update () {
@@ -95,8 +101,6 @@ public class AIController : MonoBehaviour, IDamageable {
 
     protected bool CheckIfPlayerIsInView ()
     {
-        if (player == null)
-            player = LoadManager.instance.GetPlayer();
         // cast a ray to the player to see if it is in view
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector3.Distance(transform.position, player.transform.position), colliderMask);
         if (hit.collider != null)
