@@ -7,10 +7,16 @@ public class SaveConsole : Interactable {
     CameraController camController;
     SaveScreen saveScreen;
     Vector3 consolePos;
+    float originalCamSize;
+    float zoomedCamSize;
+    float zoomSpeed;
 
     void Start()
     {
         cam = Camera.main;
+        originalCamSize = cam.orthographicSize;
+        zoomedCamSize = 0.5f;
+        zoomSpeed = 0.3f;
         camController = cam.GetComponent<CameraController>();
         saveScreen = GameObject.Find("Canvas").GetComponentInChildren<SaveScreen>(true);
         consolePos = transform.position;
@@ -30,9 +36,9 @@ public class SaveConsole : Interactable {
             Vector3 newPos = Vector3.Lerp(cam.transform.position, consolePos, 0.2f);
             newPos.z = cam.transform.position.z;
             cam.transform.position = newPos;
-            cam.orthographicSize -= 0.5f;
-            if (cam.orthographicSize < 0.5f)
-                cam.orthographicSize = 0.5f;
+            cam.orthographicSize -= zoomSpeed;
+            if (cam.orthographicSize < zoomedCamSize)
+                cam.orthographicSize = zoomedCamSize;
         }
         saveScreen.Enable(true);
         interactions.EnableDialogue(false);
@@ -41,12 +47,12 @@ public class SaveConsole : Interactable {
 
     IEnumerator CameraZoomOut()
     {
-        while (cam.orthographicSize < 10f)
+        while (cam.orthographicSize < originalCamSize)
         {
             yield return new WaitForSeconds(0.0001f);
-            cam.orthographicSize += 0.5f;
-            if (cam.orthographicSize > 10f)
-                cam.orthographicSize = 10f;
+            cam.orthographicSize += zoomSpeed;
+            if (cam.orthographicSize > originalCamSize)
+                cam.orthographicSize = originalCamSize;
         }
         saveScreen.Enable(false);
         camController.PauseFollow(false);

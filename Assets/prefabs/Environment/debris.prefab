@@ -104,6 +104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c268106be706446b15b6e77b9b1833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   inspectionText: There is debris blocking my way...
 --- !u!212 &212970992141489302
 SpriteRenderer:
