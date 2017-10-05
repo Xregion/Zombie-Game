@@ -107,6 +107,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
+  interactionDistance: 1
   sceneToLoad: Clothing Store
   playerPos: {x: 0, y: 0, z: 0}
   playerRot: 0

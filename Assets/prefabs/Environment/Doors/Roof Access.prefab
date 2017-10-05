@@ -107,6 +107,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
+  interactionDistance: 1
   sceneToLoad: Roof
   playerPos: {x: -23, y: 5, z: 1}
   playerRot: 0

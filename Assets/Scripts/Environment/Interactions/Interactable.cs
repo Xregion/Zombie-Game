@@ -2,19 +2,18 @@
 
 public abstract class Interactable : MonoBehaviour {
 
-    enum PlayerPosition { north, south, east, west };
+    public float interactionDistance;
     public LayerMask playerMask;
 
     protected static InteractionText interactions;
     protected PlayerController player;
     protected bool interacting;
 
-    float interactionDistance;
+    bool isFacingObject;
 
     void Awake()
     {
         interactions = GameObject.Find("Canvas").GetComponentInChildren<InteractionText>(true);
-        interactionDistance = 3;
     }
 
     void OnEnable()
@@ -52,78 +51,48 @@ public abstract class Interactable : MonoBehaviour {
     void CheckForPlayer()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector3.Distance(transform.position, player.transform.position), playerMask);
-        if (hit.collider != null && hit.distance < interactionDistance)
+        if (hit.collider != null)
         {
-            if (CheckIfPlayerIsFacingObject(hit))
+            if (hit.distance < interactionDistance)
             {
-                interactions.SetText("Press e to inspect.");
-                interactions.EnableDialogue(true);
-                interacting = true;
+                if (PlayerIsFacingObject(hit) && !interacting)
+                {
+                    interactions.SetText("Press e to inspect.");
+                    interactions.EnableDialogue(true);
+                    interacting = true;
+                }
+                else if (!PlayerIsFacingObject(hit) && interacting)
+                {
+                    StopInteracting();
+                }
             }
-            else
-            {
-                interacting = false;
-                interactions.EnableDialogue(false);
-            }
-        }
-        else
-        {
-            interacting = false;
-            interactions.EnableDialogue(false);
         }
     }
 
-    bool CheckIfPlayerIsFacingObject (RaycastHit2D hit)
+    bool PlayerIsFacingObject(RaycastHit2D hit)
     {
-        Vector3 forward = hit.transform.TransformDirection(hit.transform.right).normalized;
-        Vector3 dir = (transform.position - hit.transform.position).normalized;
-        float dotProd = Vector2.Dot(forward, dir);
+        Vector3 dirToPlayer = (transform.position - hit.transform.position).normalized;
+        float angleBetweenObjectAndPlayer = Vector3.Angle(hit.transform.right, dirToPlayer);
 
-        print(dotProd);
+        float largestAngleAllowed = 45;
 
-        if (dotProd > 0.5)
+        if (angleBetweenObjectAndPlayer <= largestAngleAllowed)
             return true;
 
         return false;
-        //PlayerPosition playerPosition = CheckPlayerPositionRelativeToInteractable(hit).GetValueOrDefault();
-        //float playerRotation = hit.transform.rotation.eulerAngles.z;
-        //switch (playerPosition)
-        //{
-        //    case PlayerPosition.east:
-        //        if (playerRotation >= 135 && playerRotation <= 225)
-        //            return true;
-        //        break;
-        //    case PlayerPosition.west:
-        //        if (playerRotation >= 315 || playerRotation <= 45)
-        //            return true;
-        //        break;
-        //    case PlayerPosition.north:
-        //        if (playerRotation >= 225 && playerRotation <= 315)
-        //            return true;
-        //        break;
-        //    case PlayerPosition.south:
-        //        if (playerRotation >= 45 && playerRotation <= 135)
-        //            return true;
-        //        break;
-        //    default:
-        //        return false;
-        //}
-
-        //return false;
     }
 
-    PlayerPosition? CheckPlayerPositionRelativeToInteractable(RaycastHit2D hit)
+    bool PlayerIsFacingObject(Transform player)
     {
-        if (hit.transform.position.x > transform.position.x)
-            return PlayerPosition.east;
-        else if (hit.transform.position.x < transform.position.x)
-            return PlayerPosition.west;
-        else if (hit.transform.position.y > transform.position.y)
-            return PlayerPosition.north;
-        else if (hit.transform.position.y < transform.position.y)
-            return PlayerPosition.south;
-        else
-            return null;
+        Vector3 dirToPlayer = (transform.position - player.transform.position).normalized;
+        float angleBetweenObjectAndPlayer = Vector3.Angle(player.transform.right, dirToPlayer);
+
+        float largestAngleAllowed = 55;
+
+        if (angleBetweenObjectAndPlayer <= largestAngleAllowed)
+            return true;
+
+        return false;
     }
 
     public virtual void StopInteracting()
@@ -135,12 +104,28 @@ public abstract class Interactable : MonoBehaviour {
 
     //void OnTriggerEnter2D(Collider2D collision)
     //{
-    //    if (collision.CompareTag("Player") && !interacting)
+    //    if (collision.CompareTag("Player") && !interacting && isFacingObject)
     //    {
-    //        interactions.SetText("Press e to inspect.");
-    //        interactions.EnableDialogue(true);
-    //        interacting = true;
+    //            interactions.SetText("Press e to inspect.");
+    //            interactions.EnableDialogue(true);
+    //            interacting = true;
     //    }
+    //}
+
+    //void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player"))
+    //    {
+    //        if (PlayerIsFacingObject(collision.transform))
+    //            isFacingObject = true;
+    //        else
+    //        {
+    //            interacting = false;
+    //            interactions.EnableDialogue(false);
+    //            isFacingObject = false;
+    //        }
+    //    }
+
     //}
 
     //void OnTriggerExit2D(Collider2D collision)

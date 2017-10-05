@@ -14,7 +14,6 @@ public class TitleScreen : MonoBehaviour
         SaveManager.data.Bullets = 25;
         SaveManager.data.Items = new List<GameObject>();
         SaveManager.data.IsPowerOn = true;
-        SaveManager.data.SaveData();
         SceneManager.LoadScene("Roof");
     }
 

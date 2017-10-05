@@ -6551,6 +6551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c268106be706446b15b6e77b9b1833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionDistance: 1
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   inspectionText: An elevator... It appears to require a key to use.
 --- !u!61 &757268310
 BoxCollider2D:
@@ -13801,6 +13805,38 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1634477493541102, guid: 2f516d84adc53594c885bf84dc945765, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114027000699139662, guid: 2f516d84adc53594c885bf84dc945765,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114027000699139662, guid: 2f516d84adc53594c885bf84dc945765,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114027000699139662, guid: 2f516d84adc53594c885bf84dc945765,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114363323738943256, guid: 2f516d84adc53594c885bf84dc945765,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 1586133445627370, guid: 2f516d84adc53594c885bf84dc945765, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556081622292314, guid: 2f516d84adc53594c885bf84dc945765, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f516d84adc53594c885bf84dc945765, type: 2}
   m_IsPrefabParent: 0
@@ -17431,7 +17467,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.042479753, y: -0.0012395382}
+  m_Offset: {x: 0.10254049, y: -0.03126979}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -17442,7 +17478,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0849595, y: 2.1441646}
+  m_Size: {x: 2.205081, y: 2.444468}
   m_EdgeRadius: 0
 --- !u!61 &1720764854
 BoxCollider2D:
@@ -17480,6 +17516,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a59cb6dfd5ae647ae6d8ad50e8c279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionDistance: 3
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
   inspectionText: It looks like their is a key inside this air conditioner... It's
     spinning too fast for me to grab.
   elevatorKey: {fileID: 1656080005}

@@ -16,7 +16,7 @@ public class SaveConsole : Interactable {
         cam = Camera.main;
         originalCamSize = cam.orthographicSize;
         zoomedCamSize = 0.5f;
-        zoomSpeed = 0.3f;
+        zoomSpeed = 0.1f;
         camController = cam.GetComponent<CameraController>();
         saveScreen = GameObject.Find("Canvas").GetComponentInChildren<SaveScreen>(true);
         consolePos = transform.position;
@@ -54,13 +54,13 @@ public class SaveConsole : Interactable {
             if (cam.orthographicSize > originalCamSize)
                 cam.orthographicSize = originalCamSize;
         }
-        saveScreen.Enable(false);
         camController.PauseFollow(false);
         base.StopInteracting();
     }
 
     public override void StopInteracting()
     {
+        saveScreen.Enable(false);
         StartCoroutine(CameraZoomOut());
     }
 }
