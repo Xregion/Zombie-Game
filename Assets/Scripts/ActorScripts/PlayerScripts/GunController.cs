@@ -28,13 +28,23 @@ public class GunController : MonoBehaviour {
     int bulletsFired;
     int bulletsInChamber;
 
+    void OnEnable()
+    {
+        LoadManager.instance.LevelLoaded += LoadComplete;
+    }
+
+    void OnDisable()
+    {
+        LoadManager.instance.LevelLoaded -= LoadComplete;
+    }
+
     void Start()
     {
         gunCollider = GetComponent<BoxCollider2D>();
         gunCollider.enabled = false;
         muzzleFlash.gameObject.SetActive(false);
         redDot.SetPosition(1, new Vector3(bulletRange, 0, 0));
-        bulletsInChamber = maxBulletsInChamber;
+        bulletsInChamber = SaveManager.data.BulletsInChamber;
         bulletsFired = bulletsInChamber;
         //SetBulletsText();
     }
@@ -66,6 +76,8 @@ public class GunController : MonoBehaviour {
             }
         }
         bulletsInChamber--;
+
+        SaveManager.data.BulletsInChamber = bulletsInChamber;
         if (bulletsInChamber <= 0)
             chamberIsEmpty = true;
 
@@ -106,6 +118,8 @@ public class GunController : MonoBehaviour {
             // Play out of ammo audio clip
             outOfBullets = true;
         }
+
+        SaveManager.data.BulletsRemaining = totalBulletsRemaining;
         //SetBulletsText();
     }
 
@@ -117,6 +131,12 @@ public class GunController : MonoBehaviour {
             hitObject.TakeDamage(meleeDamage);
             meleeHit = true;
         }
+    }
+
+    void LoadComplete()
+    {
+        totalBulletsRemaining = SaveManager.data.BulletsRemaining;
+        bulletsInChamber = SaveManager.data.BulletsInChamber;
     }
 
     public bool GetIsReloading()

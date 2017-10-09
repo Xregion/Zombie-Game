@@ -11,11 +11,6 @@ public abstract class Interactable : MonoBehaviour {
 
     bool isFacingObject;
 
-    void Awake()
-    {
-        interactions = GameObject.Find("Canvas").GetComponentInChildren<InteractionText>(true);
-    }
-
     void OnEnable()
     {
         LoadManager.instance.LevelLoaded += LoadComplete;
@@ -29,6 +24,7 @@ public abstract class Interactable : MonoBehaviour {
     void LoadComplete()
     {
         player = LoadManager.instance.GetPlayer().GetComponent<PlayerController>();
+        interactions = FindObjectOfType<InteractionText>();
     }
 
     void Update()

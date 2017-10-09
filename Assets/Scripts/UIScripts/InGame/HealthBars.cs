@@ -11,7 +11,7 @@ public class HealthBars : MonoBehaviour {
     float currentHealth;
     Slider healthBar;
 
-	void Start ()
+	void Awake ()
     {
         healthBar = GetComponent<Slider>();
         actor = GetComponentInParent<Canvas>().gameObject.GetComponentInParent<PlayerController>();

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(ActorMotor))]
 public class PlayerController : MonoBehaviour, IDamageable {
@@ -24,13 +23,26 @@ public class PlayerController : MonoBehaviour, IDamageable {
     GunController gunController;
     PlayerAnimation animations;
     ActorMotor motor;
+    PauseScreen ps;
+
+    void OnEnable()
+    {
+        LoadManager.instance.LevelLoaded += LoadComplete;
+        ps = FindObjectOfType<PauseScreen>();
+        ps.PausedEvent += Pause;
+    }
+
+    void OnDisable()
+    {
+        LoadManager.instance.LevelLoaded -= LoadComplete;
+        ps.PausedEvent -= Pause;
+    }
 
     void Start()
     {
         mousePosition = Input.mousePosition;
         mousePosition.z = transform.position.z;
         Vector3 worldPointMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        currentHealth = totalHealth;
         movSpeed = normalMoveSpeed;
         gunController = GetComponentInChildren<GunController>();
         animations = GetComponentInChildren<PlayerAnimation>();
@@ -127,6 +139,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
         if (HealthChangeEvent != null)
             HealthChangeEvent(-damage);
 
+        SaveManager.data.Health = currentHealth;
+
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -179,6 +193,11 @@ public class PlayerController : MonoBehaviour, IDamageable {
         }
     }
 
+    void Pause()
+    {
+        controlsOn = !controlsOn;
+    }
+
     // Checks if the player is shooting, reloading, or running. Used to block certain actions while doing any of these things
     bool IsPerformingAction()
     {
@@ -192,11 +211,19 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
     void Die()
     {
+        FindObjectOfType<PauseScreen>().PausedEvent -= Pause;
         if (DeathEvent != null)
             DeathEvent();
 
         controlsOn = false;
         SetMovementAnimation(false);
         animations.SetIsDead(true);
+    }
+
+    void LoadComplete()
+    {
+        currentHealth = SaveManager.data.Health;
+        if (HealthChangeEvent != null)
+            HealthChangeEvent(currentHealth - totalHealth);
     }
 }

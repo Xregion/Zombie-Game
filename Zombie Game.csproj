@@ -263,6 +263,7 @@
     <Compile Include="Assets\Scripts\UIScripts\InGame\BulletsText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\InGame\PauseScreen.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\RemainingEnemies.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\SaveScreen.cs" />
     <Compile Include="Assets\Scripts\UIScripts\TitleScreen\TitleScreen.cs" />

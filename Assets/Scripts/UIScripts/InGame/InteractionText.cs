@@ -4,11 +4,13 @@ using UnityEngine.UI;
 public class InteractionText : MonoBehaviour {
 
     Text interactionText;
+    Image border;
 
     void Start()
     {
         interactionText = GetComponentInChildren<Text>();
-        gameObject.SetActive(false);
+        border = GetComponentInChildren<Image>();
+        EnableDialogue(false);
     }
 
     public void SetText(string newText)
@@ -18,6 +20,7 @@ public class InteractionText : MonoBehaviour {
 
     public void EnableDialogue(bool enabled)
     {
-        gameObject.SetActive(enabled);
+        interactionText.gameObject.SetActive(enabled);
+        border.gameObject.SetActive(enabled);
     }
 }

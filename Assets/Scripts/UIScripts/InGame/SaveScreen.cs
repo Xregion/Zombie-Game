@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SaveScreen : MonoBehaviour {
 
     GameObject player;
     SaveConsole console;
+    Image savePrompt;
 
     void OnEnable()
     {
@@ -23,28 +25,30 @@ public class SaveScreen : MonoBehaviour {
 
     void Start()
     {
+        savePrompt = GetComponentInChildren<Image>();
         Enable(false);
     }
 
     public void Enable(bool enabled)
     {
-        gameObject.SetActive(enabled);
+        savePrompt.gameObject.SetActive(enabled);
     }
 
     public void SetConsole(SaveConsole sc)
     {
         console = sc;
     }
-
+    //TODO: Fix filepathing
     public void SaveGame ()
     {
         SaveManager.data.Scene = SceneManager.GetActiveScene().buildIndex;
-        SaveManager.data.Bullets = player.GetComponentInChildren<GunController>().totalBulletsRemaining;
+        SaveManager.data.Health = player.GetComponent<PlayerController>().GetCurrentHealth();
+        SaveManager.data.BulletsRemaining = player.GetComponentInChildren<GunController>().totalBulletsRemaining;
+        SaveManager.data.BulletsInChamber = player.GetComponentInChildren<GunController>().GetBulletsInChamber();
         SaveManager.data.XPosition = player.transform.position.x;
         SaveManager.data.YPosition = player.transform.position.y;
-        SaveManager.data.ZPosition = player.transform.position.z;
         SaveManager.data.ZRotation = player.transform.rotation.z;
-        SaveManager.data.SaveData();
+        SaveManager.data.SaveData(1);
         Cancel();
     }
 

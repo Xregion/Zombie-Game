@@ -18,7 +18,7 @@ public class SaveConsole : Interactable {
         zoomedCamSize = 0.5f;
         zoomSpeed = 0.1f;
         camController = cam.GetComponent<CameraController>();
-        saveScreen = GameObject.Find("Canvas").GetComponentInChildren<SaveScreen>(true);
+        saveScreen = FindObjectOfType<SaveScreen>();
         consolePos = transform.position;
     }
 

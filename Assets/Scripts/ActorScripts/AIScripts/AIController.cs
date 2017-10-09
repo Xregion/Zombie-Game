@@ -33,6 +33,7 @@ public class AIController : MonoBehaviour, IDamageable {
     protected bool isStaggered;
     protected bool isBlocked;
     static bool playerIsDead;
+    PauseScreen ps;
 
     void OnEnable()
     {
@@ -45,11 +46,14 @@ public class AIController : MonoBehaviour, IDamageable {
         dropper = GetComponent<ItemDrop>();
         motor = GetComponent<ActorMotor>();
         bloodSplatter[1].enabled = false;
+        ps = FindObjectOfType<PauseScreen>();
+        ps.PausedEvent += Pause;
     }
 
     void OnDisable()
     {
         LoadManager.instance.LevelLoaded -= LoadComplete;
+        ps.PausedEvent -= Pause;
     }
 
     void LoadComplete()
@@ -91,6 +95,11 @@ public class AIController : MonoBehaviour, IDamageable {
         currentHealth = maxHealth;
         isAlive = true;
         col.enabled = true;
+    }
+
+    void Pause()
+    {
+        isAlive = !isAlive;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -29,18 +29,48 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
-    int bullets;
+    int health;
 
-    public int Bullets
+    public int Health
     {
         get
         {
-            return bullets;
+            return health;
         }
 
         set
         {
-            bullets = value;
+            health = value;
+        }
+    }
+
+    int bulletsRemaining;
+
+    public int BulletsRemaining
+    {
+        get
+        {
+            return bulletsRemaining;
+        }
+
+        set
+        {
+            bulletsRemaining = value;
+        }
+    }
+
+    int bulletsInChamber;
+
+    public int BulletsInChamber
+    {
+        get
+        {
+            return bulletsInChamber;
+        }
+
+        set
+        {
+            bulletsInChamber = value;
         }
     }
 
@@ -71,21 +101,6 @@ public class SaveManager : MonoBehaviour {
         set
         {
             yPosition = value;
-        }
-    }
-
-    float zPosition;
-
-    public float ZPosition
-    {
-        get
-        {
-            return zPosition;
-        }
-
-        set
-        {
-            zPosition = value;
         }
     }
 
@@ -151,31 +166,29 @@ public class SaveManager : MonoBehaviour {
         fileOne = filePath + "/GameDataOne.zomb";
         fileTwo = filePath + "/GameDataTwo.zomb";
         fileThree = filePath + "/GameDataThree.zomb";
-
-        LoadData();
     }
 
-    public void SaveData(/*int fileNumber*/)
+    public void SaveData(int fileNumber)
     {
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(fileOne);
-        //switch (fileNumber)
-        //{
-        //    case 1:
-        //        file = File.Create(fileOne);
-        //        break;
-        //    case 2:
-        //        file = File.Create(fileTwo);
-        //        break;
-        //    case 3:
-        //        file = File.Create(fileThree);
-        //        break;
-        //    default:
-        //        Debug.LogError("File number outside of 1-3");
-        //        return;
-        //}
+        FileStream file;
+        switch (fileNumber)
+        {
+            case 1:
+                file = File.Create(fileOne);
+                break;
+            case 2:
+                file = File.Create(fileTwo);
+                break;
+            case 3:
+                file = File.Create(fileThree);
+                break;
+            default:
+                Debug.LogError("File number outside of 1-3");
+                return;
+        }
 
-        Data data = new Data(scene, bullets, xPosition, yPosition, zPosition, zRotation, items, isPowerOn);
+        Data data = new Data(scene, health, bulletsRemaining, bulletsInChamber, xPosition, yPosition, zRotation, items, isPowerOn);
 
         bf.Serialize(file, data);
         file.Close();
@@ -183,35 +196,36 @@ public class SaveManager : MonoBehaviour {
 
     // Deserializes the save file from binary and sets the variables based on the data on file.
     // Returns true if the file exists so that anyone accessing the function knows if the file exists or not.
-    public bool LoadData(/*int fileNumber*/)
+    public bool LoadData(int fileNumber)
     {
-        //String filePath;
-        //switch (fileNumber)
-        //{
-        //    case 1:
-        //        filePath = fileOne;
-        //        break;
-        //    case 2:
-        //        filePath = fileTwo;
-        //        break;
-        //    case 3:
-        //        filePath = fileThree;
-        //        break;
-        //    default:
-        //        Debug.LogError("File number outside of 1-3");
-        //        return false;
-        //}
-        if (File.Exists(fileOne))
+        String filePath;
+        switch (fileNumber)
+        {
+            case 1:
+                filePath = fileOne;
+                break;
+            case 2:
+                filePath = fileTwo;
+                break;
+            case 3:
+                filePath = fileThree;
+                break;
+            default:
+                Debug.LogError("File number outside of 1-3");
+                return false;
+        }
+        if (File.Exists(filePath))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(fileOne, FileMode.Open);
+            FileStream file = File.Open(filePath, FileMode.Open);
             Data data = (Data)bf.Deserialize(file);
 
             scene = data.currentScene;
-            bullets = data.bulletsLeft;
+            health = data.currentHealth;
+            bulletsRemaining = data.bulletsRemaining;
+            bulletsInChamber = data.bulletsInChamber;
             xPosition = data.xPos;
             yPosition = data.yPos;
-            zPosition = data.zPos;
             zRotation = data.zRot;
             items = data.currentItems;
             isPowerOn = data.isPowerOn;
@@ -227,21 +241,23 @@ public class SaveManager : MonoBehaviour {
     struct Data
     {
         public int currentScene;
-        public int bulletsLeft;
+        public int currentHealth;
+        public int bulletsRemaining;
+        public int bulletsInChamber;
         public float xPos;
         public float yPos;
-        public float zPos;
         public float zRot;
         public List<GameObject> currentItems;
         public bool isPowerOn;
 
-        public Data(int scene, int bullets, float xPosition, float yPosition, float zPosition, float zRotation, List<GameObject> items, bool _isPowerOn)
+        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, List<GameObject> items, bool _isPowerOn)
         {
             currentScene = scene;
-            bulletsLeft = bullets;
+            currentHealth = health;
+            bulletsRemaining = bullets;
+            bulletsInChamber = chamber;
             xPos = xPosition;
             yPos = yPosition;
-            zPos = zPosition;
             zRot = zRotation;
             currentItems = items;
             isPowerOn = _isPowerOn;

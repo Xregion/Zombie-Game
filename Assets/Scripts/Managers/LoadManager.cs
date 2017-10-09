@@ -13,6 +13,22 @@ public class LoadManager : MonoBehaviour {
 
     void Awake()
     {
+        SceneManager.activeSceneChanged += SceneChange;
+    }
+
+    private void SceneChange(Scene previousScene, Scene loadedScene)
+    {
+        DestroyMultipleInstances();
+        if (loadedScene != SceneManager.GetSceneByName("title screen"))
+            instantiatedPlayer = Instantiate(player, new Vector3(SaveManager.data.XPosition, SaveManager.data.YPosition, 1),
+                                            Quaternion.Euler(0, 0, SaveManager.data.ZRotation));
+
+        if (LevelLoaded != null)
+            LevelLoaded();
+    }
+
+    void DestroyMultipleInstances()
+    {
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -22,24 +38,6 @@ public class LoadManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-        SceneManager.activeSceneChanged += SceneChange;
-    }
-
-    private void SceneChange(Scene arg0, Scene arg1)
-    {
-        if (arg1 != SceneManager.GetSceneByName("title screen"))
-            instantiatedPlayer = Instantiate(player, new Vector3(SaveManager.data.XPosition, SaveManager.data.YPosition, SaveManager.data.ZPosition),
-                                            Quaternion.Euler(0, 0, SaveManager.data.ZRotation));   
-
-        if (LevelLoaded != null)
-            LevelLoaded();
-    }
-
-    void Start()
-    {
-        if (LevelLoaded != null)
-            LevelLoaded();
     }
 
     public GameObject GetPlayer()
