@@ -44,6 +44,11 @@ public class PauseScreen : MonoBehaviour {
             pauseScreen.SetActive(false);
         }
 
+        SendOutPauseEvent();
+    }
+
+    public void SendOutPauseEvent()
+    {
         if (PausedEvent != null)
             PausedEvent();
     }

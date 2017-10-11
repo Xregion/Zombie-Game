@@ -225,9 +225,9 @@ MonoBehaviour:
   maxHealth: 10
   movSpeed: 3
   attackDamage: 5
+  attackRange: 2
   staggerTime: 0.2
   knockbackAmount: 0.5
-  isAlive: 0
 --- !u!212 &212077763922899498
 SpriteRenderer:
   m_ObjectHideFlags: 1

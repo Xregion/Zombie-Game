@@ -683,6 +683,7 @@ MonoBehaviour:
   runMoveSpeed: 8
   moveSpeedWhileReloading: 1
   backpeddleMoveSpeed: 1
+  staggerTime: 0.5
   totalHealth: 50
 --- !u!120 &120130094151406310
 LineRenderer:

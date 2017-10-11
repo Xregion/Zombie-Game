@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-public class KeyItem : Interactable {
+﻿public class KeyItem : Interactable {
 
     public string itemName;
     string pickUpText;
@@ -9,6 +8,8 @@ public class KeyItem : Interactable {
         pickUpText = "You aquired a " + itemName;
         interactions.SetText(pickUpText);
         SaveManager.data.Items.Add(gameObject);
-        GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(gameObject);
+
+        StopInteracting();
     }
 }

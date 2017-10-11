@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour {
             if (!objects[i].activeInHierarchy)
             {
                 AIController ai = objects[i].GetComponent<AIController>();
-                if (!ai.isAlive)
+                if (!ai.GetIsAlive())
                     ai.Revive();
                 objects[i].transform.position = spawnPoints[spawnPosition].position;
                 objects[i].transform.rotation = spawnPoints[spawnPosition].rotation;

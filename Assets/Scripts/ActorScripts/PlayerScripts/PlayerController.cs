@@ -217,6 +217,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
         controlsOn = false;
         SetMovementAnimation(false);
+        animations.SetIsReloading(false);
         animations.SetIsDead(true);
     }
 

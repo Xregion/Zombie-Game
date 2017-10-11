@@ -9,6 +9,7 @@ public class LoadManager : MonoBehaviour {
     public event Action LevelLoaded;
 
     public GameObject player;
+    public GameObject zombie;
     GameObject instantiatedPlayer;
 
     void Awake()

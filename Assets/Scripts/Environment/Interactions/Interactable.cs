@@ -10,6 +10,7 @@ public abstract class Interactable : MonoBehaviour {
     protected bool interacting;
 
     bool isFacingObject;
+    PauseScreen pauseScreen;
 
     void OnEnable()
     {
@@ -25,6 +26,7 @@ public abstract class Interactable : MonoBehaviour {
     {
         player = LoadManager.instance.GetPlayer().GetComponent<PlayerController>();
         interactions = FindObjectOfType<InteractionText>();
+        pauseScreen = FindObjectOfType<PauseScreen>();
     }
 
     void Update()
@@ -34,7 +36,7 @@ public abstract class Interactable : MonoBehaviour {
         {
             if (player.GetControls())
             {
-                player.SetControls(false);
+                pauseScreen.SendOutPauseEvent();
                 Interact();
             }
             else
@@ -62,6 +64,8 @@ public abstract class Interactable : MonoBehaviour {
                     StopInteracting();
                 }
             }
+            else if (interacting)
+                StopInteracting();
         }
     }
 
@@ -78,24 +82,12 @@ public abstract class Interactable : MonoBehaviour {
         return false;
     }
 
-    bool PlayerIsFacingObject(Transform player)
-    {
-        Vector3 dirToPlayer = (transform.position - player.transform.position).normalized;
-        float angleBetweenObjectAndPlayer = Vector3.Angle(player.transform.right, dirToPlayer);
-
-        float largestAngleAllowed = 55;
-
-        if (angleBetweenObjectAndPlayer <= largestAngleAllowed)
-            return true;
-
-        return false;
-    }
-
     public virtual void StopInteracting()
     {
-        player.SetControls(true);
         interactions.EnableDialogue(false);
         interacting = false;
+        if (!player.GetControls())
+            pauseScreen.SendOutPauseEvent();
     }
 
     //void OnTriggerEnter2D(Collider2D collision)

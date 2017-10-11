@@ -104,12 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c46e9855f3dd24b836e5a5062d7bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionDistance: 1
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
-  interactionDistance: 1
   sceneToLoad: Clothing Store
-  playerPos: {x: 0, y: 0, z: 0}
+  playerPos: {x: -23.5, y: -1.5}
   playerRot: 0
 --- !u!212 &212241230596563076
 SpriteRenderer:

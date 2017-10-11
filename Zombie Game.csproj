@@ -266,6 +266,7 @@
     <Compile Include="Assets\Scripts\UIScripts\InGame\PauseScreen.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\RemainingEnemies.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\SaveScreen.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\TitleScreen\MoveToAnyLevel.cs" />
     <Compile Include="Assets\Scripts\UIScripts\TitleScreen\TitleScreen.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

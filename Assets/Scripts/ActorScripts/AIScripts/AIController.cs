@@ -13,12 +13,12 @@ public class AIController : MonoBehaviour, IDamageable {
     public float maxHealth;
     public float movSpeed;
     public int attackDamage;
+    public float attackRange;
     public float staggerTime; // the amount of time after being shot that the AI can't move
     public float knockbackAmount; // the amount at x the AI will be knocked back when shot
 
-    [HideInInspector]
-    public bool isAlive;
-
+    bool isAlive;
+    bool paused;
     protected GameObject target;
     protected GameObject player;
     protected float distanceToPlayer;
@@ -62,7 +62,7 @@ public class AIController : MonoBehaviour, IDamageable {
     }
 
     void Update () {
-        if (isAlive)
+        if (isAlive && !paused)
             Movement();
     }
 
@@ -99,7 +99,7 @@ public class AIController : MonoBehaviour, IDamageable {
 
     void Pause()
     {
-        isAlive = !isAlive;
+        paused = !paused;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -124,7 +124,7 @@ public class AIController : MonoBehaviour, IDamageable {
 
     protected bool CheckIfInRange ()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.transform.position - transform.position, 2, attackingMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, target.transform.position - transform.position, attackRange, attackingMask);
         if (hit.collider != null)
         {
             target = hit.transform.gameObject;
@@ -139,6 +139,7 @@ public class AIController : MonoBehaviour, IDamageable {
         targetToDamage = target.GetComponent<IDamageable>();
         if (targetToDamage != null) // if the target can be damaged
         {
+            attackRange += 0.75f;
             if (CheckIfInRange()) // checks if the target is still in range
             {
                 if (targetToDamage.TakeDamage(attackDamage)) // calls the targets take damage method and returns whether or not the target died.
@@ -152,6 +153,7 @@ public class AIController : MonoBehaviour, IDamageable {
                     }
                 }
             }
+            attackRange -= 0.75f;
         }
     }
 
@@ -171,28 +173,36 @@ public class AIController : MonoBehaviour, IDamageable {
             StartCoroutine(StaggerCoolDown());
             if (currentHealth <= 0) // if the enemy's health falls below 0 then turn off its collider
             {
-                animations.SetIsDead(true);
-                isAlive = false;
-                col.enabled = false;
-                if (dropper != null)
-                    dropper.DropItem(); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
-
-                Vector3 deathPosition = transform.position;
-                deathPosition.z = 14.5f;
-                transform.position = deathPosition;
-                if (DeathEvent != null)
-                    DeathEvent(gameObject);
-
-                //Invoke("Deactivate", 5f);
+                Die();
                 return true;
             }
         }
         return false;
     }
 
+    void Die()
+    {
+        animations.SetIsDead(true);
+        isAlive = false;
+        col.enabled = false;
+        if (dropper != null)
+            dropper.DropItem(); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
+
+        Vector3 deathPosition = transform.position;
+        deathPosition.z = 14.5f;
+        transform.position = deathPosition;
+        if (DeathEvent != null)
+            DeathEvent(gameObject);
+    }
+
     public void SetIsAttacking ()
     {
         isAttacking = false;
+    }
+
+    public bool GetIsAlive()
+    {
+        return isAlive;
     }
 
     IEnumerator StaggerCoolDown () // prevents the actor from moving based on the stagger time variable
