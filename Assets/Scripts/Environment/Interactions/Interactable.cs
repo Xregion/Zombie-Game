@@ -3,14 +3,13 @@
 public abstract class Interactable : MonoBehaviour {
 
     public float interactionDistance;
-    public LayerMask playerMask;
 
     protected static InteractionText interactions;
     protected PlayerController player;
-    protected bool interacting;
+    protected bool canInteract; // Use this to check if the player is able to interact with the object
 
-    bool isFacingObject;
     PauseScreen pauseScreen;
+    int playerMask;
 
     void OnEnable()
     {
@@ -27,12 +26,13 @@ public abstract class Interactable : MonoBehaviour {
         player = LoadManager.instance.GetPlayer().GetComponent<PlayerController>();
         interactions = FindObjectOfType<InteractionText>();
         pauseScreen = FindObjectOfType<PauseScreen>();
+        playerMask = 1 << LayerMask.NameToLayer("Player");
     }
 
     void Update()
     {
         CheckForPlayer();
-        if (Input.GetButtonDown("Interact") && interacting)
+        if (Input.GetButtonDown("Interact") && canInteract)
         {
             if (player.GetControls())
             {
@@ -53,18 +53,18 @@ public abstract class Interactable : MonoBehaviour {
         {
             if (hit.distance < interactionDistance)
             {
-                if (PlayerIsFacingObject(hit) && !interacting)
+                if (PlayerIsFacingObject(hit) && !canInteract)
                 {
                     interactions.SetText("Press e to inspect.");
                     interactions.EnableDialogue(true);
-                    interacting = true;
+                    canInteract = true;
                 }
-                else if (!PlayerIsFacingObject(hit) && interacting)
+                else if (!PlayerIsFacingObject(hit) && canInteract)
                 {
                     StopInteracting();
                 }
             }
-            else if (interacting)
+            else if (canInteract)
                 StopInteracting();
         }
     }
@@ -85,7 +85,7 @@ public abstract class Interactable : MonoBehaviour {
     public virtual void StopInteracting()
     {
         interactions.EnableDialogue(false);
-        interacting = false;
+        canInteract = false;
         if (!player.GetControls())
             pauseScreen.SendOutPauseEvent();
     }

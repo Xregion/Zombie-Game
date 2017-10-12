@@ -110,6 +110,8 @@ public class AIController : MonoBehaviour, IDamageable {
 
     protected bool CheckIfPlayerIsInView ()
     {
+        if (player == null)
+            player = LoadManager.instance.GetPlayer();
         // cast a ray to the player to see if it is in view
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector3.Distance(transform.position, player.transform.position), colliderMask);
         if (hit.collider != null)
@@ -180,7 +182,7 @@ public class AIController : MonoBehaviour, IDamageable {
         return false;
     }
 
-    void Die()
+    protected virtual void Die()
     {
         animations.SetIsDead(true);
         isAlive = false;

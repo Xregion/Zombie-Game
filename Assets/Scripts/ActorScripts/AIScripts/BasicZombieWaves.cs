@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class BasicZombieWaves : AIController {
 
     void Start()
     {
         target = player;
-        motor.SetTarget(target.transform.position);
     }
 
     protected override void Movement()
@@ -29,8 +29,15 @@ public class BasicZombieWaves : AIController {
         }
     }
 
-    void Deactivate()
+    protected override void Die()
     {
+        base.Die();
+        StartCoroutine(Deactivate());
+    }
+
+    IEnumerator Deactivate()
+    {
+        yield return new WaitForSeconds(5f);
         gameObject.SetActive(false);
         CancelInvoke();
     }

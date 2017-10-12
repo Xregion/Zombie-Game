@@ -6547,6 +6547,7 @@ GameObject:
   - component: {fileID: 757268311}
   - component: {fileID: 757268312}
   - component: {fileID: 757268310}
+  - component: {fileID: 757268313}
   - component: {fileID: 757268309}
   m_Layer: 0
   m_Name: elevator doors
@@ -6576,14 +6577,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 757268307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c268106be706446b15b6e77b9b1833, type: 3}
+  m_Script: {fileID: 11500000, guid: d1c46e9855f3dd24b836e5a5062d7bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 1
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  inspectionText: An elevator... It appears to require a key to use.
+  sceneToLoad: Parking Garage
+  playerPos: {x: 0, y: 0}
+  playerRot: 0
 --- !u!61 &757268310
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6678,6 +6678,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.4787209}
   m_EdgeRadius: 0
+--- !u!114 &757268313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 757268307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05de050164f5008468e1fdb04076bb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 1
+  inspectionText: An elevator... It appears to require a key to use.
+  keyItem: {fileID: 1653494422003890, guid: cd5c56c574165584e9eb651ccfb1edb5, type: 2}
+  hasKeyText: You use the elevator key.
 --- !u!1 &783690462
 GameObject:
   m_ObjectHideFlags: 0
@@ -16697,26 +16712,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 61401331909900330, guid: cd5c56c574165584e9eb651ccfb1edb5,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.039584637
-      objectReference: {fileID: 0}
-    - target: {fileID: 61401331909900330, guid: cd5c56c574165584e9eb651ccfb1edb5,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.001086235
-      objectReference: {fileID: 0}
-    - target: {fileID: 61401331909900330, guid: cd5c56c574165584e9eb651ccfb1edb5,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 2.0791693
-      objectReference: {fileID: 0}
-    - target: {fileID: 61401331909900330, guid: cd5c56c574165584e9eb651ccfb1edb5,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 2.1356335
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd5c56c574165584e9eb651ccfb1edb5, type: 2}
   m_IsPrefabParent: 0
@@ -17334,7 +17329,6 @@ GameObject:
   - component: {fileID: 1720764852}
   - component: {fileID: 1720764851}
   - component: {fileID: 1720764855}
-  - component: {fileID: 1720764853}
   - component: {fileID: 1720764854}
   m_Layer: 9
   m_Name: Air Conditioner
@@ -17402,31 +17396,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1720764853
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1720764850}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.10254049, y: -0.03126979}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.205081, y: 2.444468}
-  m_EdgeRadius: 0
 --- !u!61 &1720764854
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17464,9 +17433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 3
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 1024
   inspectionText: It looks like their is a key inside this air conditioner... It's
     spinning too fast for me to grab.
   elevatorKey: {fileID: 1656080005}

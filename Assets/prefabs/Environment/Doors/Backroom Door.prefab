@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61878984763688578}
   - component: {fileID: 61649474102293554}
   - component: {fileID: 114164021544185106}
-  - component: {fileID: 114660563958385716}
+  - component: {fileID: 114366983793799254}
   m_Layer: 9
   m_Name: Backroom Door
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1268934339061060}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1c46e9855f3dd24b836e5a5062d7bbe, type: 3}
   m_Name: 
@@ -112,7 +112,7 @@ MonoBehaviour:
   sceneToLoad: Backroom
   playerPos: {x: 0, y: 0}
   playerRot: 270
---- !u!114 &114660563958385716
+--- !u!114 &114366983793799254
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1268934339061060}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c268106be706446b15b6e77b9b1833, type: 3}
+  m_Script: {fileID: 11500000, guid: 05de050164f5008468e1fdb04076bb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 1
@@ -128,6 +128,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   inspectionText: It won't budge. I'll need the key.
+  keyItem: {fileID: 1019178760031516, guid: b3162eecf4dbce743b88705ff0b2eca7, type: 2}
+  hasKeyText: You used the backroom key.
 --- !u!212 &212797293951608160
 SpriteRenderer:
   m_ObjectHideFlags: 1
