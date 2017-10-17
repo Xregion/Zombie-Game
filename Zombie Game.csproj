@@ -244,6 +244,9 @@
     <Compile Include="Assets\Scripts\ActorScripts\PlayerScripts\GunController.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\PlayerScripts\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\ActorScripts\PlayerScripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+    <Compile Include="Assets\Scripts\CollisionDetection\Controller2D.cs" />
+    <Compile Include="Assets\Scripts\CollisionDetection\RaycastController.cs" />
     <Compile Include="Assets\Scripts\Environment\FX\FanSpin.cs" />
     <Compile Include="Assets\Scripts\Environment\FX\FlameFlicker.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\AirConditioner.cs" />
@@ -252,6 +255,7 @@
     <Compile Include="Assets\Scripts\Environment\Interactions\InspectableObject.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\Interactable.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\LockedDoor.cs" />
+    <Compile Include="Assets\Scripts\Environment\Interactions\MoveableObject.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\SaveConsole.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
@@ -260,7 +264,6 @@
     <Compile Include="Assets\Scripts\Managers\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WaveManager.cs" />
-    <Compile Include="Assets\Scripts\Misc\CameraController.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\BulletsText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />

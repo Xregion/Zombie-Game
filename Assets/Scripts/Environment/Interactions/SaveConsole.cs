@@ -10,6 +10,7 @@ public class SaveConsole : Interactable {
     float originalCamSize;
     float zoomedCamSize;
     float zoomSpeed;
+    bool zooming;
 
     void Start()
     {
@@ -33,7 +34,8 @@ public class SaveConsole : Interactable {
     {
         while (cam.orthographicSize > 0.5f)
         {
-            yield return new WaitForSeconds(0.0001f);
+            zooming = true;
+            yield return new WaitForEndOfFrame();
             Vector3 newPos = Vector3.Lerp(cam.transform.position, consolePos, 0.2f);
             newPos.z = cam.transform.position.z;
             cam.transform.position = newPos;
@@ -41,6 +43,7 @@ public class SaveConsole : Interactable {
             if (cam.orthographicSize < zoomedCamSize)
                 cam.orthographicSize = zoomedCamSize;
         }
+        zooming = false;
         saveScreen.Enable(true);
         interactions.EnableDialogue(false);
         saveScreen.SetConsole(this);
@@ -50,7 +53,7 @@ public class SaveConsole : Interactable {
     {
         while (cam.orthographicSize < originalCamSize)
         {
-            yield return new WaitForSeconds(0.0001f);
+            yield return new WaitForEndOfFrame();
             cam.orthographicSize += zoomSpeed;
             if (cam.orthographicSize > originalCamSize)
                 cam.orthographicSize = originalCamSize;
@@ -61,7 +64,10 @@ public class SaveConsole : Interactable {
 
     public override void StopInteracting()
     {
-        saveScreen.Enable(false);
-        StartCoroutine(CameraZoomOut());
+        if (!zooming)
+        {
+            saveScreen.Enable(false);
+            StartCoroutine(CameraZoomOut());
+        }
     }
 }

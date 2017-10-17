@@ -39,6 +39,7 @@ public class ActorMotor: MonoBehaviour {
             rotationAngle *= -1;
 
         actorRotation.z = rotationAngle;
-        transform.eulerAngles = (actorRotation);
+
+        transform.eulerAngles = actorRotation;
     }
 }

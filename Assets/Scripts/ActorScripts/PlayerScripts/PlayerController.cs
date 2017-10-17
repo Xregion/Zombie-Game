@@ -170,6 +170,13 @@ public class PlayerController : MonoBehaviour, IDamageable {
         movSpeed = normalMoveSpeed;
     }
 
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Moveable"))
+            if (verticalDirection >= 0 && Vector3.Angle(transform.right, (collision.transform.position - transform.position)) <= 30f)
+                collision.gameObject.GetComponent<MoveableObject>().Move(transform.right);
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Health"))
@@ -188,7 +195,6 @@ public class PlayerController : MonoBehaviour, IDamageable {
         {
             Item ammoPack = collision.GetComponent<Item>();
             gunController.totalBulletsRemaining += ammoPack.GetAmountToDrop();
-            //gunController.SetBulletsText();
             ammoPack.Destroy();
         }
     }

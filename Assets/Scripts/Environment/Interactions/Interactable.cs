@@ -7,8 +7,10 @@ public abstract class Interactable : MonoBehaviour {
     protected static InteractionText interactions;
     protected PlayerController player;
     protected bool canInteract; // Use this to check if the player is able to interact with the object
+    protected bool isPointlessToInteract; // Checks if the object still has a use for interactions
 
     PauseScreen pauseScreen;
+    MoveableObject moveableObject;
     int playerMask;
 
     void OnEnable()
@@ -19,6 +21,8 @@ public abstract class Interactable : MonoBehaviour {
     void OnDisable()
     {
         LoadManager.instance.LevelLoaded -= LoadComplete;
+        if (moveableObject != null)
+            moveableObject.FinishedMoving -= StopAllInteractions;
     }
 
     void LoadComplete()
@@ -27,22 +31,32 @@ public abstract class Interactable : MonoBehaviour {
         interactions = FindObjectOfType<InteractionText>();
         pauseScreen = FindObjectOfType<PauseScreen>();
         playerMask = 1 << LayerMask.NameToLayer("Player");
+        moveableObject = GetComponent<MoveableObject>();
+        if (moveableObject != null)
+            moveableObject.FinishedMoving += StopAllInteractions;
     }
 
     void Update()
     {
-        CheckForPlayer();
-        if (Input.GetButtonDown("Interact") && canInteract)
+        if (!isPointlessToInteract)
         {
-            if (player.GetControls())
+            CheckForPlayer();
+            if (Input.GetButtonDown("Interact") && canInteract)
             {
-                pauseScreen.SendOutPauseEvent();
-                Interact();
+                if (player.GetControls())
+                {
+                    pauseScreen.SendOutPauseEvent();
+                    Interact();
+                }
+                else
+                {
+                    StopInteracting();
+                }
             }
-            else
-            {
-                StopInteracting();
-            }
+        }
+        else if (canInteract)
+        {
+            StopInteracting();
         }
     }
 
@@ -51,7 +65,7 @@ public abstract class Interactable : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector3.Distance(transform.position, player.transform.position), playerMask);
         if (hit.collider != null)
         {
-            if (hit.distance < interactionDistance)
+            if (hit.distance <= interactionDistance)
             {
                 if (PlayerIsFacingObject(hit) && !canInteract)
                 {
@@ -90,40 +104,10 @@ public abstract class Interactable : MonoBehaviour {
             pauseScreen.SendOutPauseEvent();
     }
 
-    //void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player") && !interacting && isFacingObject)
-    //    {
-    //            interactions.SetText("Press e to inspect.");
-    //            interactions.EnableDialogue(true);
-    //            interacting = true;
-    //    }
-    //}
-
-    //void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        if (PlayerIsFacingObject(collision.transform))
-    //            isFacingObject = true;
-    //        else
-    //        {
-    //            interacting = false;
-    //            interactions.EnableDialogue(false);
-    //            isFacingObject = false;
-    //        }
-    //    }
-
-    //}
-
-    //void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player") && player.GetControls())
-    //    {
-    //        interacting = false;
-    //        interactions.EnableDialogue(false);
-    //    }
-    //}
+    void StopAllInteractions()
+    {
+        isPointlessToInteract = true;
+    }
 
     protected abstract void Interact();
 }

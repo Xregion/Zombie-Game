@@ -8,6 +8,7 @@ TagManager:
   - Health
   - Enemy
   - Environment
+  - Moveable
   layers:
   - Default
   - TransparentFX
