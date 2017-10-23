@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using System.Collections.Generic;
 
 public class LoadManager : MonoBehaviour {
 
@@ -8,9 +9,10 @@ public class LoadManager : MonoBehaviour {
 
     public event Action LevelLoaded;
 
-    public GameObject player;
-    public GameObject zombie;
+    public GameObject playerPrefab;
+    public GameObject zombiePrefab;
     GameObject instantiatedPlayer;
+    List<int> idsAtScene;
 
     void Awake()
     {
@@ -21,8 +23,11 @@ public class LoadManager : MonoBehaviour {
     {
         DestroyMultipleInstances();
         if (loadedScene != SceneManager.GetSceneByName("title screen"))
-            instantiatedPlayer = Instantiate(player, new Vector3(SaveManager.data.XPosition, SaveManager.data.YPosition, 1),
-                                            Quaternion.Euler(0, 0, SaveManager.data.ZRotation));
+        {
+            SpawnPlayer();
+            if (loadedScene != SceneManager.GetSceneByName("main"))
+                SpawnZombies();
+        }
 
         if (LevelLoaded != null)
             LevelLoaded();
@@ -44,5 +49,34 @@ public class LoadManager : MonoBehaviour {
     public GameObject GetPlayer()
     {
         return instantiatedPlayer;
+    }
+
+    void SpawnPlayer ()
+    {
+        instantiatedPlayer = Instantiate(playerPrefab, new Vector3(SaveManager.data.XPosition, SaveManager.data.YPosition, 1),
+                                            Quaternion.Euler(0, 0, SaveManager.data.ZRotation));
+    }
+
+    void SpawnZombies ()
+    {
+        EnemyManager enemyManager = GetComponent<EnemyManager>();
+        if (enemyManager != null)
+        {
+            GameObject[] points = enemyManager.FindSpawnPoints();
+            if (points != null)
+            {
+                Dictionary<int, bool> enemyDictionary = enemyManager.GetSpawnPointsDictionary();
+
+                int i = 0;
+                foreach (int id in enemyDictionary.Keys)
+                {
+                    if (!enemyDictionary[id])
+                    {
+                        Instantiate(zombiePrefab, points[i].transform.position, points[i].transform.rotation, points[i].transform);
+                    }
+                    i++;
+                }
+            }
+        }
     }
 }

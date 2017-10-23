@@ -19,7 +19,7 @@ public class LockedDoor : InspectableObject {
 
     protected override void Interact()
     {
-        if (SaveManager.data.Items.Exists(item => item.GetComponent<KeyItem>().itemName == keyItemName))
+        if (SaveManager.data.Items.Exists(item => item == keyItemName))
             hasKeyItem = true;
 
         if (hasKeyItem)

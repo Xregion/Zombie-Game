@@ -261,8 +261,10 @@
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\ItemDrop.cs" />
     <Compile Include="Assets\Scripts\Items\KeyItem.cs" />
+    <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\SpawnPointManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WaveManager.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\BulletsText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />

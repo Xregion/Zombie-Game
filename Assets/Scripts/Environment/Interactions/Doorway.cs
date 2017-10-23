@@ -12,6 +12,7 @@ public class Doorway : Interactable
         SaveManager.data.XPosition = playerPos.x;
         SaveManager.data.YPosition = playerPos.y;
         SaveManager.data.ZRotation = playerRot;
-        SceneManager.LoadScene(sceneToLoad);
+        if (sceneToLoad != "")
+            SceneManager.LoadScene(sceneToLoad);
     }
 }

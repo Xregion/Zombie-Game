@@ -46,7 +46,6 @@ public class GunController : MonoBehaviour {
         redDot.SetPosition(1, new Vector3(bulletRange, 0, 0));
         bulletsInChamber = SaveManager.data.BulletsInChamber;
         bulletsFired = bulletsInChamber;
-        //SetBulletsText();
     }
 
     void Update()
@@ -80,8 +79,6 @@ public class GunController : MonoBehaviour {
         SaveManager.data.BulletsInChamber = bulletsInChamber;
         if (bulletsInChamber <= 0)
             chamberIsEmpty = true;
-
-        //SetBulletsText();
     }
 
     public void MeleeAttack ()
@@ -120,7 +117,7 @@ public class GunController : MonoBehaviour {
         }
 
         SaveManager.data.BulletsRemaining = totalBulletsRemaining;
-        //SetBulletsText();
+        SaveManager.data.BulletsInChamber = bulletsInChamber;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

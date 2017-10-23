@@ -6,8 +6,6 @@ using System.Collections;
 [RequireComponent(typeof(ItemDrop))]
 public class AIController : MonoBehaviour, IDamageable {
 
-    public event Action<GameObject> DeathEvent; // Called when zombie dies
-
     public LayerMask colliderMask;
     public LayerMask attackingMask;
     public float maxHealth;
@@ -18,7 +16,7 @@ public class AIController : MonoBehaviour, IDamageable {
     public float knockbackAmount; // the amount at x the AI will be knocked back when shot
 
     bool isAlive;
-    bool paused;
+    bool isPaused;
     protected GameObject target;
     protected GameObject player;
     protected float distanceToPlayer;
@@ -62,7 +60,7 @@ public class AIController : MonoBehaviour, IDamageable {
     }
 
     void Update () {
-        if (isAlive && !paused)
+        if (isAlive && !isPaused)
             Movement();
     }
 
@@ -99,7 +97,7 @@ public class AIController : MonoBehaviour, IDamageable {
 
     void Pause()
     {
-        paused = !paused;
+        isPaused = !isPaused;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -193,8 +191,6 @@ public class AIController : MonoBehaviour, IDamageable {
         Vector3 deathPosition = transform.position;
         deathPosition.z = 14.5f;
         transform.position = deathPosition;
-        if (DeathEvent != null)
-            DeathEvent(gameObject);
     }
 
     public void SetIsAttacking ()

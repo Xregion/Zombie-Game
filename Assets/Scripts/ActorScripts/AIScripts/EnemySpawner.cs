@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour {
         {
             GameObject obj = Instantiate(prefab, transform);
             obj.SetActive(false);
-            obj.GetComponent<AIController>().DeathEvent += RemoveFromList;
+            obj.GetComponent<BasicZombieWaves>().DeathEvent += RemoveFromList;
             objects.Add(obj);
         }
 

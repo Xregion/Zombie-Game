@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class BasicZombieWaves : AIController {
+
+    public event Action<GameObject> DeathEvent;
 
     void Start()
     {
@@ -32,6 +35,9 @@ public class BasicZombieWaves : AIController {
     protected override void Die()
     {
         base.Die();
+        if (DeathEvent != null)
+            DeathEvent(gameObject);
+
         StartCoroutine(Deactivate());
     }
 

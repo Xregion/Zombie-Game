@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SaveManager : MonoBehaviour {
 
@@ -119,9 +121,9 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
-    List<GameObject> items;
+    List<string> items;
 
-    public List<GameObject> Items
+    public List<string> Items
     {
         get
         {
@@ -146,6 +148,21 @@ public class SaveManager : MonoBehaviour {
         set
         {
             isPowerOn = value;
+        }
+    }
+
+    Dictionary<int, bool> zombieSpawnPoints;
+
+    public Dictionary<int, bool> ZombieSpawnPoints
+    {
+        get
+        {
+            return zombieSpawnPoints;
+        }
+
+        set
+        {
+            zombieSpawnPoints = value;
         }
     }
     #endregion
@@ -188,7 +205,7 @@ public class SaveManager : MonoBehaviour {
                 return;
         }
 
-        Data data = new Data(scene, health, bulletsRemaining, bulletsInChamber, xPosition, yPosition, zRotation, items, isPowerOn);
+        Data data = new Data(scene, health, bulletsRemaining, bulletsInChamber, xPosition, yPosition, zRotation, items, isPowerOn, zombieSpawnPoints);
 
         bf.Serialize(file, data);
         file.Close();
@@ -229,6 +246,7 @@ public class SaveManager : MonoBehaviour {
             zRotation = data.zRot;
             items = data.currentItems;
             isPowerOn = data.isPowerOn;
+            zombieSpawnPoints = data.zombieSpawnPoints;
 
             file.Close();
             return true;
@@ -247,10 +265,11 @@ public class SaveManager : MonoBehaviour {
         public float xPos;
         public float yPos;
         public float zRot;
-        public List<GameObject> currentItems;
+        public List<string> currentItems;
         public bool isPowerOn;
+        public Dictionary<int, bool> zombieSpawnPoints;
 
-        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, List<GameObject> items, bool _isPowerOn)
+        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, List<string> items, bool _isPowerOn, Dictionary<int, bool> spawnPoints)
         {
             currentScene = scene;
             currentHealth = health;
@@ -261,6 +280,7 @@ public class SaveManager : MonoBehaviour {
             zRot = zRotation;
             currentItems = items;
             isPowerOn = _isPowerOn;
+            zombieSpawnPoints = spawnPoints;
         }
     }
 }

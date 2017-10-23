@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
 
 public class BasicZombieMain : AIController {
+
+    public event Action Died;
 
     public float aggroRange;
 
@@ -35,7 +38,7 @@ public class BasicZombieMain : AIController {
         // otherwise attack the current target if it is in range
         if (!CheckIfInRange() && !isStaggered && !isAttacking && (playerEnteredView || target == lastKnownPosition))
         {
-            if ((target == player && distanceToPlayer <= aggroRange) || (target == lastKnownPosition && Vector3.Distance(transform.position, target.transform.position) >= 1.1f))
+            if ((target == player && distanceToPlayer <= aggroRange) || (target == lastKnownPosition && Vector3.Distance(transform.position, target.transform.position) >= 1.1f && !isBlocked))
             {
                 motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
                 animations.SetIsMoving(true);
@@ -48,6 +51,13 @@ public class BasicZombieMain : AIController {
             animations.SetIsMeleeing(true);
             isAttacking = true;
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        if (Died != null)
+            Died();
     }
 
     void OnCollisionEnter2D(Collision2D collision)

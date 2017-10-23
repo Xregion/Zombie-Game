@@ -12,7 +12,7 @@ public class KeyItem : Interactable {
         GetComponent<SpriteRenderer>().enabled = false;
         pickUpText = "You aquired a " + itemName;
         interactions.SetText(pickUpText);
-        SaveManager.data.Items.Add(gameObject);
+        SaveManager.data.Items.Add(itemName);
         pickedUp = true;
     }
 

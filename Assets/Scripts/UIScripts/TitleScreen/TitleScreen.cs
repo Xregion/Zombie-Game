@@ -13,8 +13,9 @@ public class TitleScreen : MonoBehaviour
         SaveManager.data.ZRotation = 180;
         SaveManager.data.BulletsRemaining = 25;
         SaveManager.data.BulletsInChamber = 5;
-        SaveManager.data.Items = new List<GameObject>();
+        SaveManager.data.Items = new List<string>();
         SaveManager.data.IsPowerOn = true;
+        SaveManager.data.ZombieSpawnPoints = new Dictionary<int, bool>();
         SceneManager.LoadScene(SaveManager.data.Scene);
     }
 
