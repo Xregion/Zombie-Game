@@ -45,6 +45,7 @@ public abstract class Interactable : MonoBehaviour {
             {
                 if (player.GetControls())
                 {
+                    pauseScreen.EnablePause(false);
                     pauseScreen.SendOutPauseEvent();
                     Interact();
                 }
@@ -102,6 +103,8 @@ public abstract class Interactable : MonoBehaviour {
         canInteract = false;
         if (!player.GetControls())
             pauseScreen.SendOutPauseEvent();
+
+        pauseScreen.EnablePause(true);
     }
 
     void StopAllInteractions()

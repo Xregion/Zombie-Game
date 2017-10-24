@@ -7,13 +7,15 @@ public class PauseScreen : MonoBehaviour {
     public event Action PausedEvent;
 
     bool paused;
+    bool canPause;
     GameObject pauseScreen;
 
 	void Start () {
         pauseScreen = gameObject.transform.GetChild(0).gameObject;
         pauseScreen.SetActive(false);
         paused = false;
-	}
+        canPause = true;
+    }
 	
 	void Update () {
 		if (Input.GetButtonDown("Pause"))
@@ -34,22 +36,30 @@ public class PauseScreen : MonoBehaviour {
 
     void Pause()
     {
-        paused = !paused;
-        if (paused)
+        if (canPause)
         {
-            pauseScreen.SetActive(true);
-        }
-        else
-        {
-            pauseScreen.SetActive(false);
-        }
+            paused = !paused;
+            if (paused)
+            {
+                pauseScreen.SetActive(true);
+            }
+            else
+            {
+                pauseScreen.SetActive(false);
+            }
 
-        SendOutPauseEvent();
+            SendOutPauseEvent();
+        }
     }
 
     public void SendOutPauseEvent()
     {
         if (PausedEvent != null)
             PausedEvent();
+    }
+
+    public void EnablePause (bool enabled)
+    {
+        canPause = enabled;
     }
 }

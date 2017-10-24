@@ -3,8 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class SaveManager : MonoBehaviour {
 
@@ -151,9 +149,9 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
-    Dictionary<int, bool> zombieSpawnPoints;
+    Dictionary<SerializableVector3, bool> zombieSpawnPoints;
 
-    public Dictionary<int, bool> ZombieSpawnPoints
+    public Dictionary<SerializableVector3, bool> ZombieSpawnPoints
     {
         get
         {
@@ -267,9 +265,9 @@ public class SaveManager : MonoBehaviour {
         public float zRot;
         public List<string> currentItems;
         public bool isPowerOn;
-        public Dictionary<int, bool> zombieSpawnPoints;
+        public Dictionary<SerializableVector3, bool> zombieSpawnPoints;
 
-        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, List<string> items, bool _isPowerOn, Dictionary<int, bool> spawnPoints)
+        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, List<string> items, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints)
         {
             currentScene = scene;
             currentHealth = health;

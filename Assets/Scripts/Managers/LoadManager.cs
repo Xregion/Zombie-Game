@@ -11,6 +11,8 @@ public class LoadManager : MonoBehaviour {
 
     public GameObject playerPrefab;
     public GameObject zombiePrefab;
+    public List<string> outOfGameScenes;
+
     GameObject instantiatedPlayer;
     List<int> idsAtScene;
 
@@ -22,7 +24,7 @@ public class LoadManager : MonoBehaviour {
     private void SceneChange(Scene previousScene, Scene loadedScene)
     {
         DestroyMultipleInstances();
-        if (loadedScene != SceneManager.GetSceneByName("title screen"))
+        if (!outOfGameScenes.Contains(loadedScene.name))
         {
             SpawnPlayer();
             if (loadedScene != SceneManager.GetSceneByName("main"))
@@ -65,11 +67,13 @@ public class LoadManager : MonoBehaviour {
             GameObject[] points = enemyManager.FindSpawnPoints();
             if (points != null)
             {
-                Dictionary<int, bool> enemyDictionary = enemyManager.GetSpawnPointsDictionary();
+                Dictionary<SerializableVector3, bool> enemyDictionary = enemyManager.GetSpawnPointsDictionary();
 
                 int i = 0;
-                foreach (int id in enemyDictionary.Keys)
+                foreach (SerializableVector3 id in enemyDictionary.Keys)
                 {
+                    if (points[i].transform.position != id)
+                        continue;
                     if (!enemyDictionary[id])
                     {
                         Instantiate(zombiePrefab, points[i].transform.position, points[i].transform.rotation, points[i].transform);

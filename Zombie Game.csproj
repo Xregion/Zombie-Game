@@ -266,6 +266,8 @@
     <Compile Include="Assets\Scripts\Managers\SaveManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SpawnPointManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WaveManager.cs" />
+    <Compile Include="Assets\Scripts\Misc\LoadTitleScreen.cs" />
+    <Compile Include="Assets\Scripts\Misc\SerializableVector3.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\BulletsText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />

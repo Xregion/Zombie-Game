@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class EnemyManager : MonoBehaviour {
 
-    Dictionary<int, bool> spawnPointsDictionary = new Dictionary<int, bool>();
+    Dictionary<SerializableVector3, bool> spawnPointsDictionary = new Dictionary<SerializableVector3, bool>();
 
     public GameObject[] FindSpawnPoints()
     {
@@ -16,19 +16,18 @@ public class EnemyManager : MonoBehaviour {
             {
                 SpawnPointManager point = spawnPoints[i].GetComponent<SpawnPointManager>();
                 point.SetIsDead();
-                int id = point.GetID();
+                SerializableVector3 id = point.GetID();
                 if (!SaveManager.data.ZombieSpawnPoints.ContainsKey(id))
                     SaveManager.data.ZombieSpawnPoints.Add(id, point.GetIsDead());
 
                 spawnPointsDictionary.Add(id, SaveManager.data.ZombieSpawnPoints[id]);
-                print(id + " " + SaveManager.data.ZombieSpawnPoints[id]);
             }
         }
 
         return spawnPoints;
     }
 
-    public Dictionary<int, bool> GetSpawnPointsDictionary()
+    public Dictionary<SerializableVector3, bool> GetSpawnPointsDictionary()
     {
         return spawnPointsDictionary;
     }

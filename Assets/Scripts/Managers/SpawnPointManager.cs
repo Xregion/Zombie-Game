@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public class SpawnPointManager : MonoBehaviour {
 
-    int id;
+    SerializableVector3 id;
     bool isDead;
     BasicZombieMain zombie;
 
-    static List<int> ids = new List<int>();
-
     void Start()
     {
+        id = transform.position;
         if (!isDead)
         {
             zombie = GetComponentInChildren<BasicZombieMain>();
@@ -36,20 +33,11 @@ public class SpawnPointManager : MonoBehaviour {
 
     public void SetIsDead()
     {
-        while (ids.Contains(id))
-            id++;
-
-        ids.Add(id);
-
+        id = transform.position;
         if (SaveManager.data.ZombieSpawnPoints.ContainsKey(id))
             isDead = SaveManager.data.ZombieSpawnPoints[id];
         else
             isDead = false;
-    }
-
-    public List<int> GetIDList()
-    {
-        return ids;
     }
 
     public bool GetIsDead()
@@ -57,7 +45,7 @@ public class SpawnPointManager : MonoBehaviour {
         return isDead;
     }
 
-    public int GetID()
+    public Vector3 GetID()
     {
         return id;
     }
