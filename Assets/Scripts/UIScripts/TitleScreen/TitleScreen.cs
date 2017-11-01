@@ -11,8 +11,8 @@ public class TitleScreen : MonoBehaviour
         SaveManager.data.XPosition = 20;
         SaveManager.data.YPosition = -5;
         SaveManager.data.ZRotation = 180;
-        SaveManager.data.BulletsRemaining = 25;
-        SaveManager.data.BulletsInChamber = 5;
+        SaveManager.data.BulletsRemaining = 60;
+        SaveManager.data.BulletsInChamber = 12;
         SaveManager.data.Items = new List<string>();
         SaveManager.data.IsPowerOn = true;
         SaveManager.data.ZombieSpawnPoints = new Dictionary<SerializableVector3, bool>();
@@ -33,5 +33,10 @@ public class TitleScreen : MonoBehaviour
             SceneManager.LoadScene(SaveManager.data.Scene);
         else
             print("No save data found");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

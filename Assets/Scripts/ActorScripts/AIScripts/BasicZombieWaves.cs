@@ -22,8 +22,19 @@ public class BasicZombieWaves : AIController {
         // otherwise attack the current target if it is in range
         if (!CheckIfInRange() && !isStaggered && !isAttacking)
         {
-            motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
-            animations.SetIsMoving(true);
+            if (playerIsDead)
+            {
+                if (!isBlocked)
+                {
+                    motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
+                    animations.SetIsMoving(true);
+                }
+            }
+            else
+            {
+                motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
+                animations.SetIsMoving(true);
+            }
         }
         else if (CheckIfInRange())
         {

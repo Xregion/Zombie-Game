@@ -6,6 +6,11 @@ public class KeyItem : Interactable {
 
     string pickUpText;
     bool pickedUp;
+     void Awake()
+    {
+        if (SaveManager.data.Items.Contains(itemName))
+            gameObject.SetActive(false);
+    }
 
     protected override void Interact()
     {

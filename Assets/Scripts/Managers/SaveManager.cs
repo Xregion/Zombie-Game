@@ -183,6 +183,10 @@ public class SaveManager : MonoBehaviour {
         fileThree = filePath + "/GameDataThree.zomb";
     }
 
+    /// <summary>
+    /// Saves the data to the file specified with the parameter.
+    /// </summary>
+    /// <param name="fileNumber"></param>
     public void SaveData(int fileNumber)
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -209,8 +213,11 @@ public class SaveManager : MonoBehaviour {
         file.Close();
     }
 
-    // Deserializes the save file from binary and sets the variables based on the data on file.
-    // Returns true if the file exists so that anyone accessing the function knows if the file exists or not.
+    /// <summary>
+    /// Deserializes the save file from binary and sets the variables based on the data in the file. Returns true if the file exists.
+    /// </summary>
+    /// <param name="fileNumber"></param>
+    /// <returns></returns>
     public bool LoadData(int fileNumber)
     {
         String filePath;

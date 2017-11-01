@@ -269,6 +269,7 @@
     <Compile Include="Assets\Scripts\Misc\LoadTitleScreen.cs" />
     <Compile Include="Assets\Scripts\Misc\SerializableVector3.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\BulletsText.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\InGame\DeathScreen.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />
     <Compile Include="Assets\Scripts\UIScripts\InGame\PauseScreen.cs" />

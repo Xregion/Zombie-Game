@@ -11,7 +11,7 @@ public class PauseScreen : MonoBehaviour {
     GameObject pauseScreen;
 
 	void Start () {
-        pauseScreen = gameObject.transform.GetChild(0).gameObject;
+        pauseScreen = transform.GetChild(0).gameObject;
         pauseScreen.SetActive(false);
         paused = false;
         canPause = true;

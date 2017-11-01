@@ -22,6 +22,9 @@ public class BasicZombieMain : AIController {
         // if the player is in view look at him
         if (CheckIfPlayerIsInView() && distanceToPlayer <= aggroRange)
         {
+            if (!playerEnteredView)
+                StartCoroutine(PlayAudioClip(playerSeen, false));
+
             motor.SetTarget(player.transform.position);
             target = player;
             playerEnteredView = true;
@@ -32,21 +35,33 @@ public class BasicZombieMain : AIController {
             motor.SetTarget(lastKnownPosition.transform.position);
             target = lastKnownPosition;
             playerEnteredView = false;
+            StartCoroutine(PlayAudioClip(idlingClip, false));
         }
 
         // check if the Actor is allowed to move and if so use the motor to move him towards his target at specified speed
         // otherwise attack the current target if it is in range
         if (!CheckIfInRange() && !isStaggered && !isAttacking && (playerEnteredView || target == lastKnownPosition))
         {
-            if ((target == player && distanceToPlayer <= aggroRange) || (target == lastKnownPosition && Vector3.Distance(transform.position, target.transform.position) >= 1.1f && !isBlocked))
+            if ((target == player && distanceToPlayer <= aggroRange) || (target == lastKnownPosition && Vector3.Distance(transform.position, target.transform.position) >= 1.5f))
             {
-                motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
-                animations.SetIsMoving(true);
+                if (playerIsDead)
+                {
+                    if (!isBlocked)
+                    {
+                        motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
+                        animations.SetIsMoving(true);
+                    }
+                }
+                else
+                {
+                    motor.MoveActor(new Vector3(1, 0, 0), movSpeed);
+                    animations.SetIsMoving(true);
+                }
             }
             else
                 animations.SetIsMoving(false);
         }
-        else if (CheckIfInRange())
+        else if (CheckIfInRange() && !playerIsDead)
         {
             animations.SetIsMeleeing(true);
             isAttacking = true;

@@ -5,6 +5,7 @@ public class LockedDoor : InspectableObject {
 
     public GameObject keyItem;
     public string hasKeyText;
+    public bool isOneWayDoor;
 
     Doorway doorway;
     bool hasKeyItem;
@@ -19,7 +20,7 @@ public class LockedDoor : InspectableObject {
 
     protected override void Interact()
     {
-        if (SaveManager.data.Items.Exists(item => item == keyItemName))
+        if (SaveManager.data.Items.Contains(keyItemName))
             hasKeyItem = true;
 
         if (hasKeyItem)
@@ -34,6 +35,11 @@ public class LockedDoor : InspectableObject {
 
         if (hasKeyItem) {
             doorway.enabled = true;
+            if (isOneWayDoor)
+            {
+                hasKeyItem = false;
+                SaveManager.data.Items.Remove(keyItemName);
+            }
             enabled = false;
         }
     }

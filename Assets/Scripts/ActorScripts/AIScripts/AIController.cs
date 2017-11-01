@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections;
 
 [RequireComponent(typeof(ActorMotor))]
@@ -8,6 +7,9 @@ public class AIController : MonoBehaviour, IDamageable {
 
     public LayerMask colliderMask;
     public LayerMask attackingMask;
+    public AudioClip playerSeen;
+    public AudioClip damagedClip;
+    public AudioClip idlingClip;
     public float maxHealth;
     public float movSpeed;
     public int attackDamage;
@@ -30,8 +32,9 @@ public class AIController : MonoBehaviour, IDamageable {
     protected bool isAttacking;
     protected bool isStaggered;
     protected bool isBlocked;
-    static bool playerIsDead;
+    protected static bool playerIsDead;
     PauseScreen ps;
+    AudioSource audioSource;
 
     void OnEnable()
     {
@@ -46,6 +49,7 @@ public class AIController : MonoBehaviour, IDamageable {
         bloodSplatter[1].enabled = false;
         ps = FindObjectOfType<PauseScreen>();
         ps.PausedEvent += Pause;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnDisable()
@@ -64,10 +68,11 @@ public class AIController : MonoBehaviour, IDamageable {
             Movement();
     }
 
+    /// <summary>
+    /// Handles the death of the player and sets the target variable. Must override to set the zombies movements.
+    /// </summary>
     protected virtual void Movement ()
     {
-        CheckIfPlayerIsInView();
-
         // if the player is in view then target him
         if ((CheckIfPlayerIsInView() && target != player) || target == null)
             target = player;
@@ -75,19 +80,27 @@ public class AIController : MonoBehaviour, IDamageable {
         if (playerIsDead && target == player)
         {
             animations.SetIsMeleeing(false);
-            if ((CheckIfInRange() || isBlocked))
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position);
+            if ((CheckIfInRange() || hit.collider.CompareTag("Enemy")))
             {
+                //print(hit.collider.name);
                 movSpeed = 0;
                 animations.SetIsMoving(false);
-                if (!isBlocked)
+                if (hit.collider.CompareTag("Player"))
                 {
                     // Start player eating animation
                     animations.SetIsEating(true);
+                    isBlocked = false;
                 }
+                else
+                    isBlocked = true;
             }
         }
     }
 
+    /// <summary>
+    /// Brings the zombie back to life.
+    /// </summary>
     public void Revive()
     {
         currentHealth = maxHealth;
@@ -100,12 +113,10 @@ public class AIController : MonoBehaviour, IDamageable {
         isPaused = !isPaused;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-            isBlocked = true;
-    }
-
+    /// <summary>
+    /// Checks if the player is in the line of sight of the zombie
+    /// </summary>
+    /// <returns>true if the player is not obscured and false if he is</returns>
     protected bool CheckIfPlayerIsInView ()
     {
         if (player == null)
@@ -122,6 +133,10 @@ public class AIController : MonoBehaviour, IDamageable {
         return false;
     }
 
+    /// <summary>
+    /// Checks if the player is in range for an attack.
+    /// </summary>
+    /// <returns>true if the player is in range and false if he isn't</returns>
     protected bool CheckIfInRange ()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, target.transform.position - transform.position, attackRange, attackingMask);
@@ -140,7 +155,7 @@ public class AIController : MonoBehaviour, IDamageable {
         if (targetToDamage != null) // if the target can be damaged
         {
             attackRange += 0.75f;
-            if (CheckIfInRange()) // checks if the target is still in range
+            if (CheckIfInRange() && isAlive && isAttacking) // checks if the target is still in range
             {
                 if (targetToDamage.TakeDamage(attackDamage)) // calls the targets take damage method and returns whether or not the target died.
                 {
@@ -166,6 +181,7 @@ public class AIController : MonoBehaviour, IDamageable {
                 isAttacking = false;
                 animations.SetIsMeleeing(false);
             }
+            StartCoroutine(PlayAudioClip(damagedClip, true));
             bloodSplatter[1].enabled = true;
             currentHealth -= amount;
             isStaggered = true;
@@ -209,5 +225,30 @@ public class AIController : MonoBehaviour, IDamageable {
 
         isStaggered = false;
         bloodSplatter[1].enabled = false;
+    }
+
+    /// <summary>
+    /// Plays the specified clip after the current clip is done or interrupts the current clip.
+    /// </summary>
+    /// <param name="clip"></param>
+    /// <param name="interrupt"></param>
+    protected IEnumerator PlayAudioClip(AudioClip clip, bool interrupt)
+    {
+        bool isPlaying = audioSource.isPlaying;
+        float currentClipTime = audioSource.time;
+        AudioClip currentClip = audioSource.clip;
+        if (interrupt)
+        {
+            audioSource.clip = clip;
+            audioSource.Stop();
+            audioSource.Play();
+        }
+        else
+        {
+            if (isPlaying)
+                yield return new WaitForSeconds(currentClip.length - currentClipTime);
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
     }
 }

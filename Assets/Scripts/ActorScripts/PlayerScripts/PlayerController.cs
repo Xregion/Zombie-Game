@@ -190,12 +190,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 HealthChangeEvent(healthPack.GetAmountToDrop());
 
             healthPack.Destroy();
+
+            SaveManager.data.Health = currentHealth;
         }
         else if (collision.CompareTag("Ammo"))
         {
             Item ammoPack = collision.GetComponent<Item>();
             gunController.totalBulletsRemaining += ammoPack.GetAmountToDrop();
             ammoPack.Destroy();
+
+            SaveManager.data.BulletsRemaining = gunController.totalBulletsRemaining;
         }
     }
 
@@ -225,6 +229,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
         SetMovementAnimation(false);
         animations.SetIsReloading(false);
         animations.SetIsDead(true);
+        gunController.gameObject.SetActive(false);
     }
 
     void LoadComplete()

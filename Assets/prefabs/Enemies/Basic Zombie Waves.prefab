@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -222,6 +222,9 @@ MonoBehaviour:
   attackingMask:
     serializedVersion: 2
     m_Bits: 1536
+  playerSeen: {fileID: 0}
+  damagedClip: {fileID: 0}
+  idlingClip: {fileID: 0}
   maxHealth: 10
   movSpeed: 3
   attackDamage: 5
