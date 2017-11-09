@@ -70,3 +70,4 @@ MonoBehaviour:
   outOfGameScenes:
   - LoadScene
   - title screen
+  - demo title screen

@@ -5,42 +5,63 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/scenes/LoadScene.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/LoadScene.unity
     guid: e18074e8e1692ec489b62173dfdfa64f
-  - enabled: 1
-    path: Assets/scenes/title screen.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/title screen.unity
     guid: 9de1f30b63c7fe143989942e082df9f3
-  - enabled: 1
-    path: Assets/scenes/Roof.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Roof.unity
     guid: f793d5de61a0e3a43b8c9b854a0dd4e0
-  - enabled: 1
-    path: Assets/scenes/Third Floor.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Third Floor.unity
     guid: a6b1fd0898d166e4d9f97c6fd949ba73
-  - enabled: 1
-    path: Assets/scenes/Clothing Store.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Clothing Store.unity
     guid: 1333c6d4ce7dcff48a5c790915128647
-  - enabled: 1
-    path: Assets/scenes/Backroom.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Backroom.unity
     guid: 894a41f25e2aa204eb81d84e45288863
-  - enabled: 1
-    path: Assets/scenes/Second Floor.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Second Floor.unity
     guid: 904fcfd85d4f13449aa54c44d3c306b3
-  - enabled: 1
-    path: Assets/scenes/Gun Store.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Gun Store.unity
     guid: 70f2feefafa2d264bb1555374b27466e
-  - enabled: 1
-    path: Assets/scenes/Restaurant.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Restaurant.unity
     guid: 4aca7c7316efdaf4a83761e458926dd5
-  - enabled: 1
-    path: Assets/scenes/Arcade.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Arcade.unity
     guid: 966bfccb4d5df7643bab15032de291a6
-  - enabled: 1
-    path: Assets/scenes/Toy Store.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Toy Store.unity
     guid: e324ffea26c52f4449318aa00625c889
-  - enabled: 1
-    path: Assets/scenes/Parking Garage.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/Parking Garage.unity
     guid: 21572e5f438a4054bb4cf86a9596d351
-  - enabled: 1
-    path: Assets/scenes/main.unity
+  - enabled: 0
+    path: Assets/scenes/Full Game/main.unity
     guid: a313c6d54b10ac344bf06b913726e2d1
+  - enabled: 1
+    path: Assets/scenes/Demo/LoadScene Demo.unity
+    guid: 732dde97b2e994e418897d4427c99fe5
+  - enabled: 1
+    path: Assets/scenes/Demo/demo title screen.unity
+    guid: 4b81b02aef7e4514e98f58ff47d600c5
+  - enabled: 1
+    path: Assets/scenes/Demo/Roof Demo.unity
+    guid: eaa61677e4c95434d9bb4357cd9dce97
+  - enabled: 1
+    path: Assets/scenes/Demo/Third Floor Demo.unity
+    guid: 9dc6cfd9ec1405442b4c4acd9eb5fc79
+  - enabled: 1
+    path: Assets/scenes/Demo/Clothing Store Demo.unity
+    guid: fa45aa4e94deafa478eaee4e2d55a377
+  - enabled: 1
+    path: Assets/scenes/Demo/Second Floor Demo.unity
+    guid: f83d5779822a08146bde1bef77ff3ca3
+  - enabled: 1
+    path: Assets/scenes/Demo/Backroom Demo.unity
+    guid: 310acbd2f24097143b86a67c71c7a41d

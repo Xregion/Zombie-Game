@@ -61,6 +61,7 @@ public class AIController : MonoBehaviour, IDamageable {
     void LoadComplete()
     {
         player = LoadManager.instance.GetPlayer();
+        playerIsDead = false;
     }
 
     void Update () {

@@ -31,7 +31,7 @@ public class PauseScreen : MonoBehaviour {
 
     public void Quit()
     {
-        SceneManager.LoadScene("title screen");
+        SceneManager.LoadScene(1);
     }
 
     void Pause()
