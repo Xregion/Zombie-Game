@@ -47,7 +47,10 @@ public abstract class Interactable : MonoBehaviour {
                 {
                     pauseScreen.EnablePause(false);
                     pauseScreen.SendOutPauseEvent();
-                    Interact();
+                    if (SaveManager.data.PlayerIsInCombat)
+                        interactions.SetText("It's too dangerous to do that now.");
+                    else
+                        Interact();
                 }
                 else
                 {
@@ -63,6 +66,8 @@ public abstract class Interactable : MonoBehaviour {
 
     void CheckForPlayer()
     {
+        if (player == null)
+            player = LoadManager.instance.GetPlayer().GetComponent<PlayerController>();
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector3.Distance(transform.position, player.transform.position), playerMask);
         if (hit.collider != null)
         {
@@ -107,7 +112,7 @@ public abstract class Interactable : MonoBehaviour {
         pauseScreen.EnablePause(true);
     }
 
-    void StopAllInteractions()
+    public void StopAllInteractions()
     {
         isPointlessToInteract = true;
     }

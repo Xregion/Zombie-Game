@@ -48,6 +48,7 @@ public class SaveScreen : MonoBehaviour {
         SaveManager.data.XPosition = player.transform.position.x;
         SaveManager.data.YPosition = player.transform.position.y;
         SaveManager.data.ZRotation = player.transform.rotation.z;
+        SaveManager.data.PlayerIsInCombat = false;
         SaveManager.data.SaveData(1);
         Cancel();
     }

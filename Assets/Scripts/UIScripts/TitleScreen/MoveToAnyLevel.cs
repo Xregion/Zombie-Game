@@ -19,7 +19,7 @@ public class MoveToAnyLevel : MonoBehaviour {
         {
             sceneNames[i] = SceneUtility.GetScenePathByBuildIndex(i);
 
-            string sceneName = sceneNames[i].Split('/')[2].Split('.')[0];
+            string sceneName = sceneNames[i].Split('/')[3].Split('.')[0];
 
             Button button = Instantiate(sceneButton, transform, false);
             button.GetComponentInChildren<Text>().text = sceneName;

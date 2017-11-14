@@ -14,6 +14,15 @@ public class TitleScreen : MonoBehaviour
         SaveManager.data.BulletsRemaining = 60;
         SaveManager.data.BulletsInChamber = 12;
         SaveManager.data.Items = new List<string>();
+        /*
+         * REMOVE LADDER ITEM 
+         * REMOVE LADDER ITEM 
+         * REMOVE LADDER ITEM 
+         * REMOVE LADDER ITEM 
+         * REMOVE LADDER ITEM 
+         */
+        SaveManager.data.Items.Add("Ladder");
+        SaveManager.data.MannequinnWasShot = false;
         SaveManager.data.IsPowerOn = true;
         SaveManager.data.ZombieSpawnPoints = new Dictionary<SerializableVector3, bool>();
         SceneManager.LoadScene(SaveManager.data.Scene);

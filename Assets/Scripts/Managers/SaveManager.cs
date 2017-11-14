@@ -134,6 +134,21 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
+    bool mannequinnWasShot;
+
+    public bool MannequinnWasShot
+    {
+        get
+        {
+            return mannequinnWasShot;
+        }
+
+        set
+        {
+            mannequinnWasShot = value;
+        }
+    }
+
     bool isPowerOn;
 
     public bool IsPowerOn
@@ -164,6 +179,21 @@ public class SaveManager : MonoBehaviour {
         }
     }
     #endregion
+
+    bool playerIsInCombat;
+
+    public bool PlayerIsInCombat
+    {
+        get
+        {
+            return playerIsInCombat;
+        }
+
+        set
+        {
+            playerIsInCombat = value;
+        }
+    }
 
     void Awake()
     {
@@ -207,7 +237,7 @@ public class SaveManager : MonoBehaviour {
                 return;
         }
 
-        Data data = new Data(scene, health, bulletsRemaining, bulletsInChamber, xPosition, yPosition, zRotation, items, isPowerOn, zombieSpawnPoints);
+        Data data = new Data(scene, health, bulletsRemaining, bulletsInChamber, xPosition, yPosition, zRotation, items, mannequinnWasShot, isPowerOn, zombieSpawnPoints);
 
         bf.Serialize(file, data);
         file.Close();
@@ -250,6 +280,7 @@ public class SaveManager : MonoBehaviour {
             yPosition = data.yPos;
             zRotation = data.zRot;
             items = data.currentItems;
+            mannequinnWasShot = data.mannequinWasShot;
             isPowerOn = data.isPowerOn;
             zombieSpawnPoints = data.zombieSpawnPoints;
 
@@ -271,10 +302,12 @@ public class SaveManager : MonoBehaviour {
         public float yPos;
         public float zRot;
         public List<string> currentItems;
+        public bool mannequinWasShot;
         public bool isPowerOn;
         public Dictionary<SerializableVector3, bool> zombieSpawnPoints;
 
-        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, List<string> items, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints)
+        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, 
+            List<string> items, bool _mannequinWasShot, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints)
         {
             currentScene = scene;
             currentHealth = health;
@@ -284,6 +317,7 @@ public class SaveManager : MonoBehaviour {
             yPos = yPosition;
             zRot = zRotation;
             currentItems = items;
+            mannequinWasShot = _mannequinWasShot;
             isPowerOn = _isPowerOn;
             zombieSpawnPoints = spawnPoints;
         }

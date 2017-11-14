@@ -7,6 +7,7 @@ public class SaveConsole : Interactable {
     CameraController camController;
     SaveScreen saveScreen;
     Vector3 consolePos;
+    Vector3 consoleRot;
     float originalCamSize;
     float zoomedCamSize;
     float zoomSpeed;
@@ -21,6 +22,7 @@ public class SaveConsole : Interactable {
         camController = cam.GetComponent<CameraController>();
         saveScreen = FindObjectOfType<SaveScreen>();
         consolePos = transform.position;
+        consoleRot = transform.rotation.eulerAngles;
     }
 
     //TODO need to fix pause event so that player doesn't regain controls when it's called
@@ -37,8 +39,12 @@ public class SaveConsole : Interactable {
             zooming = true;
             yield return new WaitForEndOfFrame();
             Vector3 newPos = Vector3.Lerp(cam.transform.position, consolePos, 0.2f);
+            Vector3 newRot = Vector3.Lerp(cam.transform.rotation.eulerAngles, consoleRot, 0.2f);
             newPos.z = cam.transform.position.z;
+            newRot.x = 0;
+            newRot.y = 0;
             cam.transform.position = newPos;
+            cam.transform.rotation = Quaternion.Euler(newRot);
             cam.orthographicSize -= zoomSpeed;
             if (cam.orthographicSize < zoomedCamSize)
                 cam.orthographicSize = zoomedCamSize;
@@ -55,6 +61,7 @@ public class SaveConsole : Interactable {
         {
             yield return new WaitForEndOfFrame();
             cam.orthographicSize += zoomSpeed;
+            cam.transform.rotation = Quaternion.Euler(0, 0, 0);
             if (cam.orthographicSize > originalCamSize)
                 cam.orthographicSize = originalCamSize;
         }

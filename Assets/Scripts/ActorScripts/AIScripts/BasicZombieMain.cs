@@ -28,9 +28,11 @@ public class BasicZombieMain : AIController {
             motor.SetTarget(player.transform.position);
             target = player;
             playerEnteredView = true;
+            SaveManager.data.PlayerIsInCombat = true;
         }
         else if (playerEnteredView)
         {
+            SaveManager.data.PlayerIsInCombat = false;
             lastKnownPosition.transform.position = player.transform.position;
             motor.SetTarget(lastKnownPosition.transform.position);
             target = lastKnownPosition;

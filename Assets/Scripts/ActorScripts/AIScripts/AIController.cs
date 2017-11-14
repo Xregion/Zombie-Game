@@ -208,6 +208,7 @@ public class AIController : MonoBehaviour, IDamageable {
         Vector3 deathPosition = transform.position;
         deathPosition.z = 14.5f;
         transform.position = deathPosition;
+        SaveManager.data.PlayerIsInCombat = false;
     }
 
     public void SetIsAttacking ()
