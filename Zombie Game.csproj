@@ -255,7 +255,6 @@
     <Compile Include="Assets\Scripts\Environment\Interactions\LockedDoor.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\Mannequin.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\MoveableObject.cs" />
-    <Compile Include="Assets\Scripts\Environment\Interactions\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\Environment\Interactions\SaveConsole.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
@@ -270,15 +269,17 @@
     <Compile Include="Assets\Scripts\Misc\LoadDemoTitleScreen.cs" />
     <Compile Include="Assets\Scripts\Misc\LoadTitleScreen.cs" />
     <Compile Include="Assets\Scripts\Misc\SerializableVector3.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\BulletsText.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\DeathScreen.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\HealthBars.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\InteractionText.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\PauseScreen.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\RemainingEnemies.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\InGame\SaveScreen.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\TitleScreen\MoveToAnyLevel.cs" />
-    <Compile Include="Assets\Scripts\UIScripts\TitleScreen\TitleScreen.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\BulletsText.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\Cutscene.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\CutsceneCreator.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\DeathScreen.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\HealthBars.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\InteractionText.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\PauseScreen.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\RemainingEnemies.cs" />
+    <Compile Include="Assets\Scripts\UI UX\InGame\SaveScreen.cs" />
+    <Compile Include="Assets\Scripts\UI UX\TitleScreen\MoveToAnyLevel.cs" />
+    <Compile Include="Assets\Scripts\UI UX\TitleScreen\TitleScreen.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

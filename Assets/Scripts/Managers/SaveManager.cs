@@ -180,6 +180,21 @@ public class SaveManager : MonoBehaviour {
     }
     #endregion
 
+    Dictionary<string, List<SerializableVector3>> cutscenes;
+
+    public Dictionary<string, List<SerializableVector3>> Cutscenes
+    {
+        get
+        {
+            return cutscenes;
+        }
+
+        set
+        {
+            cutscenes = value;
+        }
+    }
+
     bool playerIsInCombat;
 
     public bool PlayerIsInCombat
