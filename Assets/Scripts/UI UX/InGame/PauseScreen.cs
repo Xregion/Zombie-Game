@@ -34,6 +34,14 @@ public class PauseScreen : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void LoadFromSave()
+    {
+        //TODO: IMPLEMENT FILE NUMBER TO GET FROM SAVEMANAGER
+        int fileNumber = 1;
+        if (SaveManager.data.LoadData(fileNumber))
+            SceneManager.LoadScene(SaveManager.data.Scene);
+    }
+
     void Pause()
     {
         if (canPause)
