@@ -38,7 +38,8 @@ public class AIController : MonoBehaviour, IDamageable {
 
     void OnEnable()
     {
-        LoadManager.instance.LevelLoaded += LoadComplete;
+        player = LoadManager.instance.GetPlayer();
+        playerIsDead = false;
         isAlive = true;
         col = GetComponent<BoxCollider2D>();
         animations = GetComponentInChildren<EnemyAnimations>();
@@ -54,14 +55,7 @@ public class AIController : MonoBehaviour, IDamageable {
 
     void OnDisable()
     {
-        LoadManager.instance.LevelLoaded -= LoadComplete;
         ps.PausedEvent -= Pause;
-    }
-
-    void LoadComplete()
-    {
-        player = LoadManager.instance.GetPlayer();
-        playerIsDead = false;
     }
 
     void Update () {
@@ -120,8 +114,6 @@ public class AIController : MonoBehaviour, IDamageable {
     /// <returns>true if the player is not obscured and false if he is</returns>
     protected bool CheckIfPlayerIsInView ()
     {
-        if (player == null)
-            player = LoadManager.instance.GetPlayer();
         // cast a ray to the player to see if it is in view
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Vector3.Distance(transform.position, player.transform.position), colliderMask);
         if (hit.collider != null)

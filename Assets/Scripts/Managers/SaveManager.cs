@@ -178,20 +178,19 @@ public class SaveManager : MonoBehaviour {
             zombieSpawnPoints = value;
         }
     }
-    #endregion
 
-    Dictionary<string, List<SerializableVector3>> cutscenes;
+    int loadedFile;
 
-    public Dictionary<string, List<SerializableVector3>> Cutscenes
+    public int LoadedFile
     {
         get
         {
-            return cutscenes;
+            return loadedFile;
         }
 
         set
         {
-            cutscenes = value;
+            loadedFile = value;
         }
     }
 
@@ -209,6 +208,7 @@ public class SaveManager : MonoBehaviour {
             playerIsInCombat = value;
         }
     }
+#endregion
 
     void Awake()
     {
@@ -300,6 +300,7 @@ public class SaveManager : MonoBehaviour {
             zombieSpawnPoints = data.zombieSpawnPoints;
 
             file.Close();
+            loadedFile = fileNumber;
             return true;
         }
 

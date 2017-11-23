@@ -7,22 +7,8 @@ public class CameraController : MonoBehaviour {
     Vector3 cameraPos;
     bool pauseFollow;
 
-    void OnEnable()
-    {
-        LoadManager.instance.LevelLoaded += LoadComplete;
-    }
-
-    void OnDisable()
-    {
-        LoadManager.instance.LevelLoaded -= LoadComplete;
-    }
-
-    void LoadComplete()
-    {
-        player = LoadManager.instance.GetPlayer().transform;
-    }
-
     void Start () {
+        player = LoadManager.instance.GetPlayer().transform;
         cameraPos = transform.position;
         pauseFollow = false;
 	}

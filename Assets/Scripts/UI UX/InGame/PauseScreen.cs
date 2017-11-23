@@ -36,9 +36,7 @@ public class PauseScreen : MonoBehaviour {
 
     public void LoadFromSave()
     {
-        //TODO: IMPLEMENT FILE NUMBER TO GET FROM SAVEMANAGER
-        int fileNumber = 1;
-        if (SaveManager.data.LoadData(fileNumber))
+        if (SaveManager.data.LoadData(SaveManager.data.LoadedFile))
             SceneManager.LoadScene(SaveManager.data.Scene);
     }
 

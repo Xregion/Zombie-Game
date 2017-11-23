@@ -27,14 +27,15 @@ public class PlayerController : MonoBehaviour, IDamageable {
 
     void OnEnable()
     {
-        LoadManager.instance.LevelLoaded += LoadComplete;
+        currentHealth = SaveManager.data.Health;
+        if (HealthChangeEvent != null)
+            HealthChangeEvent(currentHealth - totalHealth);
         ps = FindObjectOfType<PauseScreen>();
         ps.PausedEvent += Pause;
     }
 
     void OnDisable()
     {
-        LoadManager.instance.LevelLoaded -= LoadComplete;
         ps.PausedEvent -= Pause;
     }
 
@@ -230,12 +231,5 @@ public class PlayerController : MonoBehaviour, IDamageable {
         animations.SetIsReloading(false);
         animations.SetIsDead(true);
         gunController.gameObject.SetActive(false);
-    }
-
-    void LoadComplete()
-    {
-        currentHealth = SaveManager.data.Health;
-        if (HealthChangeEvent != null)
-            HealthChangeEvent(currentHealth - totalHealth);
     }
 }

@@ -8,23 +8,9 @@ public class SaveScreen : MonoBehaviour {
     SaveConsole console;
     Image savePrompt;
 
-    void OnEnable()
-    {
-        LoadManager.instance.LevelLoaded += LoadComplete;
-    }
-
-    void OnDisable()
-    {
-        LoadManager.instance.LevelLoaded -= LoadComplete;
-    }
-
-    void LoadComplete()
-    {
-        player = LoadManager.instance.GetPlayer();
-    }
-
     void Start()
     {
+        player = LoadManager.instance.GetPlayer();
         savePrompt = GetComponentInChildren<Image>();
         Enable(false);
     }

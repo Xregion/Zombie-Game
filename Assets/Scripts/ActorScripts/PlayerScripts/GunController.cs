@@ -28,16 +28,6 @@ public class GunController : MonoBehaviour {
     int bulletsFired;
     int bulletsInChamber;
 
-    void OnEnable()
-    {
-        LoadManager.instance.LevelLoaded += LoadComplete;
-    }
-
-    void OnDisable()
-    {
-        LoadManager.instance.LevelLoaded -= LoadComplete;
-    }
-
     void Start()
     {
         gunCollider = GetComponent<BoxCollider2D>();
@@ -45,6 +35,7 @@ public class GunController : MonoBehaviour {
         muzzleFlash.gameObject.SetActive(false);
         redDot.SetPosition(1, new Vector3(bulletRange, 0, 0));
         bulletsInChamber = SaveManager.data.BulletsInChamber;
+        totalBulletsRemaining = SaveManager.data.BulletsRemaining;
         bulletsFired = bulletsInChamber;
     }
 
@@ -128,12 +119,6 @@ public class GunController : MonoBehaviour {
             hitObject.TakeDamage(meleeDamage);
             meleeHit = true;
         }
-    }
-
-    void LoadComplete()
-    {
-        totalBulletsRemaining = SaveManager.data.BulletsRemaining;
-        bulletsInChamber = SaveManager.data.BulletsInChamber;
     }
 
     public bool GetIsReloading()

@@ -6,23 +6,9 @@ public class BulletsText : MonoBehaviour {
     GunController gunController;
     Text bulletText;
 
-    void OnEnable()
-    {
-        LoadManager.instance.LevelLoaded += LoadComplete;
-    }
-
-    void OnDisable()
-    {
-        LoadManager.instance.LevelLoaded -= LoadComplete;
-    }
-
-    void LoadComplete()
-    {
-        gunController = LoadManager.instance.GetPlayer().GetComponentInChildren<GunController>();
-    }
-
     void Start()
     {
+        gunController = LoadManager.instance.GetPlayer().GetComponentInChildren<GunController>();
         bulletText = GetComponent<Text>();
     }
 

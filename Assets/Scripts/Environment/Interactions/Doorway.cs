@@ -7,23 +7,23 @@ public class Doorway : Interactable
     public Vector2 playerPos;
     public float playerRot;
 
-    LockedDoor door;
+    LockedDoor lockedDoor;
 
     protected override void Interact()
     {
-        door = GetComponent<LockedDoor>();
+        lockedDoor = GetComponent<LockedDoor>();
         SaveManager.data.XPosition = playerPos.x;
         SaveManager.data.YPosition = playerPos.y;
         SaveManager.data.ZRotation = playerRot;
         if (sceneToLoad != "")
             SceneManager.LoadScene(sceneToLoad);
 
-        if (door != null)
+        if (lockedDoor != null)
         {
-            if (door.isOneWayDoor)
+            if (lockedDoor.isOneWayDoor)
             {
                 enabled = false;
-                door.enabled = true;
+                lockedDoor.enabled = true;
             }
         }
     }

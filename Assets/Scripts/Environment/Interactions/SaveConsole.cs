@@ -25,7 +25,6 @@ public class SaveConsole : Interactable {
         consoleRot = transform.rotation.eulerAngles;
     }
 
-    //TODO need to fix pause event so that player doesn't regain controls when it's called
     protected override void Interact()
     {
         StartCoroutine(CameraZoom());
