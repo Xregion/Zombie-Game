@@ -14,6 +14,21 @@ public class SaveManager : MonoBehaviour {
     string fileThree;
 
     #region Data to Save/Load
+    string characterName;
+
+    public string CharacterName
+    {
+        get
+        {
+            return characterName;
+        }
+
+        set
+        {
+            characterName = value;
+        }
+    }
+
     int scene;
 
     public int Scene
@@ -252,7 +267,8 @@ public class SaveManager : MonoBehaviour {
                 return;
         }
 
-        Data data = new Data(scene, health, bulletsRemaining, bulletsInChamber, xPosition, yPosition, zRotation, items, mannequinnWasShot, isPowerOn, zombieSpawnPoints);
+        Data data = new Data(characterName, scene, health, bulletsRemaining, bulletsInChamber, 
+            xPosition, yPosition, zRotation, items, mannequinnWasShot, isPowerOn, zombieSpawnPoints);
 
         bf.Serialize(file, data);
         file.Close();
@@ -287,6 +303,7 @@ public class SaveManager : MonoBehaviour {
             FileStream file = File.Open(filePath, FileMode.Open);
             Data data = (Data)bf.Deserialize(file);
 
+            characterName = data.name;
             scene = data.currentScene;
             health = data.currentHealth;
             bulletsRemaining = data.bulletsRemaining;
@@ -310,6 +327,7 @@ public class SaveManager : MonoBehaviour {
     [Serializable]
     struct Data
     {
+        public string name;
         public int currentScene;
         public int currentHealth;
         public int bulletsRemaining;
@@ -322,9 +340,10 @@ public class SaveManager : MonoBehaviour {
         public bool isPowerOn;
         public Dictionary<SerializableVector3, bool> zombieSpawnPoints;
 
-        public Data(int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, 
+        public Data(string characterName, int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, 
             List<string> items, bool _mannequinWasShot, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints)
         {
+            name = characterName;
             currentScene = scene;
             currentHealth = health;
             bulletsRemaining = bullets;

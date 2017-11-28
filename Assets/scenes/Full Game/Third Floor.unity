@@ -4879,9 +4879,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 1
-  sceneToLoad: Second Floor
-  playerPos: {x: -25, y: 24}
-  playerRot: 270
+  sceneToLoad: 0
+  playerPos: {x: 0, y: 0}
+  playerRot: 0
 --- !u!61 &1013299929
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7118,10 +7118,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1935366295412192, guid: 2f516d84adc53594c885bf84dc945765, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f516d84adc53594c885bf84dc945765, type: 2}

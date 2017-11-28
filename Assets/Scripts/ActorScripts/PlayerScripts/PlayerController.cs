@@ -166,6 +166,16 @@ public class PlayerController : MonoBehaviour, IDamageable {
         return currentHealth;
     }
 
+    public void Heal(int health)
+    {
+        currentHealth += health;
+        if (currentHealth > totalHealth)
+            currentHealth = totalHealth;
+
+        if (HealthChangeEvent != null)
+            HealthChangeEvent(health);
+    }
+
     public void ResetMoveSpeed()
     {
         movSpeed = normalMoveSpeed;
@@ -183,12 +193,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
         if (collision.CompareTag("Health"))
         {
             Item healthPack = collision.GetComponent<Item>();
-            currentHealth += healthPack.GetAmountToDrop();
-            if (currentHealth > totalHealth)
-                currentHealth = totalHealth;
-
-            if (HealthChangeEvent != null)
-                HealthChangeEvent(healthPack.GetAmountToDrop());
+            Heal(healthPack.GetAmountToDrop());
 
             healthPack.Destroy();
 

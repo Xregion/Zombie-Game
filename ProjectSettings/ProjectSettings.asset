@@ -14,7 +14,7 @@ PlayerSettings:
   companyName: Xregion Games
   productName: America's Favorite Zombie Game Show
   defaultCursor: {fileID: 2800000, guid: 33b9b85f8f77ec14b9aab193b96a88a6, type: 3}
-  cursorHotspot: {x: 0, y: 0}
+  cursorHotspot: {x: 25, y: 25}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1

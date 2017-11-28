@@ -60,7 +60,8 @@ public class SaveConsole : Interactable {
         {
             yield return new WaitForEndOfFrame();
             cam.orthographicSize += zoomSpeed;
-            cam.transform.rotation = Quaternion.Euler(0, 0, 0);
+            Vector3 newRot = Vector3.Lerp(cam.transform.rotation.eulerAngles, new Vector3(0,0,0), 0.2f);
+            cam.transform.rotation = Quaternion.Euler(newRot);
             if (cam.orthographicSize > originalCamSize)
                 cam.orthographicSize = originalCamSize;
         }

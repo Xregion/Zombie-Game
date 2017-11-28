@@ -6,6 +6,7 @@ public class TitleScreen : MonoBehaviour
 {
     public void NewGame()
     {
+        SaveManager.data.CharacterName = "Kyle";
         SaveManager.data.Scene = SceneManager.GetActiveScene().buildIndex + 1;
         SaveManager.data.Health = 50;
         SaveManager.data.XPosition = 20;
