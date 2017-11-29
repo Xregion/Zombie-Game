@@ -4879,9 +4879,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 1
-  sceneToLoad: 0
-  playerPos: {x: 0, y: 0}
-  playerRot: 0
+  sceneToLoad: Second Floor
+  playerPos: {x: -19.75, y: 11}
+  playerRot: 270
 --- !u!61 &1013299929
 BoxCollider2D:
   m_ObjectHideFlags: 0

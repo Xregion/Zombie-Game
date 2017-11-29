@@ -4350,7 +4350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionDistance: 1
   sceneToLoad: Toy Store
-  playerPos: {x: 25.67, y: -7}
+  playerPos: {x: 24, y: -8.09894}
   playerRot: 180
 --- !u!61 &467163180
 BoxCollider2D:

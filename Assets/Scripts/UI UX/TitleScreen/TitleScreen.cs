@@ -1,9 +1,21 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 public class TitleScreen : MonoBehaviour
 {
+
+    public GameObject saveScreen;
+
+    void Start()
+    {
+        //SaveManager.data.ClearSaves();
+        Button[] saveFiles = saveScreen.GetComponentsInChildren<Button>();
+        HelperFunctions.PopulateSaveButtons(saveFiles);
+    }
+
     public void NewGame()
     {
         SaveManager.data.CharacterName = "Kyle";
@@ -18,6 +30,7 @@ public class TitleScreen : MonoBehaviour
         SaveManager.data.MannequinnWasShot = false;
         SaveManager.data.IsPowerOn = true;
         SaveManager.data.ZombieSpawnPoints = new Dictionary<SerializableVector3, bool>();
+        SaveManager.data.TimePlayed = 0;
         SceneManager.LoadScene(SaveManager.data.Scene);
     }
 

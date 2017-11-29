@@ -2,7 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SaveScreen : MonoBehaviour {
+public class SaveScreen : MonoBehaviour
+{
+    public GameObject saveScreen;
 
     GameObject player;
     SaveConsole console;
@@ -14,7 +16,8 @@ public class SaveScreen : MonoBehaviour {
         player = LoadManager.instance.GetPlayer();
         savePrompt = GetComponentInChildren<Image>();
         Enable(false);
-        saveFiles = transform.GetChild(1).GetComponentsInChildren<Button>();
+        saveFiles = saveScreen.GetComponentsInChildren<Button>();
+        HelperFunctions.PopulateSaveButtons(saveFiles);
     }
 
     public void Enable(bool enabled)
@@ -22,8 +25,6 @@ public class SaveScreen : MonoBehaviour {
         savePrompt.gameObject.SetActive(enabled);
         if (!enabled)
             transform.GetChild(1).gameObject.SetActive(enabled);
-        //else
-        //    PopulateSaveButtons();
     }
 
     public void SetConsole(SaveConsole sc)
@@ -31,7 +32,7 @@ public class SaveScreen : MonoBehaviour {
         console = sc;
     }
 
-    public void SaveGame (int file)
+    public void SaveGame(int file)
     {
         SaveManager.data.Scene = SceneManager.GetActiveScene().buildIndex;
         SaveManager.data.Health = player.GetComponent<PlayerController>().GetCurrentHealth();
@@ -42,34 +43,14 @@ public class SaveScreen : MonoBehaviour {
         SaveManager.data.ZRotation = player.transform.rotation.z;
         SaveManager.data.PlayerIsInCombat = false;
         SaveManager.data.SaveData(file);
-        //PopulateSaveButtons();
+        HelperFunctions.PopulateSaveButtons(saveFiles);
         Cancel();
     }
 
-    public void Cancel ()
+    public void Cancel()
     {
         Enable(false);
         if (console != null)
             console.StopInteracting();
-    }
-
-    void PopulateSaveButtons()
-    {
-        int currentFile = SaveManager.data.LoadedFile;
-        if (currentFile != 0)
-            saveFiles[currentFile - 1].GetComponentInChildren<Text>().text = SaveManager.data.CharacterName + " - " + SceneManager.GetSceneByBuildIndex(SaveManager.data.Scene).name;
-        for (int i = 0; i < saveFiles.Length; i++)
-        {
-            if (i == currentFile - 1)
-                continue;
-            else
-            {
-                if (SaveManager.data.LoadData(i + 1))
-                    saveFiles[i].GetComponentInChildren<Text>().text = SaveManager.data.CharacterName + " - " + SceneManager.GetSceneByBuildIndex(SaveManager.data.Scene).name;
-                else
-                    continue;
-            }
-        }
-        SaveManager.data.LoadData(currentFile);
     }
 }

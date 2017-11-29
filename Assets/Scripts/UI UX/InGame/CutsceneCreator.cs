@@ -2,7 +2,8 @@
 using UnityEditor;
 
 [CustomEditor(typeof(Cutscene))]
-public class CutsceneCreator : Editor {
+public class CutsceneCreator : Editor
+{
 
     Camera cam;
 
@@ -15,7 +16,7 @@ public class CutsceneCreator : Editor {
     {
         DrawDefaultInspector();
 
-        Cutscene cutscene = (Cutscene) target;
+        Cutscene cutscene = (Cutscene)target;
 
         if (GUILayout.Button("Create Next Frame at Camera Position"))
         {

@@ -4,7 +4,7 @@ using System;
 [RequireComponent(typeof(ActorMotor))]
 public class PlayerController : MonoBehaviour, IDamageable {
 
-    public event Action<float> HealthChangeEvent; // called when the health of the player either increases or decreases
+    public event Action HealthChangeEvent; // called when the health of the player either increases or decreases
     public event Action DeathEvent; // called when the player dies
 
     public float normalMoveSpeed; // the normal movement speed set in the inspector
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
     {
         currentHealth = SaveManager.data.Health;
         if (HealthChangeEvent != null)
-            HealthChangeEvent(currentHealth - totalHealth);
+            HealthChangeEvent();
         ps = FindObjectOfType<PauseScreen>();
         ps.PausedEvent += Pause;
     }
@@ -84,10 +84,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 }
             }
             else if (Input.GetButtonDown("Melee") && !IsPerformingAction() && !isMoving) {
-                gunController.MeleeAttack();
-                animations.SetIsMeleeing(true);
-                movSpeed = 0;
-                gunController.SetRedDot(false);
+                //gunController.MeleeAttack();
+                //animations.SetIsMeleeing(true);
+                //movSpeed = 0;
+                //gunController.SetRedDot(false);
             }
             else if (Input.GetButton("Run") && !IsPerformingAction())
             {
@@ -101,6 +101,8 @@ public class PlayerController : MonoBehaviour, IDamageable {
                 movSpeed = normalMoveSpeed;
             }
         }
+
+        SaveManager.data.TimePlayed += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -138,7 +140,7 @@ public class PlayerController : MonoBehaviour, IDamageable {
     {
         currentHealth -= damage;
         if (HealthChangeEvent != null)
-            HealthChangeEvent(-damage);
+            HealthChangeEvent();
 
         SaveManager.data.Health = currentHealth;
 
@@ -172,8 +174,10 @@ public class PlayerController : MonoBehaviour, IDamageable {
         if (currentHealth > totalHealth)
             currentHealth = totalHealth;
 
+        SaveManager.data.Health = currentHealth;
+
         if (HealthChangeEvent != null)
-            HealthChangeEvent(health);
+            HealthChangeEvent();
     }
 
     public void ResetMoveSpeed()
@@ -196,8 +200,6 @@ public class PlayerController : MonoBehaviour, IDamageable {
             Heal(healthPack.GetAmountToDrop());
 
             healthPack.Destroy();
-
-            SaveManager.data.Health = currentHealth;
         }
         else if (collision.CompareTag("Ammo"))
         {

@@ -49,7 +49,7 @@ public class PlayerAnimation : Animations {
         ResetMoveSpeed();
     }
 
-    public void ResetMoveSpeed ()
+    void ResetMoveSpeed ()
     {
         player.ResetMoveSpeed();
     }

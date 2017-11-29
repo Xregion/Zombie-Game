@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System.Text;
 
 public class SaveManager : MonoBehaviour {
 
@@ -194,6 +195,21 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
+    float timePlayed;
+
+    public float TimePlayed
+    {
+        get
+        {
+            return timePlayed;
+        }
+
+        set
+        {
+            timePlayed = value;
+        }
+    }
+
     int loadedFile;
 
     public int LoadedFile
@@ -223,7 +239,7 @@ public class SaveManager : MonoBehaviour {
             playerIsInCombat = value;
         }
     }
-#endregion
+    #endregion
 
     void Awake()
     {
@@ -268,7 +284,7 @@ public class SaveManager : MonoBehaviour {
         }
 
         Data data = new Data(characterName, scene, health, bulletsRemaining, bulletsInChamber, 
-            xPosition, yPosition, zRotation, items, mannequinnWasShot, isPowerOn, zombieSpawnPoints);
+            xPosition, yPosition, zRotation, items, mannequinnWasShot, isPowerOn, zombieSpawnPoints, timePlayed);
 
         bf.Serialize(file, data);
         file.Close();
@@ -315,6 +331,7 @@ public class SaveManager : MonoBehaviour {
             mannequinnWasShot = data.mannequinWasShot;
             isPowerOn = data.isPowerOn;
             zombieSpawnPoints = data.zombieSpawnPoints;
+            timePlayed = data.timePlayed;
 
             file.Close();
             loadedFile = fileNumber;
@@ -322,6 +339,69 @@ public class SaveManager : MonoBehaviour {
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Finds the data for a file without loading it into the instance of the data object. Returns the data in a string format.
+    /// </summary>
+    /// <param name="fileNumber"></param>
+    /// <returns></returns>
+    public string GetSaveData(int fileNumber)
+    {
+        String filePath;
+        switch (fileNumber)
+        {
+            case 1:
+                filePath = fileOne;
+                break;
+            case 2:
+                filePath = fileTwo;
+                break;
+            case 3:
+                filePath = fileThree;
+                break;
+            default:
+                Debug.LogError("Invalid File Number");
+                return "Empty";
+        }
+        if (File.Exists(filePath))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(filePath, FileMode.Open);
+            Data data = (Data)bf.Deserialize(file);
+            file.Close();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Name: " + data.name);
+            sb.AppendLine("Scene: " + data.currentScene);
+            sb.AppendLine("Health: " + data.currentHealth);
+            sb.AppendLine("Bullets Remaining: " + data.bulletsRemaining);
+            sb.AppendLine("Bullets in Chamber: " + data.bulletsInChamber);
+            sb.AppendLine("Position X: " + data.xPos);
+            sb.AppendLine("Position Y: " + data.yPos);
+            sb.AppendLine("Rotation: " + data.zRot);
+            sb.AppendLine("Items: ");
+            foreach (String item in data.currentItems)
+            {
+                if (item == data.currentItems[data.currentItems.Count - 1])
+                    sb.Append(item);
+                else
+                    sb.Append(item + ", ");
+            }
+            sb.AppendLine("Time Played: " + (int) data.timePlayed);
+            return sb.ToString();
+        }
+
+        return "Empty";
+    }
+
+    public void ClearSaves()
+    {
+        if (File.Exists(fileOne))
+            File.Delete(fileOne);
+        if (File.Exists(fileTwo))
+            File.Delete(fileTwo);
+        if (File.Exists(fileThree))
+            File.Delete(fileThree);
     }
 
     [Serializable]
@@ -339,9 +419,10 @@ public class SaveManager : MonoBehaviour {
         public bool mannequinWasShot;
         public bool isPowerOn;
         public Dictionary<SerializableVector3, bool> zombieSpawnPoints;
+        public float timePlayed;
 
         public Data(string characterName, int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, 
-            List<string> items, bool _mannequinWasShot, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints)
+            List<string> items, bool _mannequinWasShot, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints, float time)
         {
             name = characterName;
             currentScene = scene;
@@ -355,6 +436,7 @@ public class SaveManager : MonoBehaviour {
             mannequinWasShot = _mannequinWasShot;
             isPowerOn = _isPowerOn;
             zombieSpawnPoints = spawnPoints;
+            timePlayed = time;
         }
     }
 }

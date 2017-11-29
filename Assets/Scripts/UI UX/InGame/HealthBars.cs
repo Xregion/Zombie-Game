@@ -8,7 +8,6 @@ public class HealthBars : MonoBehaviour {
     public Color zeroHealthColor;
 
     PlayerController actor;
-    float currentHealth;
     Slider healthBar;
 
 	void Awake ()
@@ -17,14 +16,13 @@ public class HealthBars : MonoBehaviour {
         actor = GetComponentInParent<Canvas>().gameObject.GetComponentInParent<PlayerController>();
         actor.HealthChangeEvent += HealthChange;
         actor.DeathEvent += PlayerDied;
-        currentHealth = actor.GetCurrentHealth();
-        healthBar.value = actor.totalHealth;
+        HealthChange();
     }
 	
-	void HealthChange (float change)
+	void HealthChange ()
     {
-        healthBar.value += (change / actor.totalHealth);
-        currentHealth = actor.GetCurrentHealth();
+        float currentHealth = actor.GetCurrentHealth();
+        healthBar.value = currentHealth / actor.totalHealth;
         fillImage.color = Color.Lerp(zeroHealthColor, fullHealthColor, currentHealth / actor.totalHealth);
     }
 

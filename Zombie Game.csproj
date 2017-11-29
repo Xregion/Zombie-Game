@@ -268,6 +268,7 @@
     <Compile Include="Assets\Scripts\Managers\SpawnPointManager.cs" />
     <Compile Include="Assets\Scripts\Managers\WaveManager.cs" />
     <Compile Include="Assets\Scripts\Misc\EndDemo.cs" />
+    <Compile Include="Assets\Scripts\Misc\HelperFunctions.cs" />
     <Compile Include="Assets\Scripts\Misc\LoadDemoTitleScreen.cs" />
     <Compile Include="Assets\Scripts\Misc\LoadTitleScreen.cs" />
     <Compile Include="Assets\Scripts\Misc\SerializableVector3.cs" />

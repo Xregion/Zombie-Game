@@ -42,7 +42,7 @@ EditorBuildSettings:
     path: Assets/scenes/Full Game/Toy Store.unity
     guid: e324ffea26c52f4449318aa00625c889
   - enabled: 1
-    path: Assets/scenes/Full Game/Restaruant Basement.unity
+    path: Assets/scenes/Full Game/Restaurant Basement.unity
     guid: cbbd97fa6f8cb9a4aa8e57b66b1f721f
   - enabled: 1
     path: Assets/scenes/Full Game/First Floor.unity

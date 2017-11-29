@@ -1,14 +1,24 @@
-WebGL
+WindowsStandalone
 SceneListBegin?
-Assets/scenes/Demo/LoadScene Demo.unity
-Assets/scenes/Demo/demo title screen.unity
-Assets/scenes/Demo/Roof Demo.unity
-Assets/scenes/Demo/Third Floor Demo.unity
-Assets/scenes/Demo/Clothing Store Demo.unity
-Assets/scenes/Demo/Second Floor Demo.unity
-Assets/scenes/Demo/Backroom Demo.unity
+Assets/scenes/Full Game/LoadScene.unity
+Assets/scenes/Full Game/title screen.unity
+Assets/scenes/Full Game/Roof.unity
+Assets/scenes/Full Game/Third Floor.unity
+Assets/scenes/Full Game/Clothing Store.unity
+Assets/scenes/Full Game/Backroom.unity
+Assets/scenes/Full Game/Food Court.unity
+Assets/scenes/Full Game/Gun Store.unity
+Assets/scenes/Full Game/Restaurant.unity
+Assets/scenes/Full Game/Kitchen.unity
+Assets/scenes/Full Game/Second Floor.unity
+Assets/scenes/Full Game/Toy Store.unity
+Assets/scenes/Full Game/Restaurant Basement.unity
+Assets/scenes/Full Game/First Floor.unity
+Assets/scenes/Full Game/Arcade.unity
+Assets/scenes/Full Game/Parking Garage.unity
+Assets/scenes/Full Game/main.unity
 SceneListEnd?
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TitleScreen
+7d6e2a4d175e13e47e051628e9a58504 Assembly-CSharp.dll:.TitleScreen
 70f610e28e0abb6ab3162195c6a9e00a Assembly-CSharp.dll:.InspectableObject
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FlameFlicker
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
@@ -24,7 +34,6 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 af723155c251fcfa0e66530a75f3ea4c UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 3e9fed735b21ab34c638dc0c941e54ba Assembly-CSharp.dll:.LockedDoor
-167ac7733aef84c140e745eebd370d32 Assembly-CSharp.dll:.Controller2D
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerAnimation
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -119,7 +128,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-8973d7b4e3c18ca15a59bc4d4c6975de Assembly-CSharp.dll:.MoveableObject
+a3d1b54bf13557170de566f67230291b Assembly-CSharp.dll:.MoveableObject
 a1281e4e6893bd2b27a4348f99d20555 Assembly-CSharp.dll:.EndDemo
 6d41e794513bc2f29471b8dbb36e88dd UnityEngine.AR.dll:UnityEngine.XR.Tango.TangoSpatialMapper
 8aacce9aedb7c2be8ff46fb105f37e5f Assembly-CSharp.dll:.WaveManager
@@ -131,6 +140,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LoadDemoTitleScreen
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PauseScreen
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Tentacle
 54e930366a78a54210098a482a7b786f Assembly-CSharp.dll:.KeyItem
 70f610e28e0abb6ab3162195c6a9e00a Assembly-CSharp.dll:.AirConditioner
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
@@ -139,7 +149,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 ba99d13b5f35be81aef4183e43cfec52 Assembly-CSharp.dll:.BasicZombieWaves
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.InteractionText
 5a5dc5969b7107eeaf0388944518c00e Assembly-CSharp.dll:.HealthBars
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SaveScreen
+7d6e2a4d175e13e47e051628e9a58504 Assembly-CSharp.dll:.SaveScreen
 333be3c2b20d7b903bf2bcd4c56e255c Assembly-CSharp.dll:.Doorway
 d0f9047e95e619dac6f705064f74a220 Assembly-CSharp.dll:.BasicZombieMain
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EnemyManager
@@ -163,12 +173,15 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RemainingEnemies
 7b6dbeb4eb6b7c123a380ab786c24674 Assembly-CSharp.dll:.GunController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LoadTitleScreen
+fcd12010585eea75407c5fb0a342a49d Assembly-CSharp.dll:.Refill
+580b72726c7797bd9db5faa1f14f71f5 Assembly-CSharp.dll:.Cutscene
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Item
 ab80d78aa839fb7010f91c41985ef024 Assembly-CSharp.dll:.EnemySpawner
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Mannequin
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -179,7 +192,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EnemyAnimations
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SaveManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ActorMotor
-167ac7733aef84c140e745eebd370d32 Assembly-CSharp.dll:.RaycastController
 942f9c0b4bde4dca4f88891a5168e1b8 Assembly-CSharp.dll:.MoveToAnyLevel
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DeathScreen
 a70efe05f2af5a95a5c25f5c3c0b4286 Assembly-CSharp.dll:.LoadManager
@@ -188,3 +200,4 @@ ad0843dc5844295eb779e75691b6f0e1 Assembly-CSharp.dll:.DestructableObject
 6cad39cd83e9b6ea5cbf29b0f36e4b57 Assembly-CSharp.dll:.SaveConsole
 ba99d13b5f35be81aef4183e43cfec52 Assembly-CSharp.dll:.AIController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraController
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HelperFunctions
