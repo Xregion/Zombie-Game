@@ -15,6 +15,8 @@ public class GunController : MonoBehaviour {
     public int bulletDamage;
     public int meleeDamage;
     public float critChance;
+    public AudioClip fireClip;
+    public AudioClip reloadClip;
 
     bool isReloading;
     bool isFiring;
@@ -27,9 +29,11 @@ public class GunController : MonoBehaviour {
     RaycastHit2D hit;
     int bulletsFired;
     int bulletsInChamber;
+    AudioSource gunAudio;
 
     void Start()
     {
+        gunAudio = GetComponent<AudioSource>();
         gunCollider = GetComponent<BoxCollider2D>();
         gunCollider.enabled = false;
         muzzleFlash.gameObject.SetActive(false);
@@ -51,6 +55,9 @@ public class GunController : MonoBehaviour {
 
     public void Fire ()
     {
+        gunAudio.Stop();
+        gunAudio.clip = fireClip;
+        gunAudio.Play();
         muzzleFlash.gameObject.SetActive(true);
         isFiring = true;
         if (hit.collider != null)
@@ -88,6 +95,9 @@ public class GunController : MonoBehaviour {
 
         if (totalBulletsRemaining > 0)
         {
+            gunAudio.Stop();
+            gunAudio.clip = reloadClip;
+            gunAudio.Play();
             fullChamber = false;
             isReloading = true;
             chamberIsEmpty = false;

@@ -1,22 +1,12 @@
-WindowsStandalone
+WebGL
 SceneListBegin?
-Assets/scenes/Full Game/LoadScene.unity
-Assets/scenes/Full Game/title screen.unity
-Assets/scenes/Full Game/Roof.unity
-Assets/scenes/Full Game/Third Floor.unity
-Assets/scenes/Full Game/Clothing Store.unity
-Assets/scenes/Full Game/Backroom.unity
-Assets/scenes/Full Game/Food Court.unity
-Assets/scenes/Full Game/Gun Store.unity
-Assets/scenes/Full Game/Restaurant.unity
-Assets/scenes/Full Game/Kitchen.unity
-Assets/scenes/Full Game/Second Floor.unity
-Assets/scenes/Full Game/Toy Store.unity
-Assets/scenes/Full Game/Restaurant Basement.unity
-Assets/scenes/Full Game/First Floor.unity
-Assets/scenes/Full Game/Arcade.unity
-Assets/scenes/Full Game/Parking Garage.unity
-Assets/scenes/Full Game/main.unity
+Assets/scenes/Demo/LoadScene Demo.unity
+Assets/scenes/Demo/demo title screen.unity
+Assets/scenes/Demo/Roof Demo.unity
+Assets/scenes/Demo/Third Floor Demo.unity
+Assets/scenes/Demo/Clothing Store Demo.unity
+Assets/scenes/Demo/Second Floor Demo.unity
+Assets/scenes/Demo/Backroom Demo.unity
 SceneListEnd?
 7d6e2a4d175e13e47e051628e9a58504 Assembly-CSharp.dll:.TitleScreen
 70f610e28e0abb6ab3162195c6a9e00a Assembly-CSharp.dll:.InspectableObject
@@ -171,7 +161,8 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BulletsText
 6d41e794513bc2f29471b8dbb36e88dd UnityEngine.AR.dll:UnityEngine.XR.Tango.TangoSpatialMapper
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RemainingEnemies
-7b6dbeb4eb6b7c123a380ab786c24674 Assembly-CSharp.dll:.GunController
+bf02f2278d19145e68e701e309192a87 Assembly-CSharp.dll:.GunController
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HelperFunctions
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LoadTitleScreen
 fcd12010585eea75407c5fb0a342a49d Assembly-CSharp.dll:.Refill
 580b72726c7797bd9db5faa1f14f71f5 Assembly-CSharp.dll:.Cutscene
@@ -200,4 +191,3 @@ ad0843dc5844295eb779e75691b6f0e1 Assembly-CSharp.dll:.DestructableObject
 6cad39cd83e9b6ea5cbf29b0f36e4b57 Assembly-CSharp.dll:.SaveConsole
 ba99d13b5f35be81aef4183e43cfec52 Assembly-CSharp.dll:.AIController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraController
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.HelperFunctions
