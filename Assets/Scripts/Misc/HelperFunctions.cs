@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using System;
 
-public class HelperFunctions : MonoBehaviour {
+public class HelperFunctions {
 
     public static void PopulateSaveButtons(Button[] saveFiles)
     {
