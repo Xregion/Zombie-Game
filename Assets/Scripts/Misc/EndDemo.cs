@@ -4,28 +4,20 @@ public class EndDemo : MonoBehaviour {
 
     public GameObject endScreen;
 
-    GameObject[] enemies;
-    int numberOfEnemies;
+    TentacleBoss boss;
 
 	void Start () {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject e in enemies)
-        {
-            e.GetComponent<BasicZombieMain>().Died += ZombieDied;
-            numberOfEnemies++;
-        }
+        boss = FindObjectOfType<TentacleBoss>();
+        boss.deathEvent += BossKilled;
 	}
 
-    private void ZombieDied()
+    void BossKilled()
     {
-        numberOfEnemies--;
-        if (numberOfEnemies <= 0)
-        {
-            PauseScreen ps = FindObjectOfType<PauseScreen>();
-            ps.SendOutPauseEvent();
-            ps.EnablePause(false);
-            endScreen.SetActive(true);
-        }
+        PauseScreen ps = FindObjectOfType<PauseScreen>();
+        ps.SendOutPauseEvent();
+        ps.EnablePause(false);
+        endScreen.SetActive(true);
+        boss.deathEvent -= BossKilled;
     }
 
     public void EndTheDemo()

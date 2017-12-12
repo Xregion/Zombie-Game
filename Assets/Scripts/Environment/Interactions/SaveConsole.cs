@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class SaveConsole : Interactable {
 
+    const float ZOOM_DELAY = 0.02f;
+    const float LERP_AMOUNT = 0.2f;
+
     Camera cam;
     CameraController camController;
     SaveScreen saveScreen;
@@ -36,9 +39,9 @@ public class SaveConsole : Interactable {
         while (cam.orthographicSize > 0.5f)
         {
             zooming = true;
-            yield return new WaitForEndOfFrame();
-            Vector3 newPos = Vector3.Lerp(cam.transform.position, consolePos, 0.2f);
-            Vector3 newRot = Vector3.Lerp(cam.transform.rotation.eulerAngles, consoleRot, 0.2f);
+            yield return new WaitForSeconds(ZOOM_DELAY);
+            Vector3 newPos = Vector3.Lerp(cam.transform.position, consolePos, LERP_AMOUNT);
+            Vector3 newRot = Vector3.Lerp(cam.transform.rotation.eulerAngles, consoleRot, LERP_AMOUNT);
             newPos.z = cam.transform.position.z;
             newRot.x = 0;
             newRot.y = 0;
@@ -58,9 +61,9 @@ public class SaveConsole : Interactable {
     {
         while (cam.orthographicSize < originalCamSize)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(ZOOM_DELAY);
             cam.orthographicSize += zoomSpeed;
-            Vector3 newRot = Vector3.Lerp(cam.transform.rotation.eulerAngles, new Vector3(0,0,0), 0.2f);
+            Vector3 newRot = Vector3.Lerp(cam.transform.rotation.eulerAngles, new Vector3(0,0,0), LERP_AMOUNT);
             cam.transform.rotation = Quaternion.Euler(newRot);
             if (cam.orthographicSize > originalCamSize)
                 cam.orthographicSize = originalCamSize;

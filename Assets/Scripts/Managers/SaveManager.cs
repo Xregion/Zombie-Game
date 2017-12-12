@@ -150,6 +150,21 @@ public class SaveManager : MonoBehaviour {
         }
     }
 
+    bool isTentacleBossDead;
+
+    public bool IsTentacleBossDead
+    {
+        get
+        {
+            return isTentacleBossDead;
+        }
+
+        set
+        {
+            isTentacleBossDead = value;
+        }
+    }
+
     bool mannequinnWasShot;
 
     public bool MannequinnWasShot
@@ -284,7 +299,7 @@ public class SaveManager : MonoBehaviour {
         }
 
         Data data = new Data(characterName, scene, health, bulletsRemaining, bulletsInChamber, 
-            xPosition, yPosition, zRotation, items, mannequinnWasShot, isPowerOn, zombieSpawnPoints, timePlayed);
+            xPosition, yPosition, zRotation, items, isTentacleBossDead, mannequinnWasShot, isPowerOn, zombieSpawnPoints, timePlayed);
 
         bf.Serialize(file, data);
         file.Close();
@@ -328,6 +343,7 @@ public class SaveManager : MonoBehaviour {
             yPosition = data.yPos;
             zRotation = data.zRot;
             items = data.currentItems;
+            isTentacleBossDead = data.isTentacleBossDead;
             mannequinnWasShot = data.mannequinWasShot;
             isPowerOn = data.isPowerOn;
             zombieSpawnPoints = data.zombieSpawnPoints;
@@ -416,13 +432,14 @@ public class SaveManager : MonoBehaviour {
         public float yPos;
         public float zRot;
         public List<string> currentItems;
+        public bool isTentacleBossDead;
         public bool mannequinWasShot;
         public bool isPowerOn;
         public Dictionary<SerializableVector3, bool> zombieSpawnPoints;
         public float timePlayed;
 
         public Data(string characterName, int scene, int health, int bullets, int chamber, float xPosition, float yPosition, float zRotation, 
-            List<string> items, bool _mannequinWasShot, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints, float time)
+            List<string> items, bool _isTentacleBossDead, bool _mannequinWasShot, bool _isPowerOn, Dictionary<SerializableVector3, bool> spawnPoints, float time)
         {
             name = characterName;
             currentScene = scene;
@@ -434,6 +451,7 @@ public class SaveManager : MonoBehaviour {
             zRot = zRotation;
             currentItems = items;
             mannequinWasShot = _mannequinWasShot;
+            isTentacleBossDead = _isTentacleBossDead;
             isPowerOn = _isPowerOn;
             zombieSpawnPoints = spawnPoints;
             timePlayed = time;
