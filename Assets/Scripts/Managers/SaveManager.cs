@@ -269,9 +269,9 @@ public class SaveManager : MonoBehaviour {
         }
 
         filePath = Application.persistentDataPath;
-        fileOne = filePath + "/GameDataOne.zomb";
-        fileTwo = filePath + "/GameDataTwo.zomb";
-        fileThree = filePath + "/GameDataThree.zomb";
+        fileOne = filePath + "/GameDataOne.dat";
+        fileTwo = filePath + "/GameDataTwo.dat";
+        fileThree = filePath + "/GameDataThree.dat";
     }
 
     /// <summary>
@@ -282,21 +282,12 @@ public class SaveManager : MonoBehaviour {
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file;
-        switch (fileNumber)
-        {
-            case 1:
-                file = File.Create(fileOne);
-                break;
-            case 2:
-                file = File.Create(fileTwo);
-                break;
-            case 3:
-                file = File.Create(fileThree);
-                break;
-            default:
-                Debug.LogError("File number outside of 1-3");
-                return;
-        }
+        String filePath = PickFile(fileNumber);
+
+        if (filePath != "Empty")
+            file = File.Create(filePath);
+        else
+            return;
 
         Data data = new Data(characterName, scene, health, bulletsRemaining, bulletsInChamber, 
             xPosition, yPosition, zRotation, items, isTentacleBossDead, mannequinnWasShot, isPowerOn, zombieSpawnPoints, timePlayed);
@@ -312,22 +303,8 @@ public class SaveManager : MonoBehaviour {
     /// <returns></returns>
     public bool LoadData(int fileNumber)
     {
-        String filePath;
-        switch (fileNumber)
-        {
-            case 1:
-                filePath = fileOne;
-                break;
-            case 2:
-                filePath = fileTwo;
-                break;
-            case 3:
-                filePath = fileThree;
-                break;
-            default:
-                Debug.LogError("File number outside of 1-3");
-                return false;
-        }
+        String filePath = PickFile(fileNumber);
+
         if (File.Exists(filePath))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -364,22 +341,8 @@ public class SaveManager : MonoBehaviour {
     /// <returns></returns>
     public string GetSaveData(int fileNumber)
     {
-        String filePath;
-        switch (fileNumber)
-        {
-            case 1:
-                filePath = fileOne;
-                break;
-            case 2:
-                filePath = fileTwo;
-                break;
-            case 3:
-                filePath = fileThree;
-                break;
-            default:
-                Debug.LogError("Invalid File Number");
-                return "Empty";
-        }
+        String filePath = PickFile(fileNumber);
+
         if (File.Exists(filePath))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -408,6 +371,28 @@ public class SaveManager : MonoBehaviour {
         }
 
         return "Empty";
+    }
+
+    string PickFile(int fileNumber)
+    {
+        string filePath = "Empty";
+        switch (fileNumber)
+        {
+            case 1:
+                filePath = fileOne;
+                break;
+            case 2:
+                filePath = fileTwo;
+                break;
+            case 3:
+                filePath = fileThree;
+                break;
+            default:
+                Debug.LogError("Invalid File Number");
+                break;
+        }
+
+        return filePath;
     }
 
     public void ClearSaves()

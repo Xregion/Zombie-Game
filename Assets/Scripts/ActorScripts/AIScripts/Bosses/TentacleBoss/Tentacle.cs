@@ -10,13 +10,13 @@ public class Tentacle : MonoBehaviour, IDamageable {
     void Start()
     {
         tentacleBoss = GetComponentInParent<TentacleBoss>();
-        tentacleBoss.deathEvent += Die;
+        tentacleBoss.DeathEvent += Die;
     }
 
     void Die()
     {
         isDead = true;
-        tentacleBoss.deathEvent -= Die;
+        tentacleBoss.DeathEvent -= Die;
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -30,12 +30,7 @@ public class Tentacle : MonoBehaviour, IDamageable {
         return tentacleBoss.TakeDamage(amount);
     }
 
-    public void StartMovingTentacle (int direction, float distance, float speed, float delay, bool isAttacking)
-    {
-        StartCoroutine(MoveTentacle(direction, distance, speed, delay, isAttacking));
-    }
-
-    IEnumerator MoveTentacle(int direction, float distance, float speed, float delay, bool isAttacking)
+    public IEnumerator MoveTentacle(int direction, float distance, float speed, float delay, bool isAttacking)
     {
         bool isMoving = true;
         float originalPosition = transform.localPosition.y;
@@ -46,10 +41,10 @@ public class Tentacle : MonoBehaviour, IDamageable {
             float distanceMoved = Mathf.Abs(transform.localPosition.y - originalPosition);
             if (distanceMoved > distance)
             {
-                if (transform.localPosition.y >= distance - 0.1)
+                if (transform.localPosition.y >= distance - 0.5)
                 {
                     yield return new WaitForSeconds(delay);
-                    StartCoroutine(MoveTentacle(-1, distance, speed, delay, false));
+                    StartCoroutine(MoveTentacle(-direction, distance, speed, delay, false));
                 }
                 isMoving = false;
             }

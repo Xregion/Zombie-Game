@@ -8,7 +8,7 @@ public class EndDemo : MonoBehaviour {
 
 	void Start () {
         boss = FindObjectOfType<TentacleBoss>();
-        boss.deathEvent += BossKilled;
+        boss.DeathEvent += BossKilled;
 	}
 
     void BossKilled()
@@ -17,7 +17,7 @@ public class EndDemo : MonoBehaviour {
         ps.SendOutPauseEvent();
         ps.EnablePause(false);
         endScreen.SetActive(true);
-        boss.deathEvent -= BossKilled;
+        boss.DeathEvent -= BossKilled;
     }
 
     public void EndTheDemo()

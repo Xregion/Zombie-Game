@@ -4,7 +4,7 @@ using System.Collections;
 
 public class DeathScreen : MonoBehaviour {
 
-    const float FADE_SPEED = 0.003f;
+    const float FADE_SPEED = 0.005f;
 
     GameObject player;
     GameObject panel;

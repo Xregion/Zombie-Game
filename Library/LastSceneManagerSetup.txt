@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scenes/Full Game/Backroom.unity
+- path: Assets/scenes/Full Game/LoadScene.unity
   isLoaded: 1
   isActive: 1

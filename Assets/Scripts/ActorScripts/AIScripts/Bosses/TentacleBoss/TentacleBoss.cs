@@ -6,19 +6,21 @@ using System.Collections.Generic;
 
 public class TentacleBoss : MonoBehaviour, IDamageable {
 
-    public event Action deathEvent;
+    public event Action DeathEvent;
 
     const float ENRAGE_PERCENT = 0.5f;
-    const float SPEED = 5f;
+    //const float SPEED = 7.5f;
     const float MOVE_DISTANCE = 3.5f;
     const float TENTACLE_RETREAT_DELAY = 0.5f;
     const float DAMAGE_DELAY = 0.5f;
     const float MAX_HEALTH = 150;
+    const string BOSS_NAME = "Tentacle Beast";
 
     public GameObject bossScreen;
     public GameObject blockingTentacle;
 
-    float health = MAX_HEALTH;
+    float currentHealth = MAX_HEALTH;
+    float speed = 7.5f;
     int attackPower = 5;
     int numOfTentaclesToAttack;
     bool isEnraged;
@@ -27,7 +29,7 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
     bool isDead;
     bool canDamagePlayer = true;
     AudioSource audioSource;
-    Transform[] tentacles;
+    Tentacle[] tentacles;
     Slider healthSlider;
     GameObjectShake shaker;
 
@@ -37,11 +39,11 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
         if (!SaveManager.data.IsTentacleBossDead)
         {
             bossScreen.SetActive(true);
-            bossScreen.GetComponentInChildren<Text>().text = "Tentacle Beast";
+            bossScreen.GetComponentInChildren<Text>().text = BOSS_NAME;
             healthSlider = bossScreen.GetComponentInChildren<Slider>();
-            healthSlider.value = health / MAX_HEALTH;
-            numOfTentaclesToAttack = 2;
-            tentacles = GetComponentsInChildren<Transform>();
+            healthSlider.value = currentHealth / MAX_HEALTH;
+            numOfTentaclesToAttack = 3;
+            tentacles = GetComponentsInChildren<Tentacle>();
             audioSource = GetComponent<AudioSource>();
             ChooseTentacle();
         }
@@ -65,12 +67,12 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
         isAttacking = true;
         for (int i = 0; i < numOfTentaclesToAttack; i++)
         {
-            int tentacle = UnityEngine.Random.Range(1, tentacles.Length);
+            int tentacle = UnityEngine.Random.Range(0, tentacles.Length);
             while (tentaclesChosen.Contains(tentacle))
-                tentacle = UnityEngine.Random.Range(1, tentacles.Length);
+                tentacle = UnityEngine.Random.Range(0, tentacles.Length);
 
             tentaclesChosen.Add(tentacle);
-            tentacles[tentacle].GetComponent<Tentacle>().StartMovingTentacle(1, MOVE_DISTANCE, SPEED, TENTACLE_RETREAT_DELAY, true);
+            StartCoroutine(tentacles[tentacle].MoveTentacle(1, MOVE_DISTANCE, speed, TENTACLE_RETREAT_DELAY, true));
         }
     }
 
@@ -81,16 +83,17 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
 
     public bool TakeDamage(int amount)
     {
-        health -= amount;
-        healthSlider.value = health / MAX_HEALTH;
-        if (health / MAX_HEALTH <= ENRAGE_PERCENT && !isEnraged)
+        currentHealth -= amount;
+        healthSlider.value = currentHealth / MAX_HEALTH;
+        if (currentHealth / MAX_HEALTH <= ENRAGE_PERCENT && !isEnraged)
         {
             isEnraged = true;
             attackPower *= 2;
-            numOfTentaclesToAttack *= 2;
+            speed = 6f;
+            numOfTentaclesToAttack = 5;
             audioSource.Play();
         }
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             StartCoroutine(Die());
             return true;
@@ -114,7 +117,7 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player") && !isDead)
             DamagePlayer(collision);
     }
 
@@ -129,22 +132,22 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
 
     IEnumerator Die()
     {
-        if (deathEvent != null)
-            deathEvent();
+        if (DeathEvent != null)
+            DeathEvent();
 
+        healthSlider.fillRect = null;
+        isDead = true;
         SaveManager.data.IsTentacleBossDead = true;
         audioSource.Play();
         shaker.StartShake(audioSource.clip.length);
         yield return new WaitWhile(() => audioSource.isPlaying);
         blockingTentacle.SetActive(false);
-        isDead = true;
         gameObject.SetActive(false);
-        healthSlider.fillRect = null;
         bossScreen.SetActive(false);
     }
 
     public float GetBossHealth()
     {
-        return health / MAX_HEALTH;
+        return currentHealth / MAX_HEALTH;
     }
 }

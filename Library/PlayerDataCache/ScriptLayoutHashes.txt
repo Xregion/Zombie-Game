@@ -1,14 +1,24 @@
-WebGL
+WindowsStandalone
 SceneListBegin?
-Assets/scenes/Demo/LoadScene Demo.unity
-Assets/scenes/Demo/demo title screen.unity
-Assets/scenes/Demo/Roof Demo.unity
-Assets/scenes/Demo/Third Floor Demo.unity
-Assets/scenes/Demo/Clothing Store Demo.unity
-Assets/scenes/Demo/Second Floor Demo.unity
-Assets/scenes/Demo/Backroom Demo.unity
+Assets/scenes/Full Game/LoadScene.unity
+Assets/scenes/Full Game/title screen.unity
+Assets/scenes/Full Game/Roof.unity
+Assets/scenes/Full Game/Third Floor.unity
+Assets/scenes/Full Game/Clothing Store.unity
+Assets/scenes/Full Game/Backroom.unity
+Assets/scenes/Full Game/Food Court.unity
+Assets/scenes/Full Game/Gun Store.unity
+Assets/scenes/Full Game/Restaurant.unity
+Assets/scenes/Full Game/Kitchen.unity
+Assets/scenes/Full Game/Second Floor.unity
+Assets/scenes/Full Game/Toy Store.unity
+Assets/scenes/Full Game/Restaurant Basement.unity
+Assets/scenes/Full Game/First Floor.unity
+Assets/scenes/Full Game/Arcade.unity
+Assets/scenes/Full Game/Parking Garage.unity
+Assets/scenes/Full Game/main.unity
 SceneListEnd?
-7d6e2a4d175e13e47e051628e9a58504 Assembly-CSharp.dll:.TitleScreen
+d9f48357749648cda527df6234efa848 Assembly-CSharp.dll:.TitleScreen
 70f610e28e0abb6ab3162195c6a9e00a Assembly-CSharp.dll:.InspectableObject
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FlameFlicker
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
