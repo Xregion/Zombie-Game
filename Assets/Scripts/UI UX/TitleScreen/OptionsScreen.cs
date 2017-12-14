@@ -4,7 +4,8 @@ using UnityEngine.Audio;
 using System.Collections.Generic;
 
 public class OptionsScreen : MonoBehaviour {
-    
+
+    public GameObject optionScreen;
     public AudioMixer audioMixer;
     public Dropdown resolutionDropwdown;
     public Dropdown qualityDropdown;
@@ -45,6 +46,8 @@ public class OptionsScreen : MonoBehaviour {
         resolutionDropwdown.AddOptions(options);
         resolutionDropwdown.value = currentResolutionIndex;
         resolutionDropwdown.RefreshShownValue();
+
+        optionScreen.SetActive(false);
     }
 
     public void SetVolume(float volume)

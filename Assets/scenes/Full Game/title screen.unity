@@ -4118,7 +4118,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BackGroundColor: {r: 0.09558821, g: 0.09558821, b: 0.09558821, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -4627,28 +4627,27 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224359462422485504, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
+    - target: {fileID: 114381186850348440, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1780908554}
+    - target: {fileID: 224865333841923482, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -23.999996
+      value: -37.80581
       objectReference: {fileID: 0}
     - target: {fileID: 114825887526715024, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2012774421}
-    - target: {fileID: 224865333841923482, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
+    - target: {fileID: 224359462422485504, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -37.80581
+      value: -23.999996
       objectReference: {fileID: 0}
-    - target: {fileID: 114381186850348440, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1780908554}
-    m_RemovedComponents:
-    - {fileID: 222290348308557110, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb9ba9f2ec27d114abd3fd0cd3202cbd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &2012774421

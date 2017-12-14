@@ -421,7 +421,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224496350788267198}
-  - component: {fileID: 222290348308557110}
   - component: {fileID: 114079908418539400}
   m_Layer: 5
   m_Name: Options Screen
@@ -429,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1580317137964044
 GameObject:
   m_ObjectHideFlags: 1
@@ -583,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1843935930647748
 GameObject:
   m_ObjectHideFlags: 1
@@ -884,6 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9f50cd5900ba04d8cd4ac7f989c904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionScreen: {fileID: 1488895177793222}
   audioMixer: {fileID: 24100000, guid: 6a79356b8eae3a14192446f51234463e, type: 2}
   resolutionDropwdown: {fileID: 114014802360965204}
   qualityDropdown: {fileID: 114535989697717730}
@@ -2279,12 +2279,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060993230841636}
---- !u!222 &222290348308557110
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1488895177793222}
 --- !u!222 &222300538982214866
 CanvasRenderer:
   m_ObjectHideFlags: 1

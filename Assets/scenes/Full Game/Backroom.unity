@@ -1193,6 +1193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossScreen: {fileID: 1576926079}
   blockingTentacle: {fileID: 50579553}
+  player:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!82 &1465773873
 AudioSource:
   m_ObjectHideFlags: 0

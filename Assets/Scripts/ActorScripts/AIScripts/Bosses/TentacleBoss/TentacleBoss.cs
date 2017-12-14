@@ -63,8 +63,9 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
 
     void ChooseTentacle ()
     {
-        List<int> tentaclesChosen = new List<int>();
         isAttacking = true;
+
+        List<int> tentaclesChosen = new List<int>();
         for (int i = 0; i < numOfTentaclesToAttack; i++)
         {
             int tentacle = UnityEngine.Random.Range(0, tentacles.Length);
