@@ -145,6 +145,8 @@ public class TentacleBoss : MonoBehaviour, IDamageable {
         blockingTentacle.SetActive(false);
         gameObject.SetActive(false);
         bossScreen.SetActive(false);
+        ItemDrop dropper = GetComponent<ItemDrop>();
+        dropper.DropRandomItem();
     }
 
     public float GetBossHealth()

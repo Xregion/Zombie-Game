@@ -19,7 +19,7 @@ public class DestructableObject : MonoBehaviour, IDamageable {
         {
             Destroy(gameObject);
             if (dropper != null)
-                dropper.DropItem();
+                dropper.DropRandomItem();
 
             return true;
         }

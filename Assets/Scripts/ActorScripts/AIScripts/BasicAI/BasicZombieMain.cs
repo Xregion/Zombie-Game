@@ -23,11 +23,12 @@ public class BasicZombieMain : AIController {
         if (CheckIfPlayerIsInView() && distanceToPlayer <= aggroRange)
         {
             if (!playerEnteredView)
+            {
                 StartCoroutine(PlayAudioClip(playerSeen, false));
-
+                target = player;
+                playerEnteredView = true;
+            }
             motor.SetTarget(player.transform.position);
-            target = player;
-            playerEnteredView = true;
             SaveManager.data.PlayerIsInCombat = true;
         }
         else if (playerEnteredView)
@@ -44,7 +45,7 @@ public class BasicZombieMain : AIController {
         // otherwise attack the current target if it is in range
         if (!CheckIfInRange() && !isStaggered && !isAttacking && (playerEnteredView || target == lastKnownPosition))
         {
-            if ((target == player && distanceToPlayer <= aggroRange) || (target == lastKnownPosition && Vector3.Distance(transform.position, target.transform.position) >= 1.5f))
+            if ((target == player && distanceToPlayer <= aggroRange) || (target == lastKnownPosition && Vector3.Distance(transform.position, target.transform.position) >= 2f))
             {
                 if (playerIsDead)
                 {
@@ -73,6 +74,7 @@ public class BasicZombieMain : AIController {
     protected override void Die()
     {
         base.Die();
+        SaveManager.data.PlayerIsInCombat = false;
         if (Died != null)
             Died();
     }

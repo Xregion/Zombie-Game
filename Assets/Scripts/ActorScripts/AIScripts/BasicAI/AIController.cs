@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(ActorMotor))]
 [RequireComponent(typeof(ItemDrop))]
@@ -22,7 +23,7 @@ public class AIController : MonoBehaviour, IDamageable {
     protected GameObject target;
     protected GameObject player;
     protected float distanceToPlayer;
-    SpriteRenderer[] bloodSplatter;
+    SpriteRenderer[] gfx;
     protected EnemyAnimations animations;
     float currentHealth;
     IDamageable targetToDamage;
@@ -35,6 +36,7 @@ public class AIController : MonoBehaviour, IDamageable {
     protected static bool playerIsDead;
     PauseScreen ps;
     AudioSource audioSource;
+    static int sortingOrder = 0;
 
     void OnEnable()
     {
@@ -44,13 +46,14 @@ public class AIController : MonoBehaviour, IDamageable {
         col = GetComponent<BoxCollider2D>();
         animations = GetComponentInChildren<EnemyAnimations>();
         currentHealth = maxHealth;
-        bloodSplatter = GetComponentsInChildren<SpriteRenderer>(true);
+        gfx = GetComponentsInChildren<SpriteRenderer>(true);
         dropper = GetComponent<ItemDrop>();
         motor = GetComponent<ActorMotor>();
-        bloodSplatter[1].enabled = false;
+        gfx[1].enabled = false;
         ps = FindObjectOfType<PauseScreen>();
         ps.PausedEvent += Pause;
         audioSource = GetComponent<AudioSource>();
+        sortingOrder = 0;
     }
 
     void OnDisable()
@@ -78,7 +81,6 @@ public class AIController : MonoBehaviour, IDamageable {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position);
             if ((CheckIfInRange() || hit.collider.CompareTag("Enemy")))
             {
-                //print(hit.collider.name);
                 movSpeed = 0;
                 animations.SetIsMoving(false);
                 if (hit.collider.CompareTag("Player"))
@@ -101,6 +103,8 @@ public class AIController : MonoBehaviour, IDamageable {
         currentHealth = maxHealth;
         isAlive = true;
         col.enabled = true;
+        gfx[0].sortingLayerName = "Default";
+        gfx[0].sortingOrder = 0;
     }
 
     void Pause()
@@ -175,7 +179,7 @@ public class AIController : MonoBehaviour, IDamageable {
                 animations.SetIsMeleeing(false);
             }
             StartCoroutine(PlayAudioClip(damagedClip, true));
-            bloodSplatter[1].enabled = true;
+            gfx[1].enabled = true;
             currentHealth -= amount;
             isStaggered = true;
             transform.Translate(-knockbackAmount, 0, 0);
@@ -193,15 +197,13 @@ public class AIController : MonoBehaviour, IDamageable {
     {
         animations.SetIsDead(true);
         isAlive = false;
-        col.enabled = false;
+        col.isTrigger = true;
         if (dropper != null)
-            dropper.DropItem(); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
+            dropper.DropRandomItem(); // calls the method DropItem from the actor's ItemDrop class.  This gives the method the items the actor is able to drop and the position to drop it at
 
-        //Vector3 deathPosition = transform.position;
-        //deathPosition.z = 14.5f;
-        //transform.position = deathPosition;
-        GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Background";
-        SaveManager.data.PlayerIsInCombat = false;
+        gfx[0].sortingLayerName = "Background";
+        gfx[0].sortingOrder = sortingOrder;
+        sortingOrder++;
     }
 
     public void SetIsAttacking ()
@@ -219,7 +221,7 @@ public class AIController : MonoBehaviour, IDamageable {
         yield return new WaitForSeconds(staggerTime);
 
         isStaggered = false;
-        bloodSplatter[1].enabled = false;
+        gfx[1].enabled = false;
     }
 
     /// <summary>

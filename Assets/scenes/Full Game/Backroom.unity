@@ -1083,6 +1083,7 @@ GameObject:
   - component: {fileID: 1465773869}
   - component: {fileID: 1465773871}
   - component: {fileID: 1465773872}
+  - component: {fileID: 1465773875}
   - component: {fileID: 1465773874}
   - component: {fileID: 1465773873}
   m_Layer: 8
@@ -1193,9 +1194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossScreen: {fileID: 1576926079}
   blockingTentacle: {fileID: 50579553}
-  player:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!82 &1465773873
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1290,6 +1288,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeAmount: 0.7
   decreaseFactor: 1
+--- !u!114 &1465773875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465773868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd9dfa958fa63e40aaa4f95c59b74b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 1968237028727736, guid: 43de3ba77ac1aa747b787805aa8071c2, type: 2}
+  dropChance: 1
+  dropAmount: 50
 --- !u!1001 &1576926078
 Prefab:
   m_ObjectHideFlags: 0
