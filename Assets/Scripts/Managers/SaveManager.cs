@@ -358,11 +358,11 @@ public class SaveManager : MonoBehaviour {
             sb.AppendLine("Position X: " + data.xPos);
             sb.AppendLine("Position Y: " + data.yPos);
             sb.AppendLine("Rotation: " + data.zRot);
-            sb.AppendLine("Items: ");
+            sb.Append("Items: ");
             foreach (String item in data.currentItems)
             {
                 if (item == data.currentItems[data.currentItems.Count - 1])
-                    sb.Append(item);
+                    sb.AppendLine(item);
                 else
                     sb.Append(item + ", ");
             }
