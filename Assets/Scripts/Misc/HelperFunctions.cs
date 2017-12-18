@@ -3,6 +3,10 @@ using System;
 
 public class HelperFunctions {
 
+    /// <summary>
+    /// Sets the text of the given buttons to the name of the player and the time played or empty if no save file exists.
+    /// </summary>
+    /// <param name="saveFiles"></param>
     public static void PopulateSaveButtons(Button[] saveFiles)
     {
         for (int i = 0; i < saveFiles.Length - 1; i++)
@@ -35,20 +39,35 @@ public class HelperFunctions {
                             seconds = secondsPlayed.ToString();
                     }
 
-                    if (minutesPlayed < 10)
-                        minutes = "0" + minutesPlayed;
-                    else
-                        minutes = minutesPlayed.ToString();
-
                     if (minutesPlayed >= 60)
                     {
+                        int hoursPlayed = minutesPlayed / 60;
+
+                        if (minutesPlayed % 60 == 0)
+                            minutes = "00";
+                        else
+                        {
+                            minutesPlayed = minutesPlayed - (hoursPlayed * 60);
+                            if (minutesPlayed < 10)
+                                minutes = "0" + minutesPlayed;
+                            else
+                                minutes = minutesPlayed.ToString();
+                        }
+
                         if (minutesPlayed < 600)
-                            hours = "0" + minutesPlayed / 60;
+                            hours = "0" + hoursPlayed;
                         else
                             hours = (minutesPlayed / 60).ToString();
                     }
                     else
+                    {
+                        if (minutesPlayed < 10)
+                            minutes = "0" + minutesPlayed;
+                        else
+                            minutes = minutesPlayed.ToString();
+
                         hours = "00";
+                    }
                 }
                 else
                 {

@@ -29,7 +29,7 @@ public class InventoryItem : MonoBehaviour {
 
         if (timer > 0.5 && !isTooltipShown)
         {
-            tooltip.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            //image.rectTransform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
             image.gameObject.SetActive(true);
             isTooltipShown = true;
         }

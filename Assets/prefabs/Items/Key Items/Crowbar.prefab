@@ -58,7 +58,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4999999, y: 0.25}
+    oldSize: {x: 1.5, y: 0.25}
     newSize: {x: 1.4999999, y: 0.25}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionDistance: 1
   itemName: Crowbar
+  icon: {fileID: 21300000, guid: 0647d7bd8c84f8a49ae501e31c9b478c, type: 3}
 --- !u!212 &212028330474425434
 SpriteRenderer:
   m_ObjectHideFlags: 1

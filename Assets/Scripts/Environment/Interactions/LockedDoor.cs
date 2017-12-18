@@ -15,7 +15,6 @@ public class LockedDoor : InspectableObject {
         doorway = GetComponent<Doorway>();
         doorway.enabled = false;
         keyItemName = keyItem.GetComponent<KeyItem>().itemName;
-
     }
 
     protected override void Interact()
@@ -39,6 +38,7 @@ public class LockedDoor : InspectableObject {
             {
                 hasKeyItem = false;
                 SaveManager.data.Items.Remove(keyItemName);
+                FindObjectOfType<Inventory>().UpdateInventory();
             }
             enabled = false;
         }

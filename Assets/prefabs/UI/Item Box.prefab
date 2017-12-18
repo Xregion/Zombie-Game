@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224502216248820978}
   - component: {fileID: 222595946630232598}
-  - component: {fileID: 114147243163540492}
+  - component: {fileID: 114223324210377964}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -63,7 +63,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114147243163540492
+--- !u!114 &114223324210377964
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -212,10 +212,10 @@ RectTransform:
   m_Father: {fileID: 224899649390738514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 40, y: 0}
-  m_SizeDelta: {x: 50, y: -30}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 65, y: 0}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224899649390738514
 RectTransform:

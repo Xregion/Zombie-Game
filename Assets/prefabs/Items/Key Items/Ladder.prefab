@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionDistance: 1
   itemName: Ladder
+  icon: {fileID: 21300000, guid: 2bc795c45a08e084d8e629c08a0a0b03, type: 3}
 --- !u!212 &212289564782136760
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -3,6 +3,7 @@
 public class KeyItem : Interactable {
 
     public string itemName;
+    public Sprite icon;
 
     string pickUpText;
     bool pickedUp;
@@ -20,6 +21,7 @@ public class KeyItem : Interactable {
         interactions.SetText(pickUpText);
         SaveManager.data.Items.Add(itemName);
         pickedUp = true;
+        FindObjectOfType<Inventory>().UpdateInventory();
     }
 
     public override void StopInteracting()
